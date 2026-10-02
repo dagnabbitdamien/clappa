@@ -1,5 +1,6 @@
 #include "twitch-chat.h"
 #include "chat-votes.h"
+#include "twitch-device-auth.h"
 #include <QSslSocket>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -19,13 +20,13 @@
 class TwitchChatPanel final: public QGroupBox {
     QSslSocket socket; QNetworkAccessManager network; QTimer heartbeat,validateTimer;
     QElapsedTimer clock; qint64 lastInput=0; ChatVotes votes;
-    QLineEdit *channelEdit,*tokenEdit; QLabel *status; QPushButton *button;
+    QLineEdit *channelEdit,*tokenEdit; QLabel *status; QPushButton *button,*signIn; TwitchDeviceAuth *auth=nullptr;
     QByteArray token,buffer; QString channel,login; bool active=false,joined=false;
     int generation=0; std::function<bool()> request;
     void stop(const QString &why){
-        active=false;joined=false;++generation;heartbeat.stop();validateTimer.stop();socket.abort();
+        if(auth)auth->cancel();signIn->setEnabled(true);active=false;joined=false;++generation;heartbeat.stop();validateTimer.stop();socket.abort();
         token.fill(0);token.clear();tokenEdit->clear();buffer.clear();votes.clear();
-        channelEdit->setEnabled(true);tokenEdit->setEnabled(true);button->setText("Connect chat");status->setText(why);
+        channelEdit->setEnabled(true);tokenEdit->setEnabled(true);button->setText("Connect with token");button->setVisible(tokenEdit->isVisible());status->setText(why);
     }
     void validate(bool first){
         QNetworkRequest r(QUrl("https://id.twitch.tv/oauth2/validate"));
@@ -61,18 +62,25 @@ class TwitchChatPanel final: public QGroupBox {
 public:
     TwitchChatPanel(QWidget *parent,std::function<bool()> callback):QGroupBox("Twitch audience challenges (optional)",parent),request(std::move(callback)){
         clock.start();auto *layout=new QVBoxLayout(this);
-        auto *help=new QLabel("Read-only chat. Three different viewers sending 🎬 can buzz your paired phone; you choose whether to take a challenge. No chat messages are sent.");help->setWordWrap(true);layout->addWidget(help);
+        auto *help=new QLabel("Let chat ask for a clap! Three viewers sending 🎬 buzz your phone. You choose when to answer.");help->setWordWrap(true);layout->addWidget(help);
         channelEdit=new QLineEdit;channelEdit->setPlaceholderText("Twitch channel name");channelEdit->setMaxLength(25);layout->addWidget(channelEdit);
-        tokenEdit=new QLineEdit;tokenEdit->setEchoMode(QLineEdit::Password);tokenEdit->setMaxLength(2048);tokenEdit->setPlaceholderText("Twitch user access token · chat:read only");layout->addWidget(tokenEdit);
-        auto *privacy=new QLabel("Advanced setup: use a Twitch user token with chat:read permission. It is kept in memory only, never in your proof files, and forgotten when disconnected or OBS closes.");privacy->setWordWrap(true);layout->addWidget(privacy);
-        auto *instructions=new QPushButton("Twitch authorization instructions");layout->addWidget(instructions);QObject::connect(instructions,&QPushButton::clicked,this,[]{QDesktopServices::openUrl(QUrl("https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/"));});
-        button=new QPushButton("Connect chat");layout->addWidget(button);status=new QLabel("Chat is off.");status->setWordWrap(true);layout->addWidget(status);
+        signIn=new QPushButton("Connect with Twitch");layout->addWidget(signIn);
+        tokenEdit=new QLineEdit;tokenEdit->setEchoMode(QLineEdit::Password);tokenEdit->setMaxLength(2048);tokenEdit->setPlaceholderText("Read-only token (advanced)");layout->addWidget(tokenEdit);tokenEdit->hide();
+        auto *privacy=new QLabel("Read-only access. Sign in again when you reopen OBS.");privacy->setWordWrap(true);layout->addWidget(privacy);
+        auto *instructions=new QPushButton("Advanced token setup…");layout->addWidget(instructions);QObject::connect(instructions,&QPushButton::clicked,this,[this]{tokenEdit->setVisible(!tokenEdit->isVisible());button->setVisible(active||tokenEdit->isVisible());});
+        button=new QPushButton("Connect with token");layout->addWidget(button);button->hide();status=new QLabel("Chat is off.");status->setWordWrap(true);layout->addWidget(status);
         QObject::connect(button,&QPushButton::clicked,this,[this]{
             if(active){stop("Chat is off. Access token forgotten.");return;}
             channel=channelEdit->text().trimmed().toLower();if(channel.startsWith('#'))channel.remove(0,1);
             auto entered=tokenEdit->text().trimmed();if(entered.startsWith("oauth:"))entered.remove(0,6);
             if(!QRegularExpression("^[a-z0-9_]{1,25}$").match(channel).hasMatch()||!QRegularExpression("^[A-Za-z0-9]{10,2048}$").match(entered).hasMatch()){status->setText("Enter a channel name and a valid Twitch access token.");return;}
-            token=entered.toLatin1();tokenEdit->clear();active=true;++generation;votes.clear();channelEdit->setEnabled(false);tokenEdit->setEnabled(false);button->setText("Disconnect chat");status->setText("Checking Twitch read permission…");validate(true);
+            token=entered.toLatin1();tokenEdit->clear();signIn->setEnabled(false);active=true;++generation;votes.clear();channelEdit->setEnabled(false);tokenEdit->setEnabled(false);button->setText("Disconnect chat");status->setText("Checking Twitch read permission…");validate(true);
+        });
+        auth=new TwitchDeviceAuth(this,[this](QString code,QString url){status->setText("Approve Twitch access in your browser. Code: "+code);QDesktopServices::openUrl(QUrl(url));},[this](QByteArray value){token=std::move(value);status->setText("Checking chat permission…");validate(true);},[this](QString error){stop(error);});
+        QObject::connect(signIn,&QPushButton::clicked,this,[this]{
+            channel=channelEdit->text().trimmed().toLower();if(channel.startsWith('#'))channel.remove(0,1);
+            if(!QRegularExpression("^[a-z0-9_]{1,25}$").match(channel).hasMatch()){status->setText("Enter the Twitch channel to listen to.");return;}
+            active=true;++generation;votes.clear();channelEdit->setEnabled(false);tokenEdit->setEnabled(false);signIn->setEnabled(false);button->show();button->setText("Cancel / disconnect");status->setText("Opening Twitch sign-in…");auth->start();
         });
         QObject::connect(&socket,&QSslSocket::encrypted,this,[this]{socket.write("PASS oauth:"+token+"\r\nNICK "+login.toUtf8()+"\r\nCAP REQ :twitch.tv/tags twitch.tv/commands\r\n");});
         QObject::connect(&socket,&QSslSocket::readyRead,this,[this]{receive();});
@@ -85,3 +93,4 @@ public:
     ~TwitchChatPanel()override{stop("Chat is off.");}
 };
 QWidget *makeTwitchChatPanel(QWidget *parent,std::function<bool()> request){return new TwitchChatPanel(parent,std::move(request));}
+

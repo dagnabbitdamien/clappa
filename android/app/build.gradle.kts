@@ -3,7 +3,7 @@ android {
     namespace = "org.clappa.app"
     compileSdk = 36
     signingConfigs { getByName("debug") { rootProject.file("../.tools/review-signing/debug.keystore").takeIf { it.exists() }?.let { storeFile = it } } }
-    defaultConfig { applicationId = "org.clappa.app"; minSdk = 28; targetSdk = 36; versionCode = 19; versionName = "0.3.0-test14.1" }
+    defaultConfig { applicationId = "org.clappa.app"; minSdk = 28; targetSdk = 36; versionCode = 20; versionName = "0.3.0-test15" }
     buildTypes { create("review") { initWith(getByName("debug")); applicationIdSuffix = ".review"; matchingFallbacks += "debug" } }
     buildFeatures { compose = true }
     compileOptions { sourceCompatibility = JavaVersion.VERSION_17; targetCompatibility = JavaVersion.VERSION_17 }
@@ -23,3 +23,4 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("com.google.zxing:core:3.5.3")
 }
+

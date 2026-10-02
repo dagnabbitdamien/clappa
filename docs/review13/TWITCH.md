@@ -4,7 +4,7 @@ This optional listener runs inside the native OBS plugin. It does not require a 
 
 ## User flow
 
-Open **Twitch audience challenges…** in the CLAPPA dock. Enter the channel and a Twitch user access token with `chat:read` permission, then choose **Connect chat**. This is an advanced first integration: a polished browser sign-in with a registered CLAPPA Twitch application is not bundled yet. The dialog links to Twitch's official authorization instructions. Do not paste the token into a proof folder, profile or recording.
+Open **Twitch audience challenges…** in the CLAPPA dock. Enter your channel and choose **Connect with Twitch**, then approve read-only chat access in the browser. Advanced token setup remains available if needed. Sign in again after restarting OBS. Do not paste a token into a proof folder, profile or recording.
 
 The token is validated at connection and hourly against Twitch's HTTPS validation endpoint. The returned account login is used for the IRC connection. Credentials are held only in process memory; the entry field clears immediately, disconnect forgets the stored token, and OBS exit tears down the connection. Qt/network buffers may retain temporary copies until freed; this is not a promise of forensic RAM erasure. No credentials or chat text are logged or written to proof files. CLAPPA does not inspect OBS's Twitch credentials.
 
@@ -40,3 +40,8 @@ Expiry is sixty seconds after sending. Android must deduplicate `request_id`, re
 - [Required token validation](https://dev.twitch.tv/docs/authentication/validate-tokens/)
 - [Twitch OAuth token flows](https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/)
 - [Twitch recommendation of EventSub](https://dev.twitch.tv/docs/chat/)
+
+## Test15 browser authorization (2026-10-02)
+
+The default setup now uses **Connect with Twitch** and Twitch's device authorization flow (`chat:read` only). Enter the channel, authorize in the browser, and wait for the listening status. The manual token workflow above remains under Advanced token setup. There is no client secret or local callback server for chat authorization. Tokens remain in process memory only; reconnect after restarting OBS or authorization expiry. Cancel invalidates in-flight callbacks. Full live authorization is still not confirmed; device-code issuance with the registered client has been checked successfully. See `../test15.md` for measured validation.
+

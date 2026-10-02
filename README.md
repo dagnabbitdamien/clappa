@@ -1,96 +1,58 @@
 # CLAPPA
 
-**Latest test build: Test14.1.** Clearer menus, everyday prompts and dual-camera defaults; [latest notes](docs/test14.1.md). Test14 introduced: Native Streamer/Viewer modes, animated-QR verification and replay, and optional Twitch OIDC evidence bound to the phone key and photo event. [Build notes](docs/test14.md) · [Review](docs/review14/index.html) · `output/CLAPPA-test14-kit.zip`. Update both APK and OBS DLL. Live Twitch authorization remains unverified; see the build notes for measured checks and limits. Approved Test13.1 whole-sprite artwork is unchanged.
+<img src="android/app/src/main/assets/mascot/approved/pose-03.png" width="160" align="right" alt="CLAPPA's paper-cut brushtail possum waving">
 
-**Test12 owner update (2026-09-16):** New sessions use `CLAPPA-SESSION-v2`: missed challenges are signed and reported without terminating the recording, stopping OBS automatically seals with the connected phone, extra-photo offers last 30 seconds and Photo B has a signed three-second window. Optional `CLAPPA-DUAL-v1` binds four front/rear normal/illuminated photos. Only completed proofs pop up on stream; waiting for the beacon stays on the phone. New identities support explicit password-protected private backup export, while existing non-exportable keys remain unchanged. See docs/review12/SESSION-POLICY.md and docs/review12/QR-PAYLOAD.md. This supersedes conflicting older failure, consent, timing, dual-camera and identity-export instructions.
+### *No cap! Clap!*
 
+**A fresh challenge. Two camera views. Something viewers can judge for themselves.**
 
-**Test11 owner update (2026-09-16):** Native challenges now use authenticated three-second Quicknet pulses, the permitted NIST alternative. All choices bind to a signed pre-pulse OBS commitment. New QR carries signatures, beacon evidence and both photo hashes, without unreadable 64-pixel JPEGs; original photos remain local and visible. This supersedes historical local-random selection and mandatory embedded-thumbnail instructions. See docs/review11/FRESHNESS-PROFILE.md and docs/test11.md.
+CLAPPA pairs an Android phone with OBS. Tap the clapperboard, hear a little musical clack, and answer an unpredictable photo challenge. The pictures appear on stream beside a scannable proof. Viewers can use CLAPPA to check the signed evidence and compare the photos with what they watched happen.
 
+No CLAPPA account. No hosted proof storage. Your signing identity and original evidence stay with you.
 
-**CLAPPA** is a local-first challenge-response proof system for video.
+**[Download the Test15 preview](https://github.com/dagnabbitdamien/clappa/releases/tag/test15)** · [Build notes](docs/test15.md) · [Developer setup](docs/GITHUB.md)
 
-It consists of:
+## For streamers
 
-- a native Android phone app;
-- a native OBS Studio plugin;
-- a small, documented proof/provenance format; and
-- a local verifier.
+1. Install the Android APK and native OBS plugin from the release.
+2. Open the CLAPPA dock in OBS, add its proof-tile source to your scene, and pair your phone by scanning the dock's code.
+3. Start a recording and tap to clap. Your phone guides you through the challenge.
+4. Stop recording to seal the original video and its evidence package.
 
-The phone behaves like a playful cryptographic clapboard. Tap it, hear a patterned **clack-clack** sequence, and a cute **brush-tail possum** gives you a photo challenge. The phone captures a small two-photo burst, signs the evidence, and sends it to OBS. OBS shows a cute proof tile in-stream, binds the proof event to the recording session, and later helps finalize the original recording.
+Supported phones use both cameras by default. The phone captures normal and illuminated views; OBS briefly shows the illuminated photo, then the normal photo. Challenge choices, musical notes and illumination are derived from a verified public timing beacon and the preceding OBS media commitment.
 
-The system is designed to work without a CLAPPA account, cloud backend, proof server, database, or hosted media service.
+## Bring chat along
 
-## What CLAPPA is trying to establish
+In the OBS CLAPPA dock, open **Twitch audience challenges**, enter your channel and choose **Connect with Twitch**. Approve read-only chat access in your browser.
 
-CLAPPA does **not** claim that cryptography can mathematically prove that the semantic content of arbitrary video is true.
+**Three different viewers sending 🎬 within 15 seconds buzz the paired phone.** The possum asks whether you want to take a challenge. You can accept or choose **Not now**. There is a two-minute cooldown, and chat never starts your camera or interrupts a challenge already in progress.
 
-Instead, it creates evidence that:
+Twitch account identity linking on the phone is separate: it adds dated, signed account evidence to your proofs. Chat access credentials are kept in OBS memory only and are never included in proofs.
 
-> The exact sealed original OBS recording is bound to a signed sequence of challenge-response observations captured during the same session.
+## For viewers
 
-The practical anti-synthetic value comes from combining:
+Choose **Viewer**, scan the animated code on a stream, read the challenge and beacon age, and replay the clapper sound. Public-key details are available when you want them. Then compare the pictures and action with what you see on stream.
 
-- exact cryptographic integrity of the original OBS recording;
-- unpredictable photo challenges;
-- independent observations from the phone camera;
-- visible proof moments embedded into the video;
-- an audible challenge cadence that is also recorded in the proof transcript; and
-- optional external contemporaneous witnessing when a livestream/platform integration exists.
+The QR carries signed metadata and image hashes—not tiny embedded photographs. Original pictures stay in the local proof folder. Exact recording verification uses the completed original recording and its sealed evidence bundle; a platform-transcoded copy will not have the same byte hash.
 
-## Recent design direction
+## Preview status
 
-The current spec now assumes:
+This is a **test release for Android and Windows OBS**, not a completed cross-platform product. Automated checks cover signatures, beacon derivation, protocol compatibility and the local capture/transfer/seal workflow. Twitch device-code issuance works with the registered client; complete live account authorization and a live audience trigger have not yet been confirmed. There is no iOS build yet.
 
-- **Android first**
-- **native OBS plugin**
-- **brush-tail possum mascot**
-- **vector-art clapboard UI**
-- **audible clack pattern per challenge**
-- **two-photo challenge capture**
-  - one ordinary photo
-  - one second photo captured with the rear LED, or a red/green/blue screen flash for a front-camera selfie
-- **first photo shown to viewers**
-- **second photo briefly shown over the first, then faded away; both are included cryptographically**
-- **animated QR proof transport**
-- **final exact original-file seal**
-- **plain JSON + JPEG proof folders**
-- **optional Twitch chat trigger using `🎬`**
-- **no CLAPPA servers/accounts**
+CLAPPA binds evidence for human judgment. It is not an automatic AI detector. A sufficiently capable real-time synthesis system can reduce the value of the visual challenge; signatures still protect the integrity of the signed evidence.
 
-## Important limits
+## Build and inspect
 
-- CLAPPA is strongest while AI still struggles to maintain a coherent, interrogable world under unpredictable challenge-response conditions.
-- If cheap, perfect, real-time world simulation becomes commonplace, CLAPPA's **anti-physical-fakery** advantage degrades.
-- In that future, CLAPPA still remains useful as a **provenance/integrity/timing/authorization** system.
-- A fully offline local proof does not, by itself, impose a hard real-time deadline on an attacker.
-- A public randomness beacon gives a **not-before** bound; without an external witness it does not give a **not-after** bound.
-- Platform-transcoded copies will not normally have the same byte hash as the original recording.
+- [Repository setup](docs/GITHUB.md)
+- [Current architecture](docs/CURRENT-ARCHITECTURE.md)
+- [Protocol and verification](protocol/README.md)
+- [Full design specification](DESIGN_SPEC.md)
+- [Latest build notes](docs/test15.md)
 
-## Repository layout
+Run the protocol/verifier tests with `pnpm install --frozen-lockfile` followed by `pnpm test` (Node.js 22+). Android and OBS require their respective native toolchains. Private keys, local recordings, proof photos and build caches are excluded from this repository.
 
-```text
-/
-├── AGENTS.md
-├── README.md
-├── DESIGN_SPEC.md
-├── android/
-├── obs-plugin/
-├── protocol/
-├── verifier/
-├── test-vectors/
-└── docs/
-```
+No project license has been selected. Existing third-party licenses and asset attributions remain applicable; see the relevant vendor and asset directories.
 
-Read `DESIGN_SPEC.md` before implementation and `AGENTS.md` before changing code.
+## A peek inside
 
-## Current Windows test build
-
-Current version: Test14.1. See [build notes](docs/test14.1.md) and [repository setup](docs/GITHUB.md). Build downloads and private/local review evidence are not stored in this source repository. Update the Android app and OBS plugin together.
-
-## License
-
-Not chosen yet. **Do not add a license without the repository owner's explicit decision.**
-
-
-
+<img src=".github/images/menu.png" width="300" alt="CLAPPA mode menu with approved paper possum illustrations and orange accents">

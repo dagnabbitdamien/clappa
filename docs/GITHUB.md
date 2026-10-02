@@ -1,6 +1,6 @@
 # Repository contents
 
-This repository contains CLAPPA source, bundled application artwork/audio, protocol documentation and synthetic test vectors. The latest test build is Test14.1; read `test14.1.md` and `test14.md` for current behavior and limitations. Live Twitch account authorization remains unverified.
+This repository contains CLAPPA source, bundled application artwork/audio, protocol documentation and synthetic test vectors. The latest test build is Test15; read `test15.md` and `test14.md` for current behavior and limitations. Live Twitch account authorization remains unverified.
 
 Local phone identities, signing keystores, SDKs, dependency caches, captured photos, recordings, session bundles, generated review pages and packaged builds are excluded. Historical review links may refer to excluded local artifacts. APKs and OBS plugin binaries should be distributed as GitHub Release attachments, not committed to source history.
 
@@ -16,3 +16,4 @@ No project license has been selected. Retain existing third-party license notice
 - `node tools/generate-protocol.mjs` updates the shared schema; `node tools/generate-prompts.mjs` updates prompt labels. Preserve existing versioned choice mappings.
 
 This is a development snapshot, not a turnkey cross-platform release. Historical automation scripts may reference the original local review environment.
+
