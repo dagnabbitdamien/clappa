@@ -1,3 +1,5 @@
+**Test15.1:** The only tagline is No cap! Clap! Do not invent promotional slogans. Streamer/viewer use new whole menu sprites with distinct presenting/binocular poses. Existing challenge sprites unchanged. See docs/test15.1.md.
+
 **Test15 (2026-10-02):** Menus/viewer/chat invitation use approved whole possum sprites. OBS chat supports read-only Twitch device authorization, with tokens in memory only and cancellation guards. Preserve 3-viewer/15-second voting, two-minute cooldown and explicit phone acceptance. Live authorization remains unverified. See docs/test15.md.
 
 **Test14.1 (2026-10-01):** New challenges use versioned CLAPPA-CHOICES-v2; preserve v1 verification. Two-camera capture defaults on for capable devices without an explicit preference. New menus use orange accents, mode icons and expandable proof details. See docs/test14.1.md.
@@ -397,5 +399,6 @@ The central goal is to bind a fresh challenge, its photos and the ongoing stream
 Read `docs/test10.md`, `docs/review10/TIMING-PROFILE.md` and `docs/review10/NEXT-CAMERA-PROFILE.md`. Keep the signed ten-second policy enforced in Android, native OBS, detached QR validation and the bundle verifier. Countdown starts at issuance, not after audio/camera setup. Do not mislabel phone-reported completion times as sensor exposure or NIST time. Separate UI screenshot collection from timed flow checks so the harness does not consume the response window.
 
 The dual-camera experiment is unsigned, local-only, capability-gated and does not establish simultaneous exposure. Preserve those labels until a full portable multi-view proof profile and illumination/timing/QR checks exist. There is no iOS build yet. Maintain the shared JavaScript/Kotlin choice vectors for the future beacon profile; their presence does not mean the native app uses that profile. Current NIST certificate/signature mismatch evidence is retained in review10; do not bypass verification or substitute a historical pulse as fresh.
+
 
 

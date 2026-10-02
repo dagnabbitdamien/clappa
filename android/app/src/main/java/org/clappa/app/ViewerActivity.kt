@@ -37,11 +37,10 @@ class HomeActivity:ComponentActivity(){
   ClappaScreenTheme{BoxWithConstraints(Modifier.fillMaxSize().safeDrawingPadding(),contentAlignment=androidx.compose.ui.Alignment.Center){val wide=maxWidth>maxHeight;Column(Modifier.widthIn(max=if(wide)840.dp else 560.dp).fillMaxWidth().verticalScroll(rememberScrollState()).padding(24.dp),verticalArrangement=Arrangement.spacedBy(if(wide)8.dp else 16.dp)){
    Wordmark(size=if(wide)32 else 40)
    Text("No cap! Clap!",color=MenuOrange,fontStyle=androidx.compose.ui.text.font.FontStyle.Italic,style=MaterialTheme.typography.titleMedium,modifier=Modifier.padding(bottom=if(wide)0.dp else 12.dp))
-   Text("Your stream. A little more trust.",style=MaterialTheme.typography.titleMedium,color=Chalk.copy(alpha=.8f))
    @Composable fun ModeCard(viewer:Boolean,modifier:Modifier){
     OutlinedCard(onClick={startActivity(Intent(this@HomeActivity,if(viewer)ViewerActivity::class.java else MainActivity::class.java))},modifier=modifier,colors=CardDefaults.outlinedCardColors(containerColor=androidx.compose.ui.graphics.Color(0xff302d29)),border=androidx.compose.foundation.BorderStroke(1.dp,MenuOrange.copy(alpha=.35f))){
      Row(Modifier.padding(20.dp),verticalAlignment=androidx.compose.ui.Alignment.CenterVertically,horizontalArrangement=Arrangement.spacedBy(16.dp)){
-      MenuPossum(if(viewer)1 else 3,Modifier.size(if(wide)88.dp else 104.dp));Column(Modifier.weight(1f)){Text(if(viewer)"Viewer" else "Streamer",style=MaterialTheme.typography.titleLarge);Text(if(viewer)"Take a closer look" else "Bring chat along",style=MaterialTheme.typography.bodyMedium,color=MenuOrange);Text(if(viewer)"Scan a proof" else "Connect to OBS",style=MaterialTheme.typography.bodySmall,color=Chalk.copy(alpha=.7f),modifier=Modifier.padding(top=6.dp))};Text("›",color=MenuOrange,style=MaterialTheme.typography.headlineMedium)
+      MenuPossum(1,Modifier.size(if(wide)88.dp else 104.dp),asset="mascot/menu/"+(if(viewer)"viewer" else "streamer")+".png");Column(Modifier.weight(1f)){Text(if(viewer)"Viewer" else "Streamer",style=MaterialTheme.typography.titleLarge);Text(if(viewer)"Scan a proof" else "Connect to OBS",style=MaterialTheme.typography.bodySmall,color=Chalk.copy(alpha=.7f),modifier=Modifier.padding(top=6.dp))};Text("›",color=MenuOrange,style=MaterialTheme.typography.headlineMedium)
      }
     }
    }
@@ -95,7 +94,7 @@ open class ViewerActivity:ComponentActivity(){
       Text("Public key (P-256)",Modifier.padding(top=12.dp));SelectionContainer{Text(r.key.getString("spki"),style=MaterialTheme.typography.bodySmall)}
       Text("Signatures and beacon checked. Exact photo and recording checks need the original files.",Modifier.padding(vertical=16.dp),style=MaterialTheme.typography.bodySmall)
      }
-    }?:Column(Modifier.padding(vertical=24.dp)){MenuPossum(1,Modifier.size(160.dp));Text("Let’s take a closer look",style=MaterialTheme.typography.headlineSmall);Text("Point at the CLAPPA code on a stream.",Modifier.padding(top=12.dp))}
+    }?:Column(Modifier.padding(vertical=24.dp)){MenuPossum(1,Modifier.size(160.dp));Text("Scan a proof",style=MaterialTheme.typography.headlineSmall);Text("Point at the CLAPPA code on a stream.",Modifier.padding(top=12.dp))}
     error?.let{Text(it,color=MaterialTheme.colorScheme.error,modifier=Modifier.padding(vertical=12.dp))}
     if(verifying){LinearProgressIndicator(Modifier.fillMaxWidth());Text("Checking signatures and freshness beacon…",Modifier.padding(vertical=12.dp))}
    };Spacer(Modifier.height(12.dp));Button(onClick={startScan()},enabled=!verifying,modifier=Modifier.fillMaxWidth().heightIn(min=56.dp)){Text(if(result==null)"Scan a stream" else "Scan another proof")}}
@@ -137,3 +136,4 @@ open class ViewerActivity:ComponentActivity(){
   }}finally{playing=false}}}
  override fun onDestroy(){provider?.unbindAll();worker.shutdown();audio?.let{runCatching{it.stop()}};super.onDestroy()}
 }
+

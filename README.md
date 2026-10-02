@@ -4,13 +4,13 @@
 
 ### *No cap! Clap!*
 
-**A fresh challenge. Two camera views. Something viewers can judge for themselves.**
+
 
 CLAPPA pairs an Android phone with OBS. Tap the clapperboard, hear a little musical clack, and answer an unpredictable photo challenge. The pictures appear on stream beside a scannable proof. Viewers can use CLAPPA to check the signed evidence and compare the photos with what they watched happen.
 
 No CLAPPA account. No hosted proof storage. Your signing identity and original evidence stay with you.
 
-**[Download the Test15 preview](https://github.com/dagnabbitdamien/clappa/releases/tag/test15)** · [Build notes](docs/test15.md) · [Developer setup](docs/GITHUB.md)
+**[Download the Test15.1 preview](https://github.com/dagnabbitdamien/clappa/releases/tag/test15.1)** · [Build notes](docs/test15.1.md) · [Developer setup](docs/GITHUB.md)
 
 ## For streamers
 
@@ -47,7 +47,7 @@ CLAPPA binds evidence for human judgment. It is not an automatic AI detector. A 
 - [Current architecture](docs/CURRENT-ARCHITECTURE.md)
 - [Protocol and verification](protocol/README.md)
 - [Full design specification](DESIGN_SPEC.md)
-- [Latest build notes](docs/test15.md)
+- [Latest build notes](docs/test15.1.md)
 
 Run the protocol/verifier tests with `pnpm install --frozen-lockfile` followed by `pnpm test` (Node.js 22+). Android and OBS require their respective native toolchains. Private keys, local recordings, proof photos and build caches are excluded from this repository.
 
@@ -56,3 +56,5 @@ No project license has been selected. Existing third-party licenses and asset at
 ## A peek inside
 
 <img src=".github/images/menu.png" width="300" alt="CLAPPA mode menu with approved paper possum illustrations and orange accents">
+
+

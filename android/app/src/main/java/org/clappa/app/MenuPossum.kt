@@ -10,8 +10,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 
 /** Approved complete character artwork. No anatomical crops or part transforms. */
-@Composable internal fun MenuPossum(pose:Int,modifier:Modifier=Modifier){
+@Composable internal fun MenuPossum(pose:Int,modifier:Modifier=Modifier,asset:String?=null){
  val context=LocalContext.current
- val bitmap=remember(pose){context.assets.open("mascot/approved/pose-${pose.toString().padStart(2,'0')}.png").use{BitmapFactory.decodeStream(it).asImageBitmap()}}
+ val bitmap=remember(pose,asset){context.assets.open(asset?:"mascot/approved/pose-${pose.toString().padStart(2,'0')}.png").use{BitmapFactory.decodeStream(it).asImageBitmap()}}
  Image(bitmap,"CLAPPA possum",modifier,contentScale=ContentScale.Fit)
 }
