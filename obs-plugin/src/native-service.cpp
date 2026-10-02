@@ -72,6 +72,7 @@ struct NativeService::Impl {
  void error(const std::string &s){fault=true;message="Incomplete: "+QString::fromStdString(s);try{send({{"type","error"},{"message",s},{"recording",!state.is_null()&&!state.value("closed",true)}});}catch(...){} }
  void resetSession(){fault=false;ended=false;finalized=false;announced=false;closedNotified=false;sid.clear();head.clear();lastType.clear();count=0;lastAt=0;successAt=0;pending=nullptr;sealRequest=nullptr;startOK=false;endOK=false;timedSession=false;tolerantSession=false;claimWindow=6000;freshSession=false;armPending=false;armedEvent=nullptr;captureProfile.clear();lastChallenge.clear();lastPrompt.clear();ids.clear();latestOutputs=nullptr;stopPending=false;}
  void init(){
+  twitchVerifier.refresh();
   need(mbedtls_ctr_drbg_seed(&rng,mbedtls_entropy_func,&entropy,(const unsigned char*)"CLAPPA",6)==0,"Random generator failed");
   unsigned char random[32];need(mbedtls_ctr_drbg_random(&rng,random,32)==0,"Random failed");token=b64(QByteArray((char*)random,32));
   mbedtls_pk_context tlskey;mbedtls_pk_init(&tlskey);mbedtls_x509write_cert cert;mbedtls_x509write_crt_init(&cert);
@@ -111,10 +112,9 @@ struct NativeService::Impl {
    envelope["identity"]=identity;if(shownIdentities.count(sid+identityDigest))envelope["identity"].erase("evidence");
   }
   auto raw=bytes(envelope.dump());QByteArray compressed(16384,0);z_stream z{};need(deflateInit2(&z,9,Z_DEFLATED,-15,8,Z_DEFAULT_STRATEGY)==Z_OK,"QR compression setup");z.next_in=(Bytef*)raw.data();z.avail_in=raw.size();z.next_out=(Bytef*)compressed.data();z.avail_out=compressed.size();int result=deflate(&z,Z_FINISH);int size=int(z.total_out);deflateEnd(&z);need(result==Z_STREAM_END&&size<=8192,"Proof exceeds QR budget");compressed.resize(size);
-  QImageReader reader(folder()+"/"+QString::fromStdString(pairs[0]["original"]["path"]));reader.setAutoTransform(true);if(reader.size().isValid())reader.setScaledSize(reader.size().scaled(1348,984,Qt::KeepAspectRatio));auto photo=reader.read();need(!photo.isNull(),"Photo cannot be displayed");bool dual=!claim&&d.contains("dual");auto rearPhoto=[&](const char *which){QImageReader r(folder()+"/"+QString::fromStdString(d["dual"][which]["original"]["path"]));r.setAutoTransform(true);if(r.size().isValid())r.setScaledSize(r.size().scaled(1348,984,Qt::KeepAspectRatio));auto image=r.read();need(!image.isNull(),"Rear photo cannot be displayed");return image;};photo=dual?BoardArt::dualPhoto(photo,rearPhoto("rear_a")):BoardArt::mountedPhotos(photo);frames.clear();const int n=(size+199)/200;
-  std::vector<std::string> texts;int version=12;
+  QImageReader reader(folder()+"/"+QString::fromStdString(pairs[0]["original"]["path"]));reader.setAutoTransform(true);if(reader.size().isValid())reader.setScaledSize(reader.size().scaled(1348,984,Qt::KeepAspectRatio));auto photo=reader.read();need(!photo.isNull(),"Photo cannot be displayed");bool dual=!claim&&d.contains("dual");auto rearPhoto=[&](const char *which){QImageReader r(folder()+"/"+QString::fromStdString(d["dual"][which]["original"]["path"]));r.setAutoTransform(true);if(r.size().isValid())r.setScaledSize(r.size().scaled(1348,984,Qt::KeepAspectRatio));auto image=r.read();need(!image.isNull(),"Rear photo cannot be displayed");return image;};photo=dual?BoardArt::dualPhoto(photo,rearPhoto("rear_a")):BoardArt::mountedPhotos(photo);frames.clear();
   const auto digest=QByteArray::fromHex(QByteArray::fromStdString(hash(compressed)));
-  for(int i=0;i<n;i++){texts.push_back(compactQrFrame(digest,i,n,compressed.mid(i*200,200)));version=std::max(version,qrcodegen::QrCode::encodeText(texts.back().c_str(),qrcodegen::QrCode::Ecc::MEDIUM).getVersion());}
+  auto texts=resilientQrFrames(digest,compressed);const int n=int(texts.size());int version=12;
   for(int i=0;i<n;i++){
    auto q=qrcodegen::QrCode::encodeSegments(qrcodegen::QrSegment::makeSegments(texts[i].c_str()),qrcodegen::QrCode::Ecc::MEDIUM,version,version,-1,false);
    need(version==12,"QR profile exceeds its fixed grid");const int cells=q.getSize()+8,scale=12;QImage code(cells*scale,cells*scale,QImage::Format_RGB32);code.fill(Qt::white);QPainter painter(&code);
@@ -123,7 +123,7 @@ struct NativeService::Impl {
   }
   QString flashPath;
   if(!claim){QImageReader flashReader(folder()+"/"+QString::fromStdString(pairs[1]["original"]["path"]));flashReader.setAutoTransform(true);if(flashReader.size().isValid())flashReader.setScaledSize(flashReader.size().scaled(1348,984,Qt::KeepAspectRatio));auto b=flashReader.read();need(!b.isNull(),"Flash photo cannot be displayed");b=dual?BoardArt::dualPhoto(b,rearPhoto("rear_b")):BoardArt::mountedPhotos(b);flashPath=root+QString("/native-flash-%1.png").arg(count);need(b.save(flashPath),"Cannot save flash preview");}
-  tileEnd=QDateTime::currentMSecsSinceEpoch()+600+std::max(4500,n*480);renderBefore=state.value("tile_renders",0LL);
+  tileEnd=QDateTime::currentMSecsSinceEpoch()+600+std::max(4500,n*240+1000);renderBefore=state.value("tile_renders",0LL);
   J paths=J::array();for(auto &path:frames)paths.push_back(path.toStdString());save(root+"/tile.json",{{"path",frames.front().toStdString()},{"frames",paths},{"flash_path",flashPath.toStdString()},{"until",tileEnd}});
   if(!identityDigest.empty()){if(shownIdentities.size()>256)shownIdentities.clear();shownIdentities.insert(sid+identityDigest);}
  }
@@ -170,7 +170,13 @@ struct NativeService::Impl {
   const auto now=QDateTime::currentMSecsSinceEpoch();if(QFile::exists(root+"/obs-state.json"))state=read(root+"/obs-state.json");
   if(connected&&!state.is_null()&&!state.value("closed",true)&&!sid.empty()&&state["session_id"]!=sid)resetSession();
   if(connected&&announced&&state.value("closed",false)&&!ended&&!closedNotified){closedNotified=true;if(tolerantSession){send({{"type","recording-closed"}});message="Recording closed. Finishing the signed transcript…";}else{fault=true;send({{"type","recording-stopped"}});message="Recording incomplete. Ready for another recording.";}}
-  std::deque<J> queue;{std::lock_guard<std::mutex> l(mutex);queue.swap(incoming);}for(auto &m:queue)try{messageIn(m);}catch(const std::exception &e){error(e.what());}
+  std::deque<J> queue;{std::lock_guard<std::mutex> l(mutex);queue.swap(incoming);}for(auto it=queue.begin();it!=queue.end();++it){
+   // Preserve event order while issuer keys arrive; never render a linked proof prematurely.
+   if(it->contains("identity")&&twitchVerifier.pending()){
+    std::lock_guard<std::mutex> l(mutex);incoming.insert(incoming.begin(),it,queue.end());break;
+   }
+   try{messageIn(*it);}catch(const std::exception &e){error(e.what());}
+  }
   if(fault)return;
   if(stopPending&&now>=tileEnd+240){need(tolerantSession||state.value("tile_renders",0LL)>renderBefore,"Proof tile was not rendered in OBS");save(root+"/command.json",{{"type","stop"},{"session_id",sid}});stopPending=false;}
   if(now-lastTick<1000)return;lastTick=now;if(!connected)return;

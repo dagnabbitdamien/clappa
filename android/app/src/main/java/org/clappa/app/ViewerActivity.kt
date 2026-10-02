@@ -127,14 +127,15 @@ open class ViewerActivity:ComponentActivity(){
   AndroidView(modifier=modifier.clipToBounds(),factory={context->val view=PreviewView(context).apply{implementationMode=PreviewView.ImplementationMode.COMPATIBLE;scaleType=PreviewView.ScaleType.FILL_CENTER};val future=ProcessCameraProvider.getInstance(context)
    future.addListener({if(!scanning||isDestroyed)return@addListener
     runCatching{provider=future.get();val preview=Preview.Builder().build().also{it.surfaceProvider=view.surfaceProvider};val analysis=ImageAnalysis.Builder().setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST).build()
+     val reader=com.google.zxing.MultiFormatReader().apply{setHints(mapOf(com.google.zxing.DecodeHintType.POSSIBLE_FORMATS to listOf(com.google.zxing.BarcodeFormat.QR_CODE)))}
      analysis.setAnalyzer(worker){frame->try{
       val plane=frame.planes[0];val bytes=ByteArray(plane.buffer.remaining());plane.buffer.get(bytes)
       val source=com.google.zxing.PlanarYUVLuminanceSource(bytes,plane.rowStride,frame.height,0,0,frame.width,frame.height,false)
-      val reader=com.google.zxing.MultiFormatReader();val qr=reader.decode(com.google.zxing.BinaryBitmap(com.google.zxing.common.HybridBinarizer(source))).text
-      if(qr.startsWith("CLAPPA2:"))runOnUiThread{if(scanning)try{val proof=collector.add(qr);val(n,total)=collector.progress;progress="Reading proof · $n of $total frames"
+      val qr=reader.decodeWithState(com.google.zxing.BinaryBitmap(com.google.zxing.common.HybridBinarizer(source))).text
+      if(qr.startsWith("CLAPPA2:")||qr.startsWith("CLAPPA3:"))runOnUiThread{if(scanning)try{val proof=collector.add(qr);val(n,total)=collector.progress;progress="Reading proof · ${(100*n/total.coerceAtLeast(1)).coerceAtMost(100)}%"
        if(proof!=null)verifyDecodedProof(proof)
-      }catch(_:Exception){collector.reset();progress="Damaged sequence · collecting again"}}
-     }catch(_:Exception){}finally{frame.close()}}
+      }catch(_:Exception){progress="Keep scanning · waiting for a clear frame"}}
+     }catch(_:Exception){}finally{reader.reset();frame.close()}}
      provider!!.unbindAll();provider!!.bindToLifecycle(this@ViewerActivity,CameraSelector.DEFAULT_BACK_CAMERA,preview,analysis)
     }.onFailure{stopScan();error="Camera unavailable. Close other camera apps and try again."}
    },ContextCompat.getMainExecutor(context));view})

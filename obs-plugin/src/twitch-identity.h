@@ -8,6 +8,11 @@
 #include <mbedtls/rsa.h>
 #include <set>
 #include <regex>
+#include <future>
+#ifdef _WIN32
+#include <windows.h>
+#include <winhttp.h>
+#endif
 
 // Only this fixed, HTTPS-authenticated issuer endpoint supplies trusted RSA keys.
 class TwitchIdentityVerifier {
@@ -16,6 +21,24 @@ class TwitchIdentityVerifier {
  J keys;
  qint64 requested=0;
  bool fetching=false;
+#ifdef _WIN32
+ std::future<QByteArray> download;
+ static QByteArray issuerKeys(){
+  struct Handle{HINTERNET h=nullptr;~Handle(){if(h)WinHttpCloseHandle(h);}};
+  Handle session{WinHttpOpen(L"CLAPPA",WINHTTP_ACCESS_TYPE_AUTOMATIC_PROXY,WINHTTP_NO_PROXY_NAME,WINHTTP_NO_PROXY_BYPASS,0)};
+  need(session.h);need(WinHttpSetTimeouts(session.h,4000,4000,4000,4000));
+  Handle connection{WinHttpConnect(session.h,L"id.twitch.tv",INTERNET_DEFAULT_HTTPS_PORT,0)};need(connection.h);
+  Handle request{WinHttpOpenRequest(connection.h,L"GET",L"/oauth2/keys",nullptr,WINHTTP_NO_REFERER,WINHTTP_DEFAULT_ACCEPT_TYPES,WINHTTP_FLAG_SECURE)};need(request.h);
+  DWORD redirect=WINHTTP_OPTION_REDIRECT_POLICY_NEVER;
+  need(WinHttpSetOption(request.h,WINHTTP_OPTION_REDIRECT_POLICY,&redirect,sizeof(redirect)));
+  // Windows validates the issuer certificate and hostname. Never relax TLS checks.
+  need(WinHttpSendRequest(request.h,WINHTTP_NO_ADDITIONAL_HEADERS,0,WINHTTP_NO_REQUEST_DATA,0,0,0)&&WinHttpReceiveResponse(request.h,nullptr));
+  DWORD status=0,length=sizeof(status);need(WinHttpQueryHeaders(request.h,WINHTTP_QUERY_STATUS_CODE|WINHTTP_QUERY_FLAG_NUMBER,WINHTTP_HEADER_NAME_BY_INDEX,&status,&length,WINHTTP_NO_HEADER_INDEX)&&status==200);
+  QByteArray raw;char buffer[4096];DWORD received=0;
+  do{need(WinHttpReadData(request.h,buffer,sizeof(buffer),&received));raw.append(buffer,int(received));need(raw.size()<=65536);}while(received);
+  return raw;
+ }
+#endif
  static void need(bool b){if(!b)throw std::runtime_error("Invalid Twitch identity");}
  static QByteArray decode(const J &j){auto s=QByteArray::fromStdString(j.get<std::string>());auto b=QByteArray::fromBase64(s,QByteArray::Base64UrlEncoding);need(b.toBase64(QByteArray::Base64UrlEncoding|QByteArray::OmitTrailingEquals)==s);return b;}
  static J parse(const QByteArray &b){std::vector<std::set<std::string>> keys;return J::parse(b.constData(),b.constData()+b.size(),[&](int depth,J::parse_event_t e,J &v){need(depth<24);if(e==J::parse_event_t::object_start)keys.emplace_back();if(e==J::parse_event_t::key)need(keys.back().insert(v.get<std::string>()).second);if(e==J::parse_event_t::object_end)keys.pop_back();return true;});}
@@ -23,11 +46,22 @@ public:
 #ifdef CLAPPA_IDENTITY_TEST
  void provisionTestKeys(const J &value){keys=value;requested=QDateTime::currentMSecsSinceEpoch();}
 #endif
- void refresh(){const auto now=QDateTime::currentMSecsSinceEpoch();if(fetching||(requested&&now-requested<60000)||(!keys.is_null()&&now-requested<3600000))return;requested=now;fetching=true;
+ bool pending(){refresh();return fetching;}
+ void refresh(){
+#ifdef _WIN32
+  if(fetching&&download.valid()&&download.wait_for(std::chrono::seconds(0))==std::future_status::ready){
+   fetching=false;try{auto raw=download.get();auto value=parse(raw);need(value.at("keys").is_array()&&value["keys"].size()<=32);keys=value;}catch(...){}
+  }
+#endif
+ const auto now=QDateTime::currentMSecsSinceEpoch();if(fetching||(requested&&now-requested<60000)||(!keys.is_null()&&now-requested<3600000))return;requested=now;fetching=true;
+#ifdef _WIN32
+  download=std::async(std::launch::async,[]{return issuerKeys();});
+#else
   QNetworkRequest request(QUrl("https://id.twitch.tv/oauth2/keys"));request.setTransferTimeout(8000);request.setAttribute(QNetworkRequest::RedirectPolicyAttribute,QNetworkRequest::ManualRedirectPolicy);
   auto reply=network.get(request);reply->setReadBufferSize(65537);
   QObject::connect(reply,&QNetworkReply::readyRead,reply,[reply]{if(reply->bytesAvailable()>65536)reply->abort();});
   QObject::connect(reply,&QNetworkReply::finished,&network,[this,reply]{fetching=false;try{need(reply->error()==QNetworkReply::NoError&&reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt()==200);auto raw=reply->readAll();need(raw.size()<=65536);auto value=parse(raw);need(value.at("keys").is_array()&&value["keys"].size()<=32);keys=value;}catch(...){}reply->deleteLater();});
+#endif
  }
  QString verifiedName(const J &e,const std::string &keyId){refresh();try{
   need(e.is_object()&&e.size()==4&&e.at("profile")=="CLAPPA-TWITCH-OIDC-v1"&&e.at("client_id")=="dohpa93i266ysl246z4b82zy9as97r");

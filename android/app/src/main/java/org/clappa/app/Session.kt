@@ -42,7 +42,7 @@ class Session(private val context: Context, val sessionId:String, val recordingI
     private var responseWindow:ResponseWindow?=null
     @Synchronized fun remainingMillis()=if(pending==null)0L else responseWindow?.remaining(android.os.SystemClock.elapsedRealtime())?:0L
     init {folder.mkdirs();Proof.atomic(File(folder,"session.json"),JSONObject().put("protocol","0.3").put("session_id",sessionId).put("key_id",key.getString("key_id")));Proof.atomic(File(folder,"public-key.json"),key)}
-    private val twitchIdentity=TwitchIdentity.stored(context,key.getString("key_id"))
+    private val twitchIdentity get()=TwitchIdentity.stored(context,key.getString("key_id"))
     private fun now()=maxOf(System.currentTimeMillis(),lastAt)
     @Synchronized fun emit(type:String,data:JSONObject,issuedAt:Long?=null):JSONObject {
         check(!ended);val at=issuedAt?:now();check(at>=lastAt);val payload=JSONObject().put("protocol","0.3").put("algorithm","ES256-P1363").put("key_id",key.getString("key_id")).put("session_id",sessionId).put("seq",seq).put("prev",head?:JSONObject.NULL).put("at",at).put("type",type).put("data",data)
