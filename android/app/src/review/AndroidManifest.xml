@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
  <application>
+ <activity android:name="org.clappa.app.ReviewDualLayoutActivity" android:exported="true" />
  <activity android:name="org.clappa.app.ReviewTwitchActivity" android:exported="true" />
  <activity android:name="org.clappa.app.ReviewViewerActivity" android:exported="true" android:configChanges="orientation|screenSize" />
  <activity android:name="org.clappa.app.ReviewCapabilitiesActivity" android:exported="true" />

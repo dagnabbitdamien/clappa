@@ -19,6 +19,7 @@ import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
@@ -34,10 +35,10 @@ import java.util.concurrent.Executors
 
 class HomeActivity:ComponentActivity(){
  override fun onCreate(savedInstanceState:Bundle?){super.onCreate(savedInstanceState);enableEdgeToEdge(statusBarStyle=androidx.activity.SystemBarStyle.dark(0xff24231f.toInt()),navigationBarStyle=androidx.activity.SystemBarStyle.dark(0xff24231f.toInt()));setContent{
-  ClappaScreenTheme{BoxWithConstraints(Modifier.fillMaxSize().safeDrawingPadding(),contentAlignment=androidx.compose.ui.Alignment.Center){val wide=maxWidth>maxHeight;Column(Modifier.widthIn(max=if(wide)840.dp else 560.dp).fillMaxWidth().verticalScroll(rememberScrollState()).padding(24.dp),verticalArrangement=Arrangement.spacedBy(if(wide)8.dp else 16.dp)){
-   MenuStripe()
-   Wordmark(size=if(wide)32 else 40)
-   Text("No cap! Clap!",color=MenuOrange,fontStyle=androidx.compose.ui.text.font.FontStyle.Italic,style=MaterialTheme.typography.titleMedium,modifier=Modifier.padding(bottom=if(wide)0.dp else 12.dp))
+  ClappaScreenTheme{MenuLayout("Choose your mode"){
+   Text("No cap! Clap!",color=MenuOrange,fontStyle=androidx.compose.ui.text.font.FontStyle.Italic,style=MaterialTheme.typography.titleMedium,modifier=Modifier.padding(bottom=16.dp))
+   BoxWithConstraints(Modifier.weight(1f).fillMaxWidth()){val wide=maxWidth>560.dp
+   Column(Modifier.fillMaxWidth().verticalScroll(rememberScrollState()),verticalArrangement=Arrangement.spacedBy(16.dp)){
    @Composable fun ModeCard(viewer:Boolean,modifier:Modifier){
     OutlinedCard(onClick={startActivity(Intent(this@HomeActivity,if(viewer)ViewerActivity::class.java else MainActivity::class.java))},modifier=modifier,colors=CardDefaults.outlinedCardColors(containerColor=androidx.compose.ui.graphics.Color(0xff302d29)),border=androidx.compose.foundation.BorderStroke(1.dp,MenuOrange.copy(alpha=.35f))){
      Row(Modifier.padding(20.dp),verticalAlignment=androidx.compose.ui.Alignment.CenterVertically,horizontalArrangement=Arrangement.spacedBy(16.dp)){
@@ -47,7 +48,7 @@ class HomeActivity:ComponentActivity(){
    }
    if(wide)Row(horizontalArrangement=Arrangement.spacedBy(16.dp)){ModeCard(false,Modifier.weight(1f));ModeCard(true,Modifier.weight(1f))}
    else{ModeCard(false,Modifier.fillMaxWidth());ModeCard(true,Modifier.fillMaxWidth())}
-  }}}
+  }}}}
  }}
 }
 
@@ -68,10 +69,18 @@ open class ViewerActivity:ComponentActivity(){
  private var audio:android.media.AudioTrack?=null
  private val permission=registerForActivityResult(ActivityResultContracts.RequestPermission()){ok->cameraAllowed=ok;if(!ok)error="Camera permission is needed to scan a stream." else scanning=true}
  override fun onCreate(savedInstanceState:Bundle?){super.onCreate(savedInstanceState);enableEdgeToEdge(statusBarStyle=androidx.activity.SystemBarStyle.dark(0xff24231f.toInt()),navigationBarStyle=androidx.activity.SystemBarStyle.dark(0xff24231f.toInt()));cameraAllowed=ContextCompat.checkSelfPermission(this,Manifest.permission.CAMERA)==PackageManager.PERMISSION_GRANTED
-  setContent{ClappaScreenTheme{Column(Modifier.fillMaxSize().background(Slate).safeDrawingPadding().padding(16.dp)){
-   MenuStripe()
-   Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween){Wordmark(size=28);TextButton(onClick={finish()}){Text("Modes")}}
-   if(scanning&&cameraAllowed){Camera(Modifier.weight(1f).fillMaxWidth());Text(progress,Modifier.padding(vertical=12.dp));Text("Keep the whole code visible while its frames change.");TextButton(onClick={stopScan()}){Text("Cancel scan")}}
+  setContent{ClappaScreenTheme{MenuLayout("Viewer", "‹ Home", {finish()}){
+   if(scanning&&cameraAllowed){BoxWithConstraints(Modifier.weight(1f).fillMaxWidth().padding(bottom=12.dp)){
+    @Composable fun ScanControls(modifier:Modifier){Column(modifier.verticalScroll(rememberScrollState()),verticalArrangement=Arrangement.spacedBy(12.dp)){
+     Text(progress);Text("Keep the whole code visible.",style=MaterialTheme.typography.bodyMedium)
+     OutlinedButton(onClick={stopScan()},modifier=Modifier.heightIn(min=48.dp)){Text("Cancel scan")}
+    }}
+    if(maxWidth>maxHeight)Row(Modifier.fillMaxSize(),horizontalArrangement=Arrangement.spacedBy(20.dp)){
+     Camera(Modifier.weight(1.5f).fillMaxHeight());ScanControls(Modifier.weight(1f))
+    }else Column(Modifier.fillMaxSize(),verticalArrangement=Arrangement.spacedBy(12.dp)){
+     Camera(Modifier.weight(1f).fillMaxWidth());ScanControls(Modifier.fillMaxWidth())
+    }
+   }}
    else{Column(Modifier.weight(1f).verticalScroll(rememberScrollState())){
     result?.let{r->
      Row(verticalAlignment=androidx.compose.ui.Alignment.CenterVertically,modifier=Modifier.padding(top=12.dp)){MenuPossum(11,Modifier.size(80.dp));Text("Signed challenge verified",style=MaterialTheme.typography.headlineSmall,modifier=Modifier.weight(1f).padding(start=12.dp))}
@@ -96,17 +105,26 @@ open class ViewerActivity:ComponentActivity(){
       Text("Public key (P-256)",Modifier.padding(top=12.dp));SelectionContainer{Text(r.key.getString("spki"),style=MaterialTheme.typography.bodySmall)}
       Text("Signatures and beacon checked. Exact photo and recording checks need the original files.",Modifier.padding(vertical=16.dp),style=MaterialTheme.typography.bodySmall)
      }
-    }?:Column(Modifier.padding(vertical=24.dp)){MenuPossum(1,Modifier.size(160.dp));Text("Scan a proof",style=MaterialTheme.typography.headlineSmall);Text("Point at the CLAPPA code on a stream.",Modifier.padding(top=12.dp))}
+    }?:run{
+     val compact=androidx.compose.ui.platform.LocalConfiguration.current.screenHeightDp<480
+     if(compact)Row(Modifier.fillMaxWidth(),verticalAlignment=androidx.compose.ui.Alignment.CenterVertically){
+      Text("Point your camera at the CLAPPA code on a stream.",Modifier.weight(1f),style=MaterialTheme.typography.bodyLarge)
+      MenuPossum(1,Modifier.padding(start=16.dp).size(96.dp),asset="mascot/menu/viewer.png")
+     }else Column(Modifier.fillMaxWidth().padding(vertical=12.dp),horizontalAlignment=androidx.compose.ui.Alignment.CenterHorizontally){
+      Text("Point your camera at the CLAPPA code on a stream.",style=MaterialTheme.typography.bodyLarge)
+      MenuPossum(1,Modifier.padding(top=24.dp).size(180.dp),asset="mascot/menu/viewer.png")
+     }
+    }
     error?.let{Text(it,color=MaterialTheme.colorScheme.error,modifier=Modifier.padding(vertical=12.dp))}
     if(verifying){LinearProgressIndicator(Modifier.fillMaxWidth());Text("Checking signatures and freshness beacon…",Modifier.padding(vertical=12.dp))}
-   };Spacer(Modifier.height(12.dp));Button(onClick={startScan()},enabled=!verifying,modifier=Modifier.fillMaxWidth().heightIn(min=56.dp)){Text(if(result==null)"Scan a stream" else "Scan another proof")}}
+   };Spacer(Modifier.height(12.dp));Button(onClick={startScan()},enabled=!verifying,modifier=Modifier.fillMaxWidth().padding(bottom=12.dp).heightIn(min=56.dp)){Text(if(result==null)"Scan a proof" else "Scan another proof")}}
   }}}
  }
  private fun startScan(){result=null;error=null;collector.reset();progress="Point at the animated QR code";if(cameraAllowed)scanning=true else permission.launch(Manifest.permission.CAMERA)}
  private fun stopScan(){scanning=false;provider?.unbindAll()}
  @Composable private fun Camera(modifier:Modifier){
   DisposableEffect(Unit){onDispose{provider?.unbindAll()}}
-  AndroidView(modifier=modifier,factory={context->val view=PreviewView(context);val future=ProcessCameraProvider.getInstance(context)
+  AndroidView(modifier=modifier.clipToBounds(),factory={context->val view=PreviewView(context).apply{implementationMode=PreviewView.ImplementationMode.COMPATIBLE;scaleType=PreviewView.ScaleType.FILL_CENTER};val future=ProcessCameraProvider.getInstance(context)
    future.addListener({if(!scanning||isDestroyed)return@addListener
     runCatching{provider=future.get();val preview=Preview.Builder().build().also{it.surfaceProvider=view.surfaceProvider};val analysis=ImageAnalysis.Builder().setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST).build()
      analysis.setAnalyzer(worker){frame->try{

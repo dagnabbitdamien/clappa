@@ -10,7 +10,7 @@ CLAPPA pairs an Android phone with OBS. Tap the clapperboard, hear a little musi
 
 No CLAPPA account. No hosted proof storage. Your signing identity and original evidence stay with you.
 
-**[Download the Test16.2 preview](https://github.com/dagnabbitdamien/clappa/releases/tag/test16.2)** · [Build notes](docs/test16.2.md) · [Developer setup](docs/GITHUB.md)
+**[Download the Test17 preview](https://github.com/dagnabbitdamien/clappa/releases/tag/test17)** · [Build notes](docs/test17.md) · [Developer setup](docs/GITHUB.md)
 
 ## For streamers
 
@@ -47,7 +47,7 @@ CLAPPA binds evidence for human judgment. It is not an automatic AI detector. A 
 - [Current architecture](docs/CURRENT-ARCHITECTURE.md)
 - [Protocol and verification](protocol/README.md)
 - [Full design specification](DESIGN_SPEC.md)
-- [Latest build notes](docs/test16.2.md)
+- [Latest build notes](docs/test17.md)
 
 Run the protocol/verifier tests with `pnpm install --frozen-lockfile` followed by `pnpm test` (Node.js 22+). Android and OBS require their respective native toolchains. Private keys, local recordings, proof photos and build caches are excluded from this repository.
 

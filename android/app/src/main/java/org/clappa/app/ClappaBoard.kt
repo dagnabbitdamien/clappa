@@ -63,9 +63,9 @@ internal data class BoardState(val phase:BoardPhase,val connected:Boolean=false,
    .background(Color(0xff302f2a),panelShape)
    .border(1.dp,Brush.verticalGradient(listOf(Color(0xff646258),Color(0xff181814))),panelShape).clip(panelShape)){
    ClapperBar(angle)
-   Row(Modifier.fillMaxWidth().padding(start=20.dp,end=16.dp,top=if(landscape)6.dp else 12.dp,bottom=if(landscape)8.dp else 16.dp),verticalAlignment=Alignment.CenterVertically){
+   Row(Modifier.fillMaxWidth().padding(start=10.dp,end=16.dp,top=if(landscape)6.dp else 12.dp,bottom=if(landscape)8.dp else 16.dp),verticalAlignment=Alignment.CenterVertically){
     Column(Modifier.weight(1f)){
-     Wordmark(size=if(landscape)28 else 32)
+     Wordmark(size=32)
      Row(verticalAlignment=Alignment.CenterVertically,horizontalArrangement=Arrangement.spacedBy(6.dp)){
       Canvas(Modifier.size(6.dp)){drawCircle(if(state.connected)Color(0xffa9cfbc)else Color(0xff87867c))}
       Text(if(state.connected)"OBS connected" else if(state.phase==BoardPhase.CONNECTING)"Connecting…" else "OBS disconnected",fontSize=11.sp,color=Chalk.copy(alpha=.78f))

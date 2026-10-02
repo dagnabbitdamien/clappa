@@ -55,7 +55,7 @@ class DualCaptureActivity:ComponentActivity(){
   requestedOrientation=android.content.pm.ActivityInfo.SCREEN_ORIENTATION_LOCKED;enableEdgeToEdge(statusBarStyle=SystemBarStyle.dark(0xff24231f.toInt()),navigationBarStyle=SystemBarStyle.dark(0xff24231f.toInt()));window.isNavigationBarContrastEnforced=false
   window.addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);oldBrightness=window.attributes.screenBrightness
   setContent{MaterialTheme(colorScheme=darkColorScheme(primary=Chalk,onPrimary=Slate)){
-   val scope=rememberCoroutineScope();val front=remember{PreviewView(this).apply{implementationMode=PreviewView.ImplementationMode.COMPATIBLE}};val rear=remember{PreviewView(this).apply{implementationMode=PreviewView.ImplementationMode.COMPATIBLE}}
+   val scope=rememberCoroutineScope();val front=remember{PreviewView(this).apply{implementationMode=PreviewView.ImplementationMode.COMPATIBLE;scaleType=PreviewView.ScaleType.FILL_CENTER}};val rear=remember{PreviewView(this).apply{implementationMode=PreviewView.ImplementationMode.COMPATIBLE;scaleType=PreviewView.ScaleType.FILL_CENTER}}
    LaunchedEffect(Unit){while(!busy){val left=intent.getLongExtra("deadline",0)-SystemClock.elapsedRealtime();seconds=((left+999).coerceAtLeast(0)/1000).toInt();if(left<=0){reject("timeout");break};delay(100)}}
    DisposableEffect(Unit){var disposed=false;val future=ProcessCameraProvider.getInstance(this@DualCaptureActivity)
     future.addListener({if(!disposed)try{val p=future.get();provider=p;val infos=p.availableConcurrentCameraInfos.firstOrNull{it.any{c->c.lensFacing==CameraSelector.LENS_FACING_FRONT}&&it.any{c->c.lensFacing==CameraSelector.LENS_FACING_BACK&&c.hasFlashUnit()}}?:error("Two-camera flash mode is unavailable")
@@ -70,20 +70,12 @@ class DualCaptureActivity:ComponentActivity(){
     onDispose{disposed=true;rearControl?.enableTorch(false);provider?.unbindAll()}
    }
    Box(Modifier.fillMaxSize().background(Slate)){
-    Column(Modifier.fillMaxSize().safeDrawingPadding()){
-     Row(Modifier.fillMaxWidth().padding(12.dp),verticalAlignment=Alignment.CenterVertically){Wordmark(Modifier.weight(1f),26);Text("Both views · "+seconds+"s",color=Chalk,fontSize=14.sp)}
-     Text(intent.getStringExtra("prompt")?:"Show yourself and your setup!",Modifier.padding(horizontal=16.dp,vertical=6.dp),color=Chalk,fontSize=16.sp)
-     BoxWithConstraints(Modifier.weight(1f).fillMaxWidth().padding(8.dp)){
-      @Composable fun pane(view:PreviewView,label:String,modifier:Modifier){Box(modifier.clipToBounds()){AndroidView(factory={view},modifier=Modifier.fillMaxSize());Text(label,Modifier.align(Alignment.TopStart).background(Slate.copy(alpha=.8f)).padding(6.dp),color=Chalk,fontSize=12.sp)}}
-      if(maxWidth>maxHeight)Row(Modifier.fillMaxSize(),horizontalArrangement=Arrangement.spacedBy(8.dp)){pane(front,"You · preview mirrored",Modifier.weight(1f).fillMaxHeight());pane(rear,"Your setup",Modifier.weight(1f).fillMaxHeight())}
-      else Column(Modifier.fillMaxSize(),verticalArrangement=Arrangement.spacedBy(8.dp)){pane(front,"You · preview mirrored",Modifier.weight(1f).fillMaxWidth());pane(rear,"Your setup",Modifier.weight(1f).fillMaxWidth())}
-     }
-     Text(status,Modifier.padding(horizontal=16.dp,vertical=6.dp),color=Chalk,fontSize=13.sp)
-     Box(Modifier.fillMaxWidth().height(94.dp)){
-      TextButton(onClick={finish()},enabled=!busy,modifier=Modifier.align(Alignment.CenterStart).padding(start=12.dp).size(56.dp)){Text("‹",fontSize=38.sp)}
-      Canvas(Modifier.align(Alignment.Center).size(72.dp).semantics{contentDescription="Capture both views"}.clickable(enabled=ready&&!busy){busy=true;scope.launch{capture()}}){drawCircle(Chalk.copy(alpha=if(busy).4f else 1f),radius=size.minDimension/2-2.dp.toPx(),style=androidx.compose.ui.graphics.drawscope.Stroke(3.dp.toPx()));drawCircle(Chalk.copy(alpha=if(busy).4f else 1f),radius=size.minDimension/2-9.dp.toPx())}
-     }
-    }
+    DualCameraLayout(
+     landscape=resources.configuration.orientation==android.content.res.Configuration.ORIENTATION_LANDSCAPE,
+     prompt=intent.getStringExtra("prompt")?:"Follow the photo challenge!", seconds=seconds,status=status,
+     ready=ready,busy=busy,onBack={finish()},onCapture={busy=true;scope.launch{capture()}},
+     front={AndroidView(factory={front},modifier=Modifier.fillMaxSize())},
+     rear={AndroidView(factory={rear},modifier=Modifier.fillMaxSize())})
     if(illumination!=Color.Transparent)Box(Modifier.fillMaxSize().background(illumination))
    }
   }}
@@ -119,4 +111,38 @@ class DualCaptureActivity:ComponentActivity(){
  }
  private fun reject(reason:String){setResult(RESULT_CANCELED,Intent().putExtra("reason",reason));finish()}
  override fun onDestroy(){synchronized(lock){request?.cancel();request=null;samples.values.forEach{it.bitmap.recycle()};samples.clear()};rearControl?.enableTorch(false);provider?.unbindAll();worker.shutdown();if(!returned&&folder.exists())folder.deleteRecursively();super.onDestroy()}
+}
+
+/** Preview allocation is shared with native layout fixtures; evidence images are never cropped here. */
+@Composable internal fun DualCameraLayout(landscape:Boolean,prompt:String,seconds:Int,status:String,
+ ready:Boolean,busy:Boolean,onBack:()->Unit,onCapture:()->Unit,
+ front:@Composable ()->Unit,rear:@Composable ()->Unit){
+ Column(Modifier.fillMaxSize().safeDrawingPadding()){
+  Row(Modifier.fillMaxWidth().padding(horizontal=20.dp,vertical=8.dp),verticalAlignment=Alignment.CenterVertically){
+   Wordmark(Modifier.weight(1f),32);Text("${seconds}s",color=Chalk)
+  }
+  Text(prompt,Modifier.padding(horizontal=20.dp,vertical=4.dp),color=Chalk,fontSize=16.sp)
+  @Composable fun pane(label:String,modifier:Modifier,preview:@Composable ()->Unit){
+   Box(modifier.clipToBounds().semantics{contentDescription=label+" preview"}){
+    preview()
+    Text(label,Modifier.align(Alignment.TopStart).background(Slate.copy(alpha=.85f)).padding(8.dp),color=Chalk,fontSize=12.sp)
+   }
+  }
+  // Use window orientation, never the aspect ratio of leftover space beneath the prompt.
+  if(landscape)Row(Modifier.weight(1f).fillMaxWidth().padding(8.dp),horizontalArrangement=Arrangement.spacedBy(8.dp)){
+   pane("Front camera",Modifier.weight(1f).fillMaxHeight(),front)
+   pane("Rear camera",Modifier.weight(1f).fillMaxHeight(),rear)
+  }else Column(Modifier.weight(1f).fillMaxWidth().padding(8.dp),verticalArrangement=Arrangement.spacedBy(8.dp)){
+   pane("Front camera",Modifier.weight(1f).fillMaxWidth(),front)
+   pane("Rear camera",Modifier.weight(1f).fillMaxWidth(),rear)
+  }
+  Row(Modifier.fillMaxWidth().heightIn(min=80.dp).padding(horizontal=12.dp),verticalAlignment=Alignment.CenterVertically){
+   TextButton(onClick=onBack,enabled=!busy,modifier=Modifier.weight(1f).heightIn(min=48.dp)){Text("‹ Back")}
+   Canvas(Modifier.padding(vertical=4.dp).size(72.dp).semantics{contentDescription="Capture both views"}.clickable(enabled=ready&&!busy,onClick=onCapture)){
+    drawCircle(Chalk.copy(alpha=if(busy).4f else 1f),radius=size.minDimension/2-2.dp.toPx(),style=androidx.compose.ui.graphics.drawscope.Stroke(3.dp.toPx()))
+    drawCircle(Chalk.copy(alpha=if(busy).4f else 1f),radius=size.minDimension/2-9.dp.toPx())
+   }
+   Text(status,Modifier.weight(1f).padding(start=12.dp),color=Chalk,fontSize=12.sp)
+  }
+ }
 }

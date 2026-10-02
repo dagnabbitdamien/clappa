@@ -1,3 +1,5 @@
+**Test17 (2026-10-02):** Home, Viewer, Settings and Twitch share MenuLayout: full-width top accent, fixed header rhythm, 32 sp wordmark, 20 dp safe content gutters, explicit outlined return navigation. Do not centre headers with body content. Viewer uses one Scan a proof action and the approved binoculars illustration, compact in landscape. Dual capture uses window orientation and equal preview halves labelled Front camera / Rear camera; preview crop never changes saved evidence. See docs/review17/DESIGN-REVIEW.md and docs/test17.md.
+
 **Test15.1:** The only tagline is No cap! Clap! Do not invent promotional slogans. Streamer/viewer use new whole menu sprites with distinct presenting/binocular poses. Existing challenge sprites unchanged. See docs/test15.1.md.
 
 **Test15 (2026-10-02):** Menus/viewer/chat invitation use approved whole possum sprites. OBS chat supports read-only Twitch device authorization, with tokens in memory only and cancellation guards. Preserve 3-viewer/15-second voting, two-minute cooldown and explicit phone acceptance. Live authorization remains unverified. See docs/test15.md.

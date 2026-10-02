@@ -293,11 +293,9 @@ open class MainActivity:ComponentActivity() {
             chatRequest=null
             if(chatReady()&&session?.sessionId==invitation.sessionId&&SystemClock.elapsedRealtime()<invitation.deadline)issue()
         })
-        if(settings)androidx.compose.ui.window.Dialog(onDismissRequest={settings=false},properties=androidx.compose.ui.window.DialogProperties(usePlatformDefaultWidth=false)){
+        if(settings)androidx.compose.ui.window.Dialog(onDismissRequest={settings=false},properties=androidx.compose.ui.window.DialogProperties(usePlatformDefaultWidth=false,decorFitsSystemWindows=false)){
           Surface(color=Slate,contentColor=Chalk,modifier=Modifier.fillMaxSize()){
-           Column(Modifier.safeDrawingPadding().padding(20.dp)){
-            MenuStripe()
-            Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically){Text("Settings",style=MaterialTheme.typography.headlineSmall);OutlinedButton(onClick={settings=false}){Text("Done")}}
+           MenuLayout("Settings", "Done", {settings=false}){
             Column(Modifier.weight(1f).fillMaxWidth().verticalScroll(androidx.compose.foundation.rememberScrollState()),verticalArrangement=Arrangement.spacedBy(10.dp)){
             Text("Twitch account",color=MenuOrange,style=MaterialTheme.typography.titleMedium)
             Text("Show your Twitch name with your proofs.",fontSize=13.sp)
