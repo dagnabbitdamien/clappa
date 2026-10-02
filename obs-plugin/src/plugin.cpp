@@ -145,7 +145,7 @@ static void tileTick(void *data,float){
   const double lag=.85*acceleration/(omega*omega)*(1-(1+omega*t)*std::exp(-omega*t));
   angle=std::asin(lag/(BoardArt::BoardWidth-14))*180/3.14159265;
  }
- QImage im(BoardArt::Width,BoardArt::Height,QImage::Format_ARGB32_Premultiplied);im.fill(Qt::transparent);QPainter p(&im);p.setRenderHint(QPainter::Antialiasing);p.translate(0,y);p.drawImage(QRectF(0,0,BoardArt::Width,BoardArt::Height),t->frames[t->index]);p.translate(12,40);
+ QImage im(BoardArt::Width*2,BoardArt::Height*2,QImage::Format_ARGB32_Premultiplied);im.fill(Qt::transparent);QPainter p(&im);p.setRenderHint(QPainter::Antialiasing);p.setRenderHint(QPainter::SmoothPixmapTransform,false);p.scale(2,2);p.translate(0,y);p.drawImage(QRectF(0,0,BoardArt::Width,BoardArt::Height),t->frames[t->index]);p.translate(12,40);
  if(!t->flash.isNull()&&ageMs<1250){p.save();p.setOpacity(TileTiming::flashOpacity(ageMs));BoardArt::drawPhoto(p,t->flash);p.restore();}
  BoardArt::bar(p,angle);BoardArt::bracket(p);p.end();im=im.convertToFormat(QImage::Format_RGBA8888);
  const uint8_t *ptr=im.constBits();obs_enter_graphics();if(!t->texture)t->texture=gs_texture_create(im.width(),im.height(),GS_RGBA,1,&ptr,GS_DYNAMIC);else gs_texture_set_image(t->texture,ptr,im.bytesPerLine(),false);obs_leave_graphics();

@@ -6,6 +6,8 @@
 
 # AGENTS.md — CLAPPA Repository Instructions
 
+**Test16.2 refinement:** Menu accent is now a 16dp mirrored arrow band (two 8dp rows). OBS hinge uses native geometry and round screws at its shorter height, never nonuniform scaling. This supersedes the single-row 8dp accent below.
+
 **Test16.1 refinement:** Ordinary phone menus use only an 8dp diagonal stripe accent, no hinge or metal plate. Reserve the complete skeuomorphic board for capture. OBS jaws/hinge are 20% shorter; enlarged photo region preserves aspect ratio. Keep QR geometry unchanged. This supersedes Test16's full menu-jaw headers.
 
 **Test16 presentation contract:** Shared charcoal surfaces, mirrored black/white clapper jaws and orange accents apply to home, viewer, settings and OBS dock menus. Streamer settings are full-screen and scrollable; Viewer mode belongs on the home menu. Use distinct headings and outlined controls, with text explaining recording-locked camera settings instead of a disabled switch. OBS public identity is selectable/copyable in Settings, never appended to status prose. Every photo is an independent aspect-preserving taped print; do not reintroduce a framed landscape composite around multiple photos. Source dimensions remain stable. See docs/test16.md.

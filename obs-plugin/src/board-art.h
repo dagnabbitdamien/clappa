@@ -28,10 +28,17 @@ inline void bar(QPainter &p,double angle=0) {
  p.save();p.translate(14,12.8);p.rotate(-angle);p.translate(-14,-12.8);jaw(p,false);p.restore();
 }
 inline void bracket(QPainter &p) {
- p.save();p.scale(1,.8);
- p.setPen(QPen(QColor("#a7a79f"),1));p.setBrush(QColor("#777970"));
- p.drawPolygon(QPolygonF({{0,0},{23,0},{46,59},{42,64},{0,64}}));
- for(auto v:{QPointF(14,16),QPointF(11,52),QPointF(33,52)}){p.setBrush(QColor("#d2d2c8"));p.drawEllipse(v,4,4);p.drawLine(v+QPointF(-2,0),v+QPointF(2,0));}
+ p.save();p.setRenderHint(QPainter::Antialiasing);
+ // Purpose-built 51.2-unit plate: pivot centred in the moving jaw,
+ // two round fixing screws in the fixed jaw. No anisotropic scaling.
+ QLinearGradient metal(0,0,37,51.2);metal.setColorAt(0,QColor("#92948b"));metal.setColorAt(1,QColor("#66685f"));
+ p.setPen(QPen(QColor("#a7a79f"),.8));p.setBrush(metal);
+ p.drawPolygon(QPolygonF({{0,0},{22,0},{39,47.2},{36,51.2},{0,51.2}}));
+ for(auto v:{QPointF(14,12.8),QPointF(10,40),QPointF(28,40)}){
+  p.setPen(Qt::NoPen);p.setBrush(QColor(0,0,0,70));p.drawEllipse(v+QPointF(.4,.6),4.2,4.2);
+  p.setPen(QPen(QColor("#e2e1d8"),.6));p.setBrush(QColor("#c4c5bb"));p.drawEllipse(v,3.4,3.4);
+  p.setPen(QPen(QColor("#606259"),.8,Qt::SolidLine,Qt::RoundCap));p.drawLine(v+QPointF(-1.7,0),v+QPointF(1.7,0));
+ }
  p.restore();
 }
 inline void tail(QPainter &p,bool frontOnly=false){

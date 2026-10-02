@@ -120,11 +120,11 @@ internal data class BoardState(val phase:BoardPhase,val connected:Boolean=false,
 }
 
 @Composable internal fun MenuStripe(){
- Canvas(Modifier.fillMaxWidth().height(8.dp).clipToBounds()){
+ Canvas(Modifier.fillMaxWidth().height(16.dp).clipToBounds()){
   drawRect(Chalk)
-  val h=size.height;val step=h*3
+  val h=size.height/2;val step=h*3
   var x=-step
-  while(x<size.width){drawPath(androidx.compose.ui.graphics.Path().apply{moveTo(x,0f);lineTo(x+step/2,0f);lineTo(x+step/2+h,h);lineTo(x+h,h);close()},Color(0xff171715));x+=step}
+  while(x<size.width){drawPath(androidx.compose.ui.graphics.Path().apply{moveTo(x,0f);lineTo(x+step/2,0f);lineTo(x+step/2+h,h);lineTo(x+step/2,h*2);lineTo(x,h*2);lineTo(x+h,h);close()},Color(0xff171715));x+=step}
  }
 }
 
