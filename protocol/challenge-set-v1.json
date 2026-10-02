@@ -1,0 +1,42 @@
+{
+  "challenge_set_version": 1,
+  "notes": "Small MVP challenge family. Challenge diversity is mainly a scene-coverage issue, not a cryptographic issue.",
+  "challenges": [
+    {
+      "id": "left",
+      "text": "Take a picture to your left."
+    },
+    {
+      "id": "right",
+      "text": "Take a picture to your right."
+    },
+    {
+      "id": "up",
+      "text": "Take a picture upward."
+    },
+    {
+      "id": "down",
+      "text": "Take a picture downward."
+    },
+    {
+      "id": "front",
+      "text": "Take a picture in front of you."
+    },
+    {
+      "id": "back",
+      "text": "Take a picture behind you."
+    },
+    {
+      "id": "recording_camera",
+      "text": "Take a picture of the recording camera."
+    },
+    {
+      "id": "main_subject_alt_angle",
+      "text": "Take a picture of the main subject from another angle."
+    },
+    {
+      "id": "room_setup",
+      "text": "Take a wide picture of the room or recording setup."
+    }
+  ]
+}\n

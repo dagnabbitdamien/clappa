@@ -1,0 +1,15 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {readFile} from 'node:fs/promises';
+import {deterministicSign as sign} from '../../test-vectors/generate.mjs';import {MediaChain} from '../../protocol/media-chain.mjs';
+import {encodeTransport,decodeTransport} from '../../protocol/transport.mjs';import {hashObject} from '../proof.mjs';import {avcc} from '../recording.mjs';
+const root=new URL('../../test-vectors/',import.meta.url),json=async p=>JSON.parse(await readFile(new URL(p,root)));
+const event=await json('valid/events/000002.json'),challenge=await json('valid/events/000001.json'),key=await json('valid/public-key.json'),photo=await readFile(new URL('fixture.jpg',root));
+const d=(await json('valid/events/000000.json')).payload.data.outputs[0],chain=new MediaChain(d);chain.append({type:'video',track:0,pts:'0',dts:'0',timebase_num:1,timebase_den:30,keyframe:true},Buffer.from('preceding media'));
+const payload={profile:'CLAPPA-MEDIA-PROOF-v1',algorithm:'ES256-P1363',key_id:key.key_id,session_id:event.payload.session_id,recording_id:challenge.payload.data.obs.recording_id,event_sha256:hashObject(event),challenge_sha256:hashObject(challenge),at:event.payload.at,descriptors:[d],outputs:[chain.snapshot()]};
+const context={challenge,proof:sign(payload)},encode=(e=event,c=context)=>encodeTransport(e,key,[photo,photo],{context:c});
+test('QR includes independently signed challenge and cumulative media boundary',()=>assert.deepEqual(decodeTransport(encode()).context,context));
+test('valid event signature cannot lie about signing key identity',()=>assert.throws(()=>encode(sign({...event.payload,key_id:'aa'.repeat(32)}))));
+test('QR rejects changed challenge text, even with a fresh challenge signature',()=>assert.throws(()=>encode(event,{...context,challenge:sign({...challenge.payload,data:{...challenge.payload.data,prompt_id:'right'}})})));
+test('QR rejects context transplanted to a different signed response',()=>assert.throws(()=>encode(sign({...event.payload,at:event.payload.at+1}))));
+test('QR rejects changed head without phone signature',()=>{const c=structuredClone(context);c.proof.payload.outputs[0].head='aa'.repeat(32);assert.throws(()=>encode(event,c))});
+test('legacy QR has no media-verification context',()=>assert.equal(decodeTransport(encodeTransport(event,key,[photo,photo])).context,undefined));
+test('H264 container normalisation preserves NAL bytes, rejects malformed framing',()=>{assert.deepEqual(avcc(Buffer.from([0,0,1,101,5,0,0,0,1,65,9])),Buffer.from([0,0,0,2,101,5,0,0,0,2,65,9]));assert.throws(()=>avcc(Buffer.from([1,2,3])))});

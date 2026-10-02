@@ -1,0 +1,10 @@
+import fs from 'node:fs';
+const edit=(file,fn)=>{const old=fs.readFileSync(file,'utf8'),next=fn(old);if(next===old)throw Error('No change: '+file);fs.writeFileSync(file,next)};
+edit('obs-plugin/src/plugin.cpp',s=>s.replace('uint32_t width=872,height=430','uint32_t width=BoardArt::Width,height=BoardArt::Height').replace('y=483*','y=(BoardArt::Height+53)*').replace('y=490*','y=(BoardArt::Height+60)*').replace('QImage im(2616,1290,','QImage im(BoardArt::Width*3,BoardArt::Height*3,').replace('QRectF(0,0,872,430)','QRectF(0,0,BoardArt::Width,BoardArt::Height)'));
+edit('android/app/build.gradle.kts',s=>s.replace('versionCode = 9','versionCode = 10').replace('0.3.0-test7','0.3.0-test8'));
+edit('android/app/src/main/java/org/clappa/app/Cadence.kt',s=>s.replaceAll('CLAPPA-RIFF-v1','CLAPPA-RIFF-v2').replace('125 else 150','125 else 111'));
+edit('android/app/src/test/java/org/clappa/app/CadenceTest.kt',s=>s.replace('125,150','125,111'));
+edit('obs-plugin/native-integration-test.mjs',s=>s.replaceAll('430','480').replaceAll('left:540,top:99','left:544,top:120').replace('left:146,top:104','left:156,top:124'));
+fs.mkdirSync('docs/review8',{recursive:true});
+for(const file of ['tools/android-review.mjs','tools/android-stress-review.mjs'])edit(file,s=>s.replaceAll("'docs/review7/'","(process.argv[2]??'docs/review7')+'/'").replaceAll("'docs/review7/screens.json'","(process.argv[2]??'docs/review7')+'/screens.json'"));
+edit('tools/RiffPreview.java',s=>s.replace('n<=3','n<=2').replace('"review-challenge-"+n','"review-challenge-1"').replace('phrase.getSecond(),pitches','n==1?125:111,pitches').replace('"docs/review7/riff-"+n+".wav"','"docs/review8/riff-"+(n==1?120:135)+".wav"'));

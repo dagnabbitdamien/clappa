@@ -1,0 +1,8 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {mkdtemp,writeFile,rm} from 'node:fs/promises';import path from 'node:path';import os from 'node:os';
+import {MediaChain,verifyMediaArchive} from '../../protocol/media-chain.mjs';import {canonical} from '../canonical.mjs';
+const d={session_id:'11'.repeat(16),output_id:'22'.repeat(16),role:'recording',codec:'test'};
+const meta={type:'video',track:0,pts:'0',dts:'-1',timebase_num:1,timebase_den:1000,keyframe:true};
+test('every output packet and later tile packet bind preceding output',()=>{const a=new MediaChain(d),b=new MediaChain(d);a.append(meta,Buffer.from('frame'));b.append(meta,Buffer.from('frAme'));a.append(meta,Buffer.from('QR tile'));b.append(meta,Buffer.from('QR tile'));assert.notEqual(a.head,b.head);});
+test('archive verifies all checkpoints and detects changed packet',async t=>{const dir=await mkdtemp(path.join(os.tmpdir(),'clappa-media-'));t.after(()=>rm(dir,{recursive:true,force:true}));const c=new MediaChain(d),p1=c.append(meta,Buffer.from('first')),check=c.snapshot(),p2=c.append(meta,Buffer.from('tile'));const manifest=path.join(dir,'packets.jsonl'),archive=path.join(dir,'packets.bin');await writeFile(manifest,[p1,p2].map(canonical).join('\n')+'\n');await writeFile(archive,'firsttile');await verifyMediaArchive(d,manifest,archive,[check],c.snapshot());await writeFile(archive,'Firsttile');await assert.rejects(verifyMediaArchive(d,manifest,archive,[check],c.snapshot()));});
+test('output identity domain-separates identical media',()=>{const a=new MediaChain(d),b=new MediaChain({...d,role:'streaming'});a.append(meta,Buffer.from('x'));b.append(meta,Buffer.from('x'));assert.notEqual(a.head,b.head);});
+

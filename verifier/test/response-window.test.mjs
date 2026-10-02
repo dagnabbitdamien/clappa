@@ -1,0 +1,11 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {validateResponseWindow as check,RESPONSE_PROFILE} from '../../protocol/response-window.mjs';
+import {validate} from '../proof.mjs';import {readFile} from 'node:fs/promises';
+const c={at:1000,data:{response_window_ms:10000,flash:'red'}};
+const response=(ms=9999,gap=1500)=>({at:1000+ms+gap,data:{a_at:1000+ms,b_at:1000+ms+gap,response_ms:ms,pair_ms:gap}});
+test('deadline accepts boundary and rejects just-late first photo',()=>{assert.equal(check(c,response(10000)),RESPONSE_PROFILE);assert.throws(()=>check(c,response(10001)),/deadline/)});
+test('front and rear pair budgets differ',()=>{assert.throws(()=>check(c,response(9000,1501)));assert.equal(check({...c,data:{...c.data,flash:'led'}},response(9000,3000)),RESPONSE_PROFILE)});
+test('Test12 explicitly signs a three-second selfie pair window',()=>{const next={...c,data:{...c.data,pair_window_ms:3000}};assert.equal(check(next,response(9000,3000)),RESPONSE_PROFILE);assert.throws(()=>check(next,response(9000,3001)))});
+test('clock manipulation or missing timing cannot pass',()=>{const r=response();r.data.a_at-=1000;assert.throws(()=>check(c,r));delete r.data.response_ms;assert.throws(()=>check(c,r))});
+test('timed session cannot downgrade a challenge',()=>{assert.throws(()=>check({at:1000,data:{}},response(),{required:true}));assert.equal(check({at:1000,data:{flash:'red'}},{at:2000,data:{a_at:1000,b_at:2000}}),'legacy-unbounded')});
+test('new action prompts require front camera and RGB illumination',async()=>{const e=JSON.parse(await readFile(new URL('../../test-vectors/valid/events/000001.json',import.meta.url)));for(const prompt_id of ['selfie_cover_left','selfie_cover_right','selfie_wink','selfie_turn']){Object.assign(e.payload.data,{prompt_id,camera:'front',flash:'blue',response_window_ms:10000});assert.doesNotThrow(()=>validate('event',e));e.payload.data.flash='led';assert.throws(()=>validate('event',e))}});

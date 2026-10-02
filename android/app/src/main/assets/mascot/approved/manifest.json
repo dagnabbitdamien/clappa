@@ -1,0 +1,581 @@
+{
+  "source": "../sprite-proposals-12.png",
+  "sourceSha256": "a94c032739d32106be909808823ea7ccba0312e1c892014a8502cbbb7fe6b62e",
+  "sourceSize": [
+    1448,
+    1086
+  ],
+  "canvasSize": [
+    448,
+    448
+  ],
+  "excluded": [
+    2
+  ],
+  "pixelPolicy": "Rectangular extraction and transparent padding only. No resampling, recoloring, alpha alteration, anatomy cutting or removal of fringe.",
+  "separation": "12 complete significant connected components at alpha>=16, exact variable rectangular partitions at measured neighboring gaps. Retain every RGBA pixel inside each measured crop, including faint alpha1-15 source fringes.",
+  "quality": "Native RGBA compositing on charcoal/light is clean at display scale. Raw uncomposited RGB shows red/yellow hidden fringe mainly alpha1-2; retained without erasure. Some faint alpha1 source bridges cross partition gutters; no foreign significant component pixels in any crop. Pose3 faint fringe touches original top edge; significant silhouette starts y6 and is intact.",
+  "poses": [
+    {
+      "pose": 1,
+      "file": "pose-01.png",
+      "approved": true,
+      "sourceComponent": {
+        "id": 4,
+        "area": 66865,
+        "l": 33,
+        "t": 15,
+        "r": 339,
+        "b": 365
+      },
+      "originalCrop": {
+        "left": 29,
+        "top": 11,
+        "width": 347,
+        "height": 358
+      },
+      "sourcePartition": {
+        "left": 0,
+        "top": 0,
+        "right": 376,
+        "bottom": 368
+      },
+      "renderedBounds": {
+        "left": 46,
+        "top": 69,
+        "width": 347,
+        "height": 358
+      },
+      "baseline": 416,
+      "baselineNormalized": 0.9285714285714286,
+      "bodyAnchor": [
+        232,
+        416
+      ],
+      "muzzle": [
+        310,
+        211
+      ],
+      "muzzleNormalized": [
+        0.6919642857142857,
+        0.47098214285714285
+      ],
+      "muzzleMethod": "manually located nose center; approximate +/-5 source pixels",
+      "facing": "right",
+      "mirrored": false,
+      "exactRgbaMatch": true,
+      "foreignSignificantPixels": 0,
+      "lowAlphaPixels": 4161
+    },
+    {
+      "pose": 3,
+      "file": "pose-03.png",
+      "approved": true,
+      "sourceComponent": {
+        "id": 1,
+        "area": 57592,
+        "l": 747,
+        "t": 6,
+        "r": 1083,
+        "b": 358
+      },
+      "originalCrop": {
+        "left": 731,
+        "top": 0,
+        "width": 357,
+        "height": 376
+      },
+      "sourcePartition": {
+        "left": 723,
+        "top": 0,
+        "right": 1098,
+        "bottom": 375
+      },
+      "renderedBounds": {
+        "left": 43,
+        "top": 66,
+        "width": 357,
+        "height": 376
+      },
+      "baseline": 416,
+      "baselineNormalized": 0.9285714285714286,
+      "bodyAnchor": [
+        232,
+        416
+      ],
+      "muzzle": [
+        332,
+        185
+      ],
+      "muzzleNormalized": [
+        0.7410714285714286,
+        0.41294642857142855
+      ],
+      "muzzleMethod": "manually located nose center; approximate +/-5 source pixels",
+      "facing": "right",
+      "mirrored": false,
+      "exactRgbaMatch": true,
+      "foreignSignificantPixels": 0,
+      "lowAlphaPixels": 5454
+    },
+    {
+      "pose": 4,
+      "file": "pose-04.png",
+      "approved": true,
+      "sourceComponent": {
+        "id": 3,
+        "area": 59667,
+        "l": 1113,
+        "t": 14,
+        "r": 1415,
+        "b": 358
+      },
+      "originalCrop": {
+        "left": 1099,
+        "top": 10,
+        "width": 323,
+        "height": 353
+      },
+      "sourcePartition": {
+        "left": 1099,
+        "top": 0,
+        "right": 1447,
+        "bottom": 366
+      },
+      "renderedBounds": {
+        "left": 14,
+        "top": 76,
+        "width": 323,
+        "height": 353
+      },
+      "baseline": 416,
+      "baselineNormalized": 0.9285714285714286,
+      "bodyAnchor": [
+        232,
+        416
+      ],
+      "muzzle": [
+        240,
+        212
+      ],
+      "muzzleNormalized": [
+        0.5357142857142857,
+        0.4732142857142857
+      ],
+      "muzzleMethod": "manually located nose center; approximate +/-5 source pixels",
+      "facing": "right",
+      "mirrored": false,
+      "exactRgbaMatch": true,
+      "foreignSignificantPixels": 0,
+      "lowAlphaPixels": 5233
+    },
+    {
+      "pose": 5,
+      "file": "pose-05.png",
+      "approved": true,
+      "sourceComponent": {
+        "id": 8,
+        "area": 57034,
+        "l": 36,
+        "t": 372,
+        "r": 334,
+        "b": 706
+      },
+      "originalCrop": {
+        "left": 34,
+        "top": 369,
+        "width": 330,
+        "height": 348
+      },
+      "sourcePartition": {
+        "left": 0,
+        "top": 369,
+        "right": 363,
+        "bottom": 716
+      },
+      "renderedBounds": {
+        "left": 25,
+        "top": 86,
+        "width": 330,
+        "height": 348
+      },
+      "baseline": 416,
+      "baselineNormalized": 0.9285714285714286,
+      "bodyAnchor": [
+        232,
+        416
+      ],
+      "muzzle": [
+        256,
+        208
+      ],
+      "muzzleNormalized": [
+        0.5714285714285714,
+        0.4642857142857143
+      ],
+      "muzzleMethod": "manually located nose center; approximate +/-5 source pixels",
+      "facing": "right",
+      "mirrored": false,
+      "exactRgbaMatch": true,
+      "foreignSignificantPixels": 0,
+      "lowAlphaPixels": 4914
+    },
+    {
+      "pose": 6,
+      "file": "pose-06.png",
+      "approved": true,
+      "sourceComponent": {
+        "id": 10,
+        "area": 57651,
+        "l": 393,
+        "t": 375,
+        "r": 688,
+        "b": 707
+      },
+      "originalCrop": {
+        "left": 365,
+        "top": 372,
+        "width": 337,
+        "height": 357
+      },
+      "sourcePartition": {
+        "left": 364,
+        "top": 369,
+        "right": 709,
+        "bottom": 728
+      },
+      "renderedBounds": {
+        "left": 34,
+        "top": 87,
+        "width": 337,
+        "height": 357
+      },
+      "baseline": 416,
+      "baselineNormalized": 0.9285714285714286,
+      "bodyAnchor": [
+        232,
+        416
+      ],
+      "muzzle": [
+        288,
+        234
+      ],
+      "muzzleNormalized": [
+        0.6428571428571429,
+        0.5223214285714286
+      ],
+      "muzzleMethod": "manually located nose center; approximate +/-5 source pixels",
+      "facing": "right",
+      "mirrored": false,
+      "exactRgbaMatch": true,
+      "foreignSignificantPixels": 0,
+      "lowAlphaPixels": 3564
+    },
+    {
+      "pose": 7,
+      "file": "pose-07.png",
+      "approved": true,
+      "sourceComponent": {
+        "id": 11,
+        "area": 63550,
+        "l": 730,
+        "t": 393,
+        "r": 1040,
+        "b": 704
+      },
+      "originalCrop": {
+        "left": 723,
+        "top": 376,
+        "width": 357,
+        "height": 335
+      },
+      "sourcePartition": {
+        "left": 710,
+        "top": 376,
+        "right": 1082,
+        "bottom": 710
+      },
+      "renderedBounds": {
+        "left": 3,
+        "top": 93,
+        "width": 357,
+        "height": 335
+      },
+      "baseline": 416,
+      "baselineNormalized": 0.9285714285714286,
+      "bodyAnchor": [
+        232,
+        416
+      ],
+      "muzzle": [
+        252,
+        277
+      ],
+      "muzzleNormalized": [
+        0.5625,
+        0.6183035714285714
+      ],
+      "muzzleMethod": "manually located nose center; approximate +/-5 source pixels",
+      "facing": "right",
+      "mirrored": false,
+      "exactRgbaMatch": true,
+      "foreignSignificantPixels": 0,
+      "lowAlphaPixels": 4906
+    },
+    {
+      "pose": 8,
+      "file": "pose-08.png",
+      "approved": true,
+      "sourceComponent": {
+        "id": 9,
+        "area": 56324,
+        "l": 1125,
+        "t": 374,
+        "r": 1391,
+        "b": 707
+      },
+      "originalCrop": {
+        "left": 1087,
+        "top": 368,
+        "width": 325,
+        "height": 350
+      },
+      "sourcePartition": {
+        "left": 1083,
+        "top": 367,
+        "right": 1447,
+        "bottom": 717
+      },
+      "renderedBounds": {
+        "left": 29,
+        "top": 83,
+        "width": 325,
+        "height": 350
+      },
+      "baseline": 416,
+      "baselineNormalized": 0.9285714285714286,
+      "bodyAnchor": [
+        232,
+        416
+      ],
+      "muzzle": [
+        259,
+        216
+      ],
+      "muzzleNormalized": [
+        0.578125,
+        0.48214285714285715
+      ],
+      "muzzleMethod": "manually located nose center; approximate +/-5 source pixels",
+      "facing": "right",
+      "mirrored": false,
+      "exactRgbaMatch": true,
+      "foreignSignificantPixels": 0,
+      "lowAlphaPixels": 4011
+    },
+    {
+      "pose": 9,
+      "file": "pose-09.png",
+      "approved": true,
+      "sourceComponent": {
+        "id": 19,
+        "area": 59216,
+        "l": 55,
+        "t": 727,
+        "r": 362,
+        "b": 1043
+      },
+      "originalCrop": {
+        "left": 47,
+        "top": 717,
+        "width": 322,
+        "height": 333
+      },
+      "sourcePartition": {
+        "left": 0,
+        "top": 717,
+        "right": 377,
+        "bottom": 1085
+      },
+      "renderedBounds": {
+        "left": 124,
+        "top": 95,
+        "width": 322,
+        "height": 333
+      },
+      "baseline": 416,
+      "baselineNormalized": 0.9285714285714286,
+      "bodyAnchor": [
+        232,
+        416
+      ],
+      "muzzle": [
+        171,
+        166
+      ],
+      "muzzleNormalized": [
+        0.38169642857142855,
+        0.3705357142857143
+      ],
+      "muzzleMethod": "manually located nose center; approximate +/-5 source pixels",
+      "facing": "left",
+      "mirrored": false,
+      "exactRgbaMatch": true,
+      "foreignSignificantPixels": 0,
+      "lowAlphaPixels": 3694
+    },
+    {
+      "pose": 10,
+      "file": "pose-10.png",
+      "approved": true,
+      "sourceComponent": {
+        "id": 21,
+        "area": 57952,
+        "l": 393,
+        "t": 749,
+        "r": 701,
+        "b": 1038
+      },
+      "originalCrop": {
+        "left": 385,
+        "top": 730,
+        "width": 339,
+        "height": 314
+      },
+      "sourcePartition": {
+        "left": 378,
+        "top": 729,
+        "right": 723,
+        "bottom": 1085
+      },
+      "renderedBounds": {
+        "left": 23,
+        "top": 112,
+        "width": 339,
+        "height": 314
+      },
+      "baseline": 416,
+      "baselineNormalized": 0.9285714285714286,
+      "bodyAnchor": [
+        232,
+        416
+      ],
+      "muzzle": [
+        315,
+        340
+      ],
+      "muzzleNormalized": [
+        0.703125,
+        0.7589285714285714
+      ],
+      "muzzleMethod": "manually located nose center; approximate +/-5 source pixels",
+      "facing": "right",
+      "mirrored": false,
+      "exactRgbaMatch": true,
+      "foreignSignificantPixels": 0,
+      "lowAlphaPixels": 4314
+    },
+    {
+      "pose": 11,
+      "file": "pose-11.png",
+      "approved": true,
+      "sourceComponent": {
+        "id": 18,
+        "area": 59737,
+        "l": 746,
+        "t": 716,
+        "r": 1073,
+        "b": 1044
+      },
+      "originalCrop": {
+        "left": 737,
+        "top": 711,
+        "width": 359,
+        "height": 341
+      },
+      "sourcePartition": {
+        "left": 724,
+        "top": 711,
+        "right": 1095,
+        "bottom": 1085
+      },
+      "renderedBounds": {
+        "left": 33,
+        "top": 89,
+        "width": 359,
+        "height": 341
+      },
+      "baseline": 416,
+      "baselineNormalized": 0.9285714285714286,
+      "bodyAnchor": [
+        232,
+        416
+      ],
+      "muzzle": [
+        274,
+        221
+      ],
+      "muzzleNormalized": [
+        0.6116071428571429,
+        0.49330357142857145
+      ],
+      "muzzleMethod": "manually located nose center; approximate +/-5 source pixels",
+      "facing": "right",
+      "mirrored": false,
+      "exactRgbaMatch": true,
+      "foreignSignificantPixels": 0,
+      "lowAlphaPixels": 3965
+    },
+    {
+      "pose": 12,
+      "file": "pose-12.png",
+      "approved": true,
+      "sourceComponent": {
+        "id": 20,
+        "area": 56735,
+        "l": 1117,
+        "t": 728,
+        "r": 1391,
+        "b": 1042
+      },
+      "originalCrop": {
+        "left": 1097,
+        "top": 718,
+        "width": 331,
+        "height": 332
+      },
+      "sourcePartition": {
+        "left": 1096,
+        "top": 718,
+        "right": 1447,
+        "bottom": 1085
+      },
+      "renderedBounds": {
+        "left": 39,
+        "top": 96,
+        "width": 331,
+        "height": 332
+      },
+      "baseline": 416,
+      "baselineNormalized": 0.9285714285714286,
+      "bodyAnchor": [
+        232,
+        416
+      ],
+      "muzzle": [
+        263,
+        234
+      ],
+      "muzzleNormalized": [
+        0.5870535714285714,
+        0.5223214285714286
+      ],
+      "muzzleMethod": "manually located nose center; approximate +/-5 source pixels",
+      "facing": "right",
+      "mirrored": false,
+      "exactRgbaMatch": true,
+      "foreignSignificantPixels": 0,
+      "lowAlphaPixels": 3714
+    }
+  ]
+}

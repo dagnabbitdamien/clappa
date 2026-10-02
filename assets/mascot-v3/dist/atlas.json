@@ -1,0 +1,172 @@
+[
+  {
+    "id": "body",
+    "frame": [
+      8,
+      8,
+      385,
+      455
+    ],
+    "bounds": [
+      116,
+      90,
+      162,
+      212
+    ],
+    "node": "body",
+    "variant": "open"
+  },
+  {
+    "id": "head",
+    "frame": [
+      401,
+      8,
+      345,
+      298
+    ],
+    "bounds": [
+      151,
+      46,
+      110,
+      96
+    ],
+    "node": "head",
+    "variant": "open"
+  },
+  {
+    "id": "earNear",
+    "frame": [
+      754,
+      8,
+      170,
+      231
+    ],
+    "bounds": [
+      118,
+      11,
+      61,
+      82
+    ],
+    "node": "earNear",
+    "variant": "open"
+  },
+  {
+    "id": "earFar",
+    "frame": [
+      8,
+      471,
+      170,
+      233
+    ],
+    "bounds": [
+      213,
+      9,
+      51,
+      81
+    ],
+    "node": "earFar",
+    "variant": "open"
+  },
+  {
+    "id": "farArm",
+    "frame": [
+      186,
+      471,
+      269,
+      293
+    ],
+    "bounds": [
+      136,
+      124,
+      77,
+      85
+    ],
+    "node": "farArm",
+    "variant": "open"
+  },
+  {
+    "id": "farArm-rub",
+    "frame": [
+      463,
+      471,
+      311,
+      269
+    ],
+    "bounds": [
+      136,
+      124,
+      112,
+      96
+    ],
+    "node": "farArm",
+    "variant": "rub"
+  },
+  {
+    "id": "farArm-thumb",
+    "frame": [
+      8,
+      772,
+      281,
+      267
+    ],
+    "bounds": [
+      136,
+      124,
+      92,
+      90
+    ],
+    "node": "farArm",
+    "variant": "thumb"
+  },
+  {
+    "id": "longArm",
+    "frame": [
+      297,
+      772,
+      254,
+      355
+    ],
+    "bounds": [
+      194,
+      145,
+      55,
+      119
+    ],
+    "node": "longArm",
+    "variant": "open"
+  },
+  {
+    "id": "tail",
+    "frame": [
+      559,
+      772,
+      370,
+      427
+    ],
+    "bounds": [
+      15,
+      127,
+      146,
+      177
+    ],
+    "node": "tail",
+    "variant": "open"
+  },
+  {
+    "id": "tailHook",
+    "frame": [
+      8,
+      1207,
+      312,
+      432
+    ],
+    "bounds": [
+      0,
+      0,
+      83,
+      115
+    ],
+    "node": "tailHook",
+    "variant": "open"
+  }
+]

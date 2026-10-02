@@ -1,0 +1,3 @@
+import {readFile,writeFile,copyFile} from 'node:fs/promises';import QRCode from 'qrcode';
+const qr=[];for(let i=0;i<6;i++)qr.push(await QRCode.toDataURL(JSON.stringify({demo:'CLAPPA motion preview; not a proof',frame:i,total:6}),{version:6,errorCorrectionLevel:'M',margin:4,scale:8}));
+const photo='data:image/jpeg;base64,'+(await readFile('docs/mockups/18-working-review/sample-photo.jpg')).toString('base64');await writeFile('docs/mockups/21-motion/media-data.js','window.MEDIA='+JSON.stringify({qr,photo})+';');await copyFile('assets/mascot-v2/review/assembled.png','docs/mockups/21-motion/assembled.png');

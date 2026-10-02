@@ -1,0 +1,13 @@
+import {execFileSync} from 'node:child_process';import fs from 'node:fs/promises';import path from 'node:path';
+import {verifyBundle} from '../verifier/proof.mjs';
+const adb=path.resolve('.tools/android-sdk/platform-tools/adb.exe'),dir='docs/review13';
+const run=(...args)=>execFileSync(adb,['-s','emulator-5556',...args],{encoding:'utf8',timeout:30000,maxBuffer:2000000});
+const pause=ms=>new Promise(r=>setTimeout(r,ms));
+function nodes(){run('shell','uiautomator','dump','/sdcard/flow.xml');return [...run('shell','cat','/sdcard/flow.xml').matchAll(/<node\b[^>]*>/g)].map(m=>Object.fromEntries([...m[0].matchAll(/([\w-]+)="([^"]*)"/g)].map(a=>[a[1],a[2].replaceAll('&amp;','&').replaceAll('&quot;','"')])));}
+async function wait(label,seconds=30){const end=Date.now()+seconds*1000;let last=[];do{last=nodes();const n=last.find(n=>(n.text===label||n['content-desc']===label)&&n.enabled==='true');if(n)return n;await pause(200)}while(Date.now()<end);throw Error('Missing '+label+': '+last.filter(n=>n.text).map(n=>n.text).join(' | '));}
+function tap(n){const b=n.bounds.match(/\d+/g).map(Number);run('shell','input','tap',String(Math.round((b[0]+b[2])/2)),String(Math.round((b[1]+b[3])/2)));}
+async function shot(name){await fs.writeFile(dir+'/'+name+'.png',execFileSync(adb,['-s','emulator-5556','exec-out','screencap','-p'],{timeout:30000,maxBuffer:20000000}));}
+const before=JSON.parse(await fs.readFile('output/native-test/obs-state.json'));const folder=`output/native-test/sessions/${before.session_id}/proof`;const claims=(await Promise.all((await fs.readdir(folder+'/events')).map(async f=>JSON.parse(await fs.readFile(folder+'/events/'+f)).payload))).filter(e=>e.type==='claim');const tile=JSON.parse(await fs.readFile('output/native-test/tile.json'));
+tap(await wait('End session'));tap(await wait('Capture'));tap(await wait('Capture photo'));await wait('Stop & seal',35);tap(await wait('Stop & seal'));await wait('Start another recording',45);await shot('sealed');
+const state=JSON.parse(await fs.readFile('output/native-test/obs-state.json'));const result=await verifyBundle(folder,state.media_path);if(result.status!=='EXACT ORIGINAL VERIFIED')throw Error(JSON.stringify(result));
+await fs.writeFile(dir+'/emulator-flow-result.json',JSON.stringify({session:state.session_id,media:state.media_path,result,claims:claims.length,offerDidNotReopen:true,claimTileFrames:tile.frames.length,chatInvitation:'Review-only injection into production handler, duplicate delivered twice, starts only after acceptance. No live Twitch credentials.',limitation:'Emulator camera; no physical S22 illumination or haptic sensation check.'},null,2));console.log(JSON.stringify({result,claims:claims.length,offerDidNotReopen:true}));

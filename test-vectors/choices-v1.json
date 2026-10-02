@@ -1,0 +1,594 @@
+[
+  {
+    "seed": "9dbe114396b75b8ffa3423b0ec22f48e7abe556768cfb318aa66db2e65c4a949",
+    "mapping": "CLAPPA-CHOICES-v1",
+    "prompt_id": "down",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      -3,
+      -3,
+      -5,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "7fb996a75d2ba27b98a7ae1db47eff620b8ff651c0f11f96e8418c218f344eb7",
+    "mapping": "CLAPPA-CHOICES-v1",
+    "prompt_id": "front",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010001010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      -3,
+      -5,
+      -3,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "bfcfb48ebbf1b8f860bab988883a37829fac4bcf9f16fac5417b418baa7c3d5c",
+    "mapping": "CLAPPA-CHOICES-v1",
+    "prompt_id": "room_setup",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010001000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      2,
+      2,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "703ac3fc726481f09125ceabcf1384bafad4fb22ccd5f2c9dd201c36f86d18ef",
+    "mapping": "CLAPPA-CHOICES-v1",
+    "prompt_id": "right",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010001010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      -3,
+      -3,
+      0,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "6ee6e5017db3088bcfd001416f2cc168cc282ed09f824c0253d1ebb3c05cfe58",
+    "mapping": "CLAPPA-CHOICES-v1",
+    "prompt_id": "selfie",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1010101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      2,
+      2,
+      2,
+      4,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "5e391673730d5540701b1948d6baa413aef171524e5c807508c08ad4346a045a",
+    "mapping": "CLAPPA-CHOICES-v1",
+    "prompt_id": "selfie_cover_right",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1010101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      2,
+      0,
+      0,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "241145604a111d9787e3cb23579187f531641f8acf0e3de47f8626f9316865a8",
+    "mapping": "CLAPPA-CHOICES-v1",
+    "prompt_id": "back",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      0,
+      2,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "7753eeda45fa3bea544fa23a5236ca178e4374c8b3dbf4443e120146147fd213",
+    "mapping": "CLAPPA-CHOICES-v1",
+    "prompt_id": "back",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      -3,
+      -3,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "64525b68ded311c6a8a8a92d1abd95934ef5ac8bceaea2e021a93e7e8f85e8dd",
+    "mapping": "CLAPPA-CHOICES-v1",
+    "prompt_id": "room_setup",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      2,
+      0,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "962217981f52e7e045b4d671910aea43b3aa8e0ec2767e5a307c846cc0c42dc8",
+    "mapping": "CLAPPA-CHOICES-v1",
+    "prompt_id": "left",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      4,
+      2,
+      4,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0e7a80d7e909dbca2f31e116455b00f866274c04ba0950c98d89be9bef65702b",
+    "mapping": "CLAPPA-CHOICES-v1",
+    "prompt_id": "recording_camera",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      2,
+      4,
+      2,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "4136bc66bb0a6696c5f5a7741445c3b5e1ddbadbc7a1806288f53479bc1a8374",
+    "mapping": "CLAPPA-CHOICES-v1",
+    "prompt_id": "recording_camera",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      -3,
+      -3,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "bdd40e588450bc6cf85cb4ee9a2d5cc2977247652eadbab27062d9bd7b9aa16d",
+    "mapping": "CLAPPA-CHOICES-v1",
+    "prompt_id": "front",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      0,
+      2,
+      4,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "394d5268fe480ba55fb0c0214543409b0c164368f091d9e3565c687d1938daf3",
+    "mapping": "CLAPPA-CHOICES-v1",
+    "prompt_id": "room_setup",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      -5,
+      -5,
+      -3,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "b5adb2df0ca84c829879e8c3ce3512eced53960aa8fb8dbc9a2f254ef74384c2",
+    "mapping": "CLAPPA-CHOICES-v1",
+    "prompt_id": "selfie_turn",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1010100010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      0,
+      -3,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "3691ec6b6dfc2a02c68253937e3274c6f239902a6eb93faeb21280e6c77a2976",
+    "mapping": "CLAPPA-CHOICES-v1",
+    "prompt_id": "selfie_wink",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1010100010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      0,
+      0,
+      -3,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "4cd5dc09715371c35587e56c0921e05fdf6d6b0286ccbe3adb9a2b7374f0dc7d",
+    "mapping": "CLAPPA-CHOICES-v1",
+    "prompt_id": "left",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010001010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      0,
+      2,
+      4,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "b862eba8ee8b48c22eb19c8711a40ecf967330ffb33747ad556fcec7f9134ef5",
+    "mapping": "CLAPPA-CHOICES-v1",
+    "prompt_id": "selfie_cover_right",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1000101010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      2,
+      4,
+      2,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "4abecac83b640ecd3a7ede42f4e25403ce7e06207ec75938e6dc34f559c83a8e",
+    "mapping": "CLAPPA-CHOICES-v1",
+    "prompt_id": "down",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      0,
+      2,
+      4,
+      7,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "fb23640ae1645bdfe82f8a487e76c624f9f4b0a7ac146fd2d6ecc170eddee75a",
+    "mapping": "CLAPPA-CHOICES-v1",
+    "prompt_id": "left",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      0,
+      -3,
+      0,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "9884e6ff29b43413b0787d957cfc1d487cf8f916ec741e10a0131e24a70b4928",
+    "mapping": "CLAPPA-CHOICES-v1",
+    "prompt_id": "selfie_wink",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1000101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      2,
+      0,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "5e11454c2c43b8fc5210ad0d89fda12626cd85a6d3b34321a61203a03d6432bc",
+    "mapping": "CLAPPA-CHOICES-v1",
+    "prompt_id": "selfie_wink",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1010100010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      0,
+      -3,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "c67c3547d95999ab0590797456acda572c11b47616a1fd379b03e3f44b475def",
+    "mapping": "CLAPPA-CHOICES-v1",
+    "prompt_id": "up",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      0,
+      2,
+      2,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "73162f1b52856f6361f32445c6af7ae7f178d66578173f0c0ff5c53cf7ee5c23",
+    "mapping": "CLAPPA-CHOICES-v1",
+    "prompt_id": "selfie_turn",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1000100010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      4,
+      4,
+      7,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "68d1b47c692caeb1031c14ff8a4309d6c8a055ac69a3599af39fa729ef444269",
+    "mapping": "CLAPPA-CHOICES-v1",
+    "prompt_id": "right",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      0,
+      -3,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "a885a37d786f1a93cce47d490c4c6ec62fd9f057e55a3b4c19e8660f5b293101",
+    "mapping": "CLAPPA-CHOICES-v1",
+    "prompt_id": "up",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      2,
+      0,
+      0,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "07021fbd825f3c4fc6b5c3464a0676ef3bf5c12fc36a2faf3e7371bb0ce094c4",
+    "mapping": "CLAPPA-CHOICES-v1",
+    "prompt_id": "selfie_wink",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1010101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      0,
+      2,
+      0,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "2b31f7f7ee0bbb4277420cc50c25d82129390eaa07f6822bf84610d8cfc9f046",
+    "mapping": "CLAPPA-CHOICES-v1",
+    "prompt_id": "selfie_cover_right",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1010101010001010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      2,
+      4,
+      2,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "bd7095f54c9aced3ce79ba5fa8d01e199bd73abb0768b0c580161e190655c9b9",
+    "mapping": "CLAPPA-CHOICES-v1",
+    "prompt_id": "selfie_turn",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1000101010001010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      0,
+      0,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "62928b95a8fb2887b427ce580daa104b35236e87bb45a48391d27fd9181e3fd0",
+    "mapping": "CLAPPA-CHOICES-v1",
+    "prompt_id": "front",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000100010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      -5,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "485a7d14089804af513353d1c0dbd2b79c07feb487a0fd6e4591e040f850516e",
+    "mapping": "CLAPPA-CHOICES-v1",
+    "prompt_id": "left",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010001010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      -3,
+      -5,
+      -5,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "4c106542e87b97b53d506a1306aafd6eb4e2f5be5d45cdcad490028db0e490d2",
+    "mapping": "CLAPPA-CHOICES-v1",
+    "prompt_id": "up",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010001010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      -5,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  }
+]

@@ -1,0 +1,12 @@
+import {readFile,writeFile} from 'node:fs/promises';
+const dir='docs/mockups/21-motion/';let s=await readFile(dir+'player.js','utf8');
+s=s.replace('k=portrait?.65:.72','k=portrait?.54:.57').replace('portrait?166:153','portrait?166:150').replace('portrait?180:161','portrait?180:160').replace('portrait?225:210','portrait?203:183').replace('portrait?239:218','portrait?217:193');
+s=s.replace('function proof(p){let s=`<image href="${D.hook}" x="-57" y="267" width="115" height="151"/>`+base(772,390);','function proof(p){const tail=`<image href="${D.hook}" x="-46" y="263" width="115" height="151"/>`;let s=`<defs><clipPath id="tailBelowLimit"><rect x="-100" y="45" width="872" height="345"/></clipPath><clipPath id="tailFrontRoot"><rect x="0" y="344" width="45" height="46"/></clipPath></defs><g clip-path="url(#tailBelowLimit)">${tail}</g>`+base(772,390)+`<g clip-path="url(#tailFrontRoot)">${tail}</g>`;');
+s=s.replaceAll('Look to your left.','Look to your left!').replace("'Tap to clap',26","'Tap to clap!',26");
+s=s.replace("caption=scene==='error'?'Couldn’t reach OBS':scene==='success'?'Sent to OBS':'Take a picture'","caption=scene==='error'?'OBS is out':scene==='success'?'Sent to OBS!':'Take a picture'");
+s=s.replace('bx=portrait?26:418,by=portrait?532:133,bw=portrait?308:328,bh=84','bx=portrait?26:300,by=portrait?500:212,bw=portrait?308:182,bh=78');
+s=s.replace("portrait?'M165 616L174 660L194 616':'M510 217L548 267L538 215'","portrait?'M94 577L143 674L110 577':'M481 246L527 284L481 260'");
+s=s.replace("['guide','ear','rub','clap'].includes(scene)?text(bx+18,by+59,'to your left.',21)","['guide','ear','rub','clap','error'].includes(scene)?text(bx+18,by+59,scene==='error'?'of reach!':'to your left!',21)");
+s=s.replace("text(portrait?54:100,portrait?709:280,scene==='error'?'Retry':'Capture',17)","text(portrait?88.5:143.5,portrait?702.5:272.5,scene==='error'?'Retry':'Capture',17,'text-anchor=\"middle\" dominant-baseline=\"central\"')");
+await writeFile(dir+'player.js',s);
+let h=await readFile(dir+'index.html','utf8');h=h.replace('Whole sprites · 22','Whole sprites · 22b');h=h.replace('<p>Momentum, hinged clacks, paper weight and a quieter little guide.</p>','<p><strong>Design prototype only — these revisions are not in the APK or OBS plugin.</strong> Native implementation remains a separate step.</p>');h=h.replaceAll('href="whole-sprite-sheet.png"','href="isolated-sprites.png"').replaceAll('src="whole-sprite-sheet.png"','src="isolated-sprites.png"');await writeFile(dir+'index.html',h);

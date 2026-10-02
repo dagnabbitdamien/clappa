@@ -1,0 +1,9 @@
+<resources>
+ <style name="ClappaTheme" parent="android:style/Theme.Material.NoActionBar">
+  <item name="android:windowBackground">#24231f</item>
+  <item name="android:colorAccent">#eeeade</item>
+  <item name="android:statusBarColor">#24231f</item>
+  <item name="android:navigationBarColor">#24231f</item>
+  <item name="android:windowLightStatusBar">false</item>
+ </style>
+</resources>
