@@ -114,12 +114,13 @@ open class MainActivity:ComponentActivity() {
         }
     }
     private val permission=registerForActivityResult(ActivityResultContracts.RequestPermission()){ok->if(ok){refreshDualCapabilities();openCamera(scanning)} else status="Camera permission is required"}
-    override fun onCreate(savedInstanceState:Bundle?){super.onCreate(savedInstanceState);Proof.initialize(this);enableEdgeToEdge(statusBarStyle=SystemBarStyle.dark(0xff24231f.toInt()),navigationBarStyle=SystemBarStyle.dark(0xff24231f.toInt()));window.isNavigationBarContrastEnforced=false;window.addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+    override fun onSaveInstanceState(outState:Bundle){outState.putBoolean("settingsOpen",settings);super.onSaveInstanceState(outState)}
+    override fun onCreate(savedInstanceState:Bundle?){super.onCreate(savedInstanceState);settings=savedInstanceState?.getBoolean("settingsOpen")?:false;Proof.initialize(this);enableEdgeToEdge(statusBarStyle=SystemBarStyle.dark(0xff24231f.toInt()),navigationBarStyle=SystemBarStyle.dark(0xff24231f.toInt()));window.isNavigationBarContrastEnforced=false;window.addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         lifecycleScope.launch {for(msg in messages){try{receive(msg)}catch(e:Exception){status="Session incomplete: ${e.message}";phase=BoardPhase.INCOMPLETE;busy=false}}}
         lifecycleScope.launch {identityId=withContext(Dispatchers.IO){Proof.ensureKey();Proof.publicKey().getString("key_id")};savedPairing=getSharedPreferences("connection",MODE_PRIVATE).getString("pairing","")?:"";if(savedPairing.isNotEmpty())beginPairing(savedPairing)}
         dualEnabled=getSharedPreferences("capture",MODE_PRIVATE).getBoolean("dual",false)
         refreshDualCapabilities()
-        setContent {MaterialTheme(colorScheme=darkColorScheme(primary=Color(0xffeeeade),onPrimary=Color(0xff24231f))){Screen()}}
+        setContent {MaterialTheme(colorScheme=darkColorScheme(primary=MenuOrange,onPrimary=Slate,background=Slate,surface=Slate,surfaceContainer=Slate,surfaceContainerHigh=Slate,surfaceContainerHighest=Slate)){Screen()}}
     }
     private fun refreshDualCapabilities(){val cameras=ProcessCameraProvider.getInstance(this);cameras.addListener({dualAvailable=runCatching{cameras.get().availableConcurrentCameraInfos.any{it.any{c->c.lensFacing==CameraSelector.LENS_FACING_FRONT}&&it.any{c->c.lensFacing==CameraSelector.LENS_FACING_BACK&&c.hasFlashUnit()}}}.getOrDefault(false);if(session==null&&!obsRecording&&!getSharedPreferences("capture",MODE_PRIVATE).contains("dual"))dualEnabled=dualAvailable},ContextCompat.getMainExecutor(this))}
     protected fun beginPairing(data:String){
@@ -292,33 +293,45 @@ open class MainActivity:ComponentActivity() {
             chatRequest=null
             if(chatReady()&&session?.sessionId==invitation.sessionId&&SystemClock.elapsedRealtime()<invitation.deadline)issue()
         })
-        if(settings)AlertDialog(onDismissRequest={settings=false},title={Text("Settings")},text={Column(Modifier.verticalScroll(androidx.compose.foundation.rememberScrollState())){
-            TextButton(onClick={settings=false;startActivity(android.content.Intent(this@MainActivity,TwitchSignInActivity::class.java))},enabled=session==null&&!obsRecording&&!busy){Text("Twitch identity · sign in or manage")}
-            TextButton(onClick={settings=false;startActivity(android.content.Intent(this@MainActivity,ViewerActivity::class.java))},enabled=session==null&&!obsRecording&&!busy){Text("Viewer mode · scan a stream")}
-            Text("Connection",style=MaterialTheme.typography.titleMedium)
+        if(settings)androidx.compose.ui.window.Dialog(onDismissRequest={settings=false},properties=androidx.compose.ui.window.DialogProperties(usePlatformDefaultWidth=false)){
+          Surface(color=Slate,contentColor=Chalk,modifier=Modifier.fillMaxSize()){
+           Column(Modifier.safeDrawingPadding().padding(20.dp)){
+            ClapperBar()
+            Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically){Text("Settings",style=MaterialTheme.typography.headlineSmall);OutlinedButton(onClick={settings=false}){Text("Done")}}
+            Column(Modifier.weight(1f).fillMaxWidth().verticalScroll(androidx.compose.foundation.rememberScrollState()),verticalArrangement=Arrangement.spacedBy(10.dp)){
+            Text("Twitch account",color=MenuOrange,style=MaterialTheme.typography.titleMedium)
+            Text("Show your Twitch name with your proofs.",fontSize=13.sp)
+            OutlinedButton(modifier=Modifier.fillMaxWidth(),onClick={settings=false;startActivity(android.content.Intent(this@MainActivity,TwitchSignInActivity::class.java))},enabled=session==null&&!obsRecording&&!busy){Text("Manage Twitch account")}
+            HorizontalDivider(Modifier.padding(vertical=12.dp))
+            Text("Connection",color=MenuOrange,style=MaterialTheme.typography.titleMedium)
             Text(if(connected)"Connected to OBS" else "Not connected",Modifier.padding(vertical=8.dp))
-            TextButton(onClick={settings=false;pairing=true},enabled=session==null&&!obsRecording){Text(if(connected)"Connect to a different OBS" else "Connection options")}
+            OutlinedButton(modifier=Modifier.fillMaxWidth(),onClick={settings=false;pairing=true},enabled=session==null&&!obsRecording){Text(if(connected)"Connect to a different OBS" else "Connection options")}
             HorizontalDivider(Modifier.padding(vertical=16.dp))
-            Text("Camera mode",style=MaterialTheme.typography.titleMedium)
-            Row(verticalAlignment=Alignment.CenterVertically){Switch(checked=dualEnabled,onCheckedChange={dualEnabled=it;getSharedPreferences("capture",MODE_PRIVATE).edit().putBoolean("dual",it).apply()},enabled=(dualAvailable||dualEnabled)&&session==null&&!obsRecording&&!busy);Text("Use both cameras",Modifier.padding(start=8.dp))}
+            Text("Camera mode",color=MenuOrange,style=MaterialTheme.typography.titleMedium)
+            if(session!=null||obsRecording||busy){Text(if(dualEnabled)"Both cameras" else "One camera",fontSize=16.sp);Text("Locked while recording",color=MenuOrange,fontSize=13.sp)}
+            else if(dualAvailable){Row(verticalAlignment=Alignment.CenterVertically){Switch(checked=dualEnabled,onCheckedChange={dualEnabled=it;getSharedPreferences("capture",MODE_PRIVATE).edit().putBoolean("dual",it).apply()});Text("Use both cameras",Modifier.padding(start=8.dp))}}
             Text(if(dualAvailable)"Capture yourself and the view behind your phone. Hold your pose for both flashes." else "This phone uses one camera at a time.",fontSize=13.sp)
             HorizontalDivider(Modifier.padding(vertical=12.dp))
-            Text("Your CLAPPA identity",style=MaterialTheme.typography.titleMedium)
-            Text("This phone signs your recordings with a private key. Its matching public identity lets viewers recognise that future proofs came from the same signer. No CLAPPA account is needed.",fontSize=13.sp)
+            Text("Your CLAPPA identity",color=MenuOrange,style=MaterialTheme.typography.titleMedium)
+            Text("Your public code lets viewers recognise your signed proofs. It is safe to share.",fontSize=13.sp)
             Text("Public identity code · safe to share",Modifier.padding(top=12.dp),fontSize=13.sp)
             androidx.compose.foundation.text.selection.SelectionContainer{Text(identityId.chunked(8).joinToString(" "),Modifier.padding(vertical=8.dp),fontSize=11.sp)}
-            Text("Put this public code in your Twitch About panel or another profile you control. Viewers can compare it with the identity in your proofs. Publishing it links your profile to the code; CLAPPA does not automatically verify account ownership.",fontSize=13.sp)
-            TextButton(onClick={val clipboard=getSystemService(CLIPBOARD_SERVICE) as android.content.ClipboardManager;clipboard.setPrimaryClip(android.content.ClipData.newPlainText("CLAPPA public identity","CLAPPA public identity: "+identityId));connectionNotice="Public identity copied. Paste it into your profile."}){Text("Copy code for my profile")}
-            TextButton(onClick={savePublicIdentity.launch("clappa-public-identity.json")}){Text("Save public identity file")}
-            Text("The file contains your P-256 public key and its SHA-256 identity code. OBS and the verifier can import it. It contains no private signing key.",fontSize=13.sp)
+            Text("Share this code on your profile so viewers can compare it with your proofs.",fontSize=13.sp)
+            OutlinedButton(modifier=Modifier.fillMaxWidth(),onClick={val clipboard=getSystemService(CLIPBOARD_SERVICE) as android.content.ClipboardManager;clipboard.setPrimaryClip(android.content.ClipData.newPlainText("CLAPPA public identity","CLAPPA public identity: "+identityId));connectionNotice="Public identity copied. Paste it into your profile."}){Text("Copy code for my profile")}
+            OutlinedButton(modifier=Modifier.fillMaxWidth(),onClick={savePublicIdentity.launch("clappa-public-identity.json")}){Text("Save public identity file")}
+            Text("This public file is safe to share.",fontSize=13.sp)
             HorizontalDivider(Modifier.padding(vertical=12.dp))
-            Text("Private signing key · keep secret",style=MaterialTheme.typography.titleSmall)
+            Text("Back up or restore",color=MenuOrange,style=MaterialTheme.typography.titleMedium)
             Text("Your private key signs your proofs. A password-protected backup lets you use the same identity on another device. Keep private backups secret.",fontSize=13.sp)
-            TextButton(onClick={if(Proof.canExportIdentity())exportIdentityDialog=true else connectionNotice="This signing key is secured to this device and cannot be exported. If you have its original backup, import it to enable backup export. Otherwise, create a new portable identity; this changes your public code."},enabled=session==null&&!obsRecording&&!busy){Text("Export private backup")}
-            TextButton(onClick={createIdentityDialog=true},enabled=session==null&&!obsRecording&&!busy){Text("Create a new portable identity")}
-            Text("Already have a portable identity? Import a password-protected .p12 or .pfx file containing a P-256 private key and its certificate (PKCS#12 format). Keep that original file and its password to use the same identity on another phone. Importing replaces the identity used for future recordings and requires pairing again.",fontSize=13.sp)
-            TextButton(onClick={link.disconnect();connected=false;session=null;phase=BoardPhase.UNPAIRED;getSharedPreferences("connection",MODE_PRIVATE).edit().remove("pairing").apply();savedPairing="";chooseIdentity.launch(arrayOf("application/x-pkcs12","application/octet-stream"))},enabled=session==null&&!obsRecording&&!busy){Text("Import an existing private key")}
-        }},confirmButton={TextButton(onClick={settings=false}){Text("Done")}})
+            OutlinedButton(modifier=Modifier.fillMaxWidth(),onClick={if(Proof.canExportIdentity())exportIdentityDialog=true else connectionNotice="This signing key is secured to this device and cannot be exported. If you have its original backup, import it to enable backup export. Otherwise, create a new portable identity; this changes your public code."},enabled=session==null&&!obsRecording&&!busy){Text("Save a private backup")}
+
+            Text("Restore a password-protected backup to use your identity on this phone. You will need to pair again.",fontSize=13.sp)
+            OutlinedButton(modifier=Modifier.fillMaxWidth(),onClick={link.disconnect();connected=false;session=null;phase=BoardPhase.UNPAIRED;getSharedPreferences("connection",MODE_PRIVATE).edit().remove("pairing").apply();savedPairing="";chooseIdentity.launch(arrayOf("application/x-pkcs12","application/octet-stream"))},enabled=session==null&&!obsRecording&&!busy){Text("Restore a private backup")}
+            HorizontalDivider(Modifier.padding(vertical=12.dp))
+            Text("Start a different identity",color=MenuOrange,style=MaterialTheme.typography.titleMedium)
+            Text("This changes your public code for future recordings.",fontSize=13.sp)
+            OutlinedButton(modifier=Modifier.fillMaxWidth(),onClick={createIdentityDialog=true},enabled=session==null&&!obsRecording&&!busy){Text("Create a new identity")}
+        }}}}
         if(createIdentityDialog)AlertDialog(onDismissRequest={if(!busy)createIdentityDialog=false},title={Text("Create a new portable identity?")},text={Text("This replaces the identity for future recordings. Your public code changes, so update any profile where you published it and pair with OBS again. Previous recordings keep their original signatures. You can then export a private backup.")},confirmButton={TextButton(enabled=!busy,onClick={busy=true;lifecycleScope.launch{try{val newId=withContext(Dispatchers.IO){Proof.createPortableIdentity()};identityId=newId;link.disconnect();connected=false;session=null;savedPairing="";getSharedPreferences("connection",MODE_PRIVATE).edit().remove("pairing").apply();phase=BoardPhase.UNPAIRED;createIdentityDialog=false;exportIdentityDialog=true}catch(e:Exception){connectionNotice="Could not create the new identity. Your prior recordings are unchanged."}finally{busy=false}}}){Text("Create new identity")}},dismissButton={TextButton(enabled=!busy,onClick={createIdentityDialog=false}){Text("Keep current identity")}})
         if(exportIdentityDialog){var password by remember{mutableStateOf("")};var repeat by remember{mutableStateOf("")};AlertDialog(onDismissRequest={if(!busy)exportIdentityDialog=false},title={Text("Export private backup")},text={Column(Modifier.verticalScroll(androidx.compose.foundation.rememberScrollState())){Text("Choose a password of at least 12 characters. Save the .p12 file somewhere private and keep the password separately. CLAPPA cannot recover a forgotten password.");OutlinedTextField(password,{password=it},label={Text("Backup password")},singleLine=true,visualTransformation=androidx.compose.ui.text.input.PasswordVisualTransformation());OutlinedTextField(repeat,{repeat=it},label={Text("Repeat password")},singleLine=true,visualTransformation=androidx.compose.ui.text.input.PasswordVisualTransformation())}},confirmButton={TextButton(enabled=!busy&&password.length>=12&&password==repeat,onClick={busy=true;val secret=password.toCharArray();password="";repeat="";lifecycleScope.launch{try{encryptedExport=withContext(Dispatchers.IO){Proof.exportIdentity(secret)};exportIdentityDialog=false;savePrivateIdentity.launch("clappa-private-identity.p12")}catch(e:Exception){connectionNotice="Could not export this private identity."}finally{secret.fill('\u0000');busy=false}}}){Text("Choose where to save")}},dismissButton={TextButton(enabled=!busy,onClick={exportIdentityDialog=false}){Text("Cancel")}})}
         if(pairing){var text by remember{mutableStateOf("")};AlertDialog(onDismissRequest={pairing=false},title={Text("Connection options")},text={Column{

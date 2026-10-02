@@ -50,25 +50,36 @@ inline void tail(QPainter &p,bool frontOnly=false){
  p.setClipPath(shape,Qt::IntersectClip);p.fillPath(shape,QColor("#554635"));p.drawImage(QRectF(-90,246,160,220),QImage(":/clappa/obs-tail.png").copy(60,160,90,100));
  QLinearGradient shade(-65,275,60,445);shade.setColorAt(0,QColor(0,0,0,0));shade.setColorAt(1,QColor(0,0,0,70));p.setBrush(shade);p.drawPath(shape);p.restore();
 }
-inline void drawPhoto(QPainter &p,const QImage &photo){
- p.save();p.setRenderHint(QPainter::SmoothPixmapTransform);p.fillRect(QRectF(16,80,492,292),QColor("#25241f"));
- QSizeF fit=photo.size();fit.scale(QSizeF(492,292),Qt::KeepAspectRatio);
- p.drawImage(QRectF(16+(492-fit.width())/2,80+(292-fit.height())/2,fit.width(),fit.height()),photo);p.restore();
-}
-inline QImage dualPhoto(const QImage &front,const QImage &rear){
- QImage image(1476,876,QImage::Format_RGB32);image.fill(QColor("#25241f"));QPainter p(&image);p.setRenderHint(QPainter::SmoothPixmapTransform);p.setRenderHint(QPainter::TextAntialiasing);
- QFont font("Arial");font.setPixelSize(42);font.setWeight(QFont::DemiBold);p.setFont(font);p.setPen(QColor("#eeeade"));
- int x=0;for(const auto &photo:{front,rear}){QSizeF fit=photo.size();fit.scale(QSizeF(726,814),Qt::KeepAspectRatio);p.drawImage(QRectF(x+(726-fit.width())/2,(814-fit.height())/2,fit.width(),fit.height()),photo);p.drawText(QRectF(x,818,726,54),Qt::AlignCenter,x==0?"YOU":"YOUR SETUP");x+=750;}
+// The preview is a transparent arrangement of individually mounted prints.
+// Every print keeps its source aspect ratio; the source canvas stays stable in OBS.
+inline QImage mountedPhotos(const QImage &front,const QImage &rear=QImage()){
+ QImage image(1476,876,QImage::Format_ARGB32_Premultiplied);image.fill(Qt::transparent);
+ QPainter p(&image);p.setRenderHint(QPainter::SmoothPixmapTransform);p.setRenderHint(QPainter::Antialiasing);
+ const bool dual=!rear.isNull();const double gap=30,available=dual?1446:1476;
+ const double r1=double(front.width())/front.height(),r2=dual?double(rear.width())/rear.height():0;
+ const double h=std::min(810.,(available-(dual?48:24))/(r1+r2));
+ const double total=h*(r1+r2)+(dual?48+gap:24);double x=(1476-total)/2;
+ for(const auto &photo:dual?QList<QImage>{front,rear}:QList<QImage>{front}){
+  const double w=h*photo.width()/photo.height(),y=(876-h-36)/2;
+  QRectF frame(x,y,w+24,h+36),picture(x+12,y+12,w,h);
+  p.fillRect(frame.translated(5,8),QColor(0,0,0,90));p.fillRect(frame,QColor("#f5f0e5"));p.drawImage(picture,photo);
+  p.save();p.translate(frame.center().x(),y+6);p.rotate(x<738?-5:5);p.fillRect(QRectF(-50,-18,100,36),QColor("#c7b991"));p.restore();
+  x+=w+24+gap;
+ }
  return image;
 }
+inline void drawPhoto(QPainter &p,const QImage &photo){
+ p.save();p.setRenderHint(QPainter::SmoothPixmapTransform);p.drawImage(QRectF(10,76,504,299),photo);p.restore();
+}
+inline QImage dualPhoto(const QImage &front,const QImage &rear){return mountedPhotos(front,rear);}
 inline QImage proof(const QImage &photo,const QImage &qr,qint64 at,const QString &prompt,bool fresh=false,const QString &twitchName={}) {
  QImage im(Width*3,Height*3,QImage::Format_ARGB32_Premultiplied);im.fill(Qt::transparent);QPainter p(&im);p.setRenderHint(QPainter::Antialiasing);p.setRenderHint(QPainter::TextAntialiasing);p.scale(3,3);p.translate(12,40);
  p.fillRect(QRectF(0,32,848,408),QColor("#2d2c27"));
  p.setPen(QPen(QColor(255,255,255,25),1));p.drawLine(1,65,1,438);p.drawLine(1,438,846,438);
  jaw(p,true);
- p.fillRect(QRectF(12,78,504,304),QColor(0,0,0,80));p.fillRect(QRectF(10,74,504,304),QColor("#f5f0e5"));
+
  drawPhoto(p,photo);
- p.fillRect(QRectF(222,68,76,18),QColor("#c7b991"));
+
  p.setPen(QColor("#f2eee4"));QFont caption("Arial");caption.setPixelSize(prompt.size()>32?16:18);caption.setWeight(QFont::DemiBold);p.setFont(caption);const int captionWidth=twitchName.isEmpty()?600:520;p.drawText(QRectF(16,380,captionWidth,26),Qt::AlignLeft|Qt::AlignVCenter,QFontMetrics(caption).elidedText(prompt,Qt::ElideRight,captionWidth));
  const double side=qr.width()/3.;const QRectF square(682-side/2,226-side/2,side,side);auto mount=square.adjusted(-5,-5,5,5);
  p.fillRect(mount.translated(3,4),QColor(0,0,0,80));p.setPen(QPen(QColor("#858780"),1));p.setBrush(QColor("#44443d"));p.drawRoundedRect(mount,5,5);

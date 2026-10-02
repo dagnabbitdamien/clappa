@@ -24,7 +24,7 @@ class TwitchSignInActivity:ComponentActivity(){
  private var message by mutableStateOf("Show your Twitch name on your stream’s proofs.")
  private var busy by mutableStateOf(false)
  override fun onCreate(savedInstanceState:Bundle?){super.onCreate(savedInstanceState);enableEdgeToEdge(statusBarStyle=androidx.activity.SystemBarStyle.dark(0xff24231f.toInt()),navigationBarStyle=androidx.activity.SystemBarStyle.dark(0xff24231f.toInt()));Proof.initialize(this)
-  setContent{ClappaScreenTheme{Column(Modifier.fillMaxSize().background(Slate).safeDrawingPadding().verticalScroll(rememberScrollState()).padding(24.dp),verticalArrangement=Arrangement.Center){Wordmark(size=36);Text("Your Twitch account",style=MaterialTheme.typography.headlineSmall,modifier=Modifier.padding(vertical=16.dp));Text(message)
+  setContent{ClappaScreenTheme{Column(Modifier.fillMaxSize().background(Slate).safeDrawingPadding().verticalScroll(rememberScrollState()).padding(24.dp),verticalArrangement=Arrangement.Center){ClapperBar();Spacer(Modifier.height(16.dp));Wordmark(size=36);Text("Your Twitch account",style=MaterialTheme.typography.headlineSmall,modifier=Modifier.padding(vertical=16.dp));Text(message)
    Button(onClick={begin()},enabled=!busy,modifier=Modifier.padding(top=24.dp).fillMaxWidth()){Text("Sign in with Twitch")}
    TextButton(onClick={TwitchIdentity.clear(this@TwitchSignInActivity);message="Twitch identity removed from future sessions."},enabled=!busy){Text("Remove linked account")}
    TextButton(onClick={finish()}){Text("Back")}

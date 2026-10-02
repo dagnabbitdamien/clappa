@@ -8,6 +8,7 @@ public:
     void tick();
     void setAddress(const QString &address);
     QString status() const;
+    QString publicIdentity() const;
     bool paired() const;
     bool notifyChatRequest();
 private:

@@ -111,7 +111,7 @@ struct NativeService::Impl {
    envelope["identity"]=identity;if(shownIdentities.count(sid+identityDigest))envelope["identity"].erase("evidence");
   }
   auto raw=bytes(envelope.dump());QByteArray compressed(16384,0);z_stream z{};need(deflateInit2(&z,9,Z_DEFLATED,-15,8,Z_DEFAULT_STRATEGY)==Z_OK,"QR compression setup");z.next_in=(Bytef*)raw.data();z.avail_in=raw.size();z.next_out=(Bytef*)compressed.data();z.avail_out=compressed.size();int result=deflate(&z,Z_FINISH);int size=int(z.total_out);deflateEnd(&z);need(result==Z_STREAM_END&&size<=8192,"Proof exceeds QR budget");compressed.resize(size);
-  QImageReader reader(folder()+"/"+QString::fromStdString(pairs[0]["original"]["path"]));reader.setAutoTransform(true);if(reader.size().isValid())reader.setScaledSize(reader.size().scaled(1348,984,Qt::KeepAspectRatio));auto photo=reader.read();need(!photo.isNull(),"Photo cannot be displayed");bool dual=!claim&&d.contains("dual");auto rearPhoto=[&](const char *which){QImageReader r(folder()+"/"+QString::fromStdString(d["dual"][which]["original"]["path"]));r.setAutoTransform(true);if(r.size().isValid())r.setScaledSize(r.size().scaled(1348,984,Qt::KeepAspectRatio));auto image=r.read();need(!image.isNull(),"Rear photo cannot be displayed");return image;};if(dual)photo=BoardArt::dualPhoto(photo,rearPhoto("rear_a"));frames.clear();const int n=(size+199)/200;
+  QImageReader reader(folder()+"/"+QString::fromStdString(pairs[0]["original"]["path"]));reader.setAutoTransform(true);if(reader.size().isValid())reader.setScaledSize(reader.size().scaled(1348,984,Qt::KeepAspectRatio));auto photo=reader.read();need(!photo.isNull(),"Photo cannot be displayed");bool dual=!claim&&d.contains("dual");auto rearPhoto=[&](const char *which){QImageReader r(folder()+"/"+QString::fromStdString(d["dual"][which]["original"]["path"]));r.setAutoTransform(true);if(r.size().isValid())r.setScaledSize(r.size().scaled(1348,984,Qt::KeepAspectRatio));auto image=r.read();need(!image.isNull(),"Rear photo cannot be displayed");return image;};photo=dual?BoardArt::dualPhoto(photo,rearPhoto("rear_a")):BoardArt::mountedPhotos(photo);frames.clear();const int n=(size+199)/200;
   std::vector<std::string> texts;int version=12;
   const auto digest=QByteArray::fromHex(QByteArray::fromStdString(hash(compressed)));
   for(int i=0;i<n;i++){texts.push_back(compactQrFrame(digest,i,n,compressed.mid(i*200,200)));version=std::max(version,qrcodegen::QrCode::encodeText(texts.back().c_str(),qrcodegen::QrCode::Ecc::MEDIUM).getVersion());}
@@ -122,7 +122,7 @@ struct NativeService::Impl {
    auto im=BoardArt::proof(photo,code,freshSession?issuedEvent["payload"]["data"]["freshness"]["pulse"]["at"].get<long long>():d[claim?"captured_at":"a_at"].get<long long>(),claim?QStringLiteral("Your additional photo!"):promptText(lastPrompt,dual),freshSession,twitchName);auto name=root+QString("/native-tile-%1-%2.png").arg(count).arg(i);need(im.save(name),"Cannot save proof tile");frames.push_back(name);
   }
   QString flashPath;
-  if(!claim){QImageReader flashReader(folder()+"/"+QString::fromStdString(pairs[1]["original"]["path"]));flashReader.setAutoTransform(true);if(flashReader.size().isValid())flashReader.setScaledSize(flashReader.size().scaled(1348,984,Qt::KeepAspectRatio));auto b=flashReader.read();need(!b.isNull(),"Flash photo cannot be displayed");if(dual)b=BoardArt::dualPhoto(b,rearPhoto("rear_b"));flashPath=root+QString("/native-flash-%1.png").arg(count);need(b.save(flashPath),"Cannot save flash preview");}
+  if(!claim){QImageReader flashReader(folder()+"/"+QString::fromStdString(pairs[1]["original"]["path"]));flashReader.setAutoTransform(true);if(flashReader.size().isValid())flashReader.setScaledSize(flashReader.size().scaled(1348,984,Qt::KeepAspectRatio));auto b=flashReader.read();need(!b.isNull(),"Flash photo cannot be displayed");b=dual?BoardArt::dualPhoto(b,rearPhoto("rear_b")):BoardArt::mountedPhotos(b);flashPath=root+QString("/native-flash-%1.png").arg(count);need(b.save(flashPath),"Cannot save flash preview");}
   tileEnd=QDateTime::currentMSecsSinceEpoch()+600+std::max(4500,n*480);renderBefore=state.value("tile_renders",0LL);
   J paths=J::array();for(auto &path:frames)paths.push_back(path.toStdString());save(root+"/tile.json",{{"path",frames.front().toStdString()},{"frames",paths},{"flash_path",flashPath.toStdString()},{"until",tileEnd}});
   if(!identityDigest.empty()){if(shownIdentities.size()>256)shownIdentities.clear();shownIdentities.insert(sid+identityDigest);}
@@ -133,7 +133,7 @@ struct NativeService::Impl {
    bool interrupted=announced&&!finalized&&!state.value("closed",true);
    pub=candidate;
    if(QFile::exists(root+"/trusted-phone.json")){auto trusted=read(root+"/trusted-phone.json").value("key_id",std::string());need(trusted.empty()||trusted==pub["key_id"],"Phone identity does not match the trusted fingerprint in the OBS dock");}
-   mbedtls_pk_free(&key);mbedtls_pk_init(&key);need(mbedtls_pk_parse_public_key(&key,(unsigned char*)spki.data(),spki.size())==0,"Invalid phone key");need(mbedtls_pk_can_do(&key,MBEDTLS_PK_ECDSA)&&mbedtls_pk_get_bitlen(&key)==256&&mbedtls_pk_ec(key)->MBEDTLS_PRIVATE(grp).id==MBEDTLS_ECP_DP_SECP256R1,"Unsupported phone key");connected=true;{std::lock_guard<std::mutex> l(mutex);outbound=J::array();lastPoll=QDateTime::currentMSecsSinceEpoch();}send({{"type","paired"},{"recording",!state.is_null()&&state.value("recording_active",false)}});if(interrupted){error("Phone reconnected during a recording. Stop this incomplete recording, then start another");return;}resetSession();message="Phone connected. Start recording to begin. Signing identity: "+QString::fromStdString(pub["key_id"]);return;
+   mbedtls_pk_free(&key);mbedtls_pk_init(&key);need(mbedtls_pk_parse_public_key(&key,(unsigned char*)spki.data(),spki.size())==0,"Invalid phone key");need(mbedtls_pk_can_do(&key,MBEDTLS_PK_ECDSA)&&mbedtls_pk_get_bitlen(&key)==256&&mbedtls_pk_ec(key)->MBEDTLS_PRIVATE(grp).id==MBEDTLS_ECP_DP_SECP256R1,"Unsupported phone key");connected=true;{std::lock_guard<std::mutex> l(mutex);outbound=J::array();lastPoll=QDateTime::currentMSecsSinceEpoch();}send({{"type","paired"},{"recording",!state.is_null()&&state.value("recording_active",false)}});if(interrupted){error("Phone reconnected during a recording. Stop this incomplete recording, then start another");return;}resetSession();message="Phone connected. Start recording in OBS to begin.";return;
   }need(connected,"Phone is not connected");
   if(type=="start-recording"){need(state.is_null()||!state.value("recording_active",false),"OBS is already recording");save(root+"/command.json",{{"type","start"}});return;}
   if(type=="stop-incomplete"){need(!state.is_null()&&!state.value("closed",true),"No active recording");fault=true;save(root+"/command.json",{{"type","stop"},{"session_id",state["session_id"]}});return;}
@@ -187,13 +187,13 @@ NativeService::~NativeService()=default;
 void NativeService::tick(){try{p->tick();}catch(const std::exception &e){p->error(e.what());}}
 void NativeService::setAddress(const QString &a){if(p->fault||p->connected)return;p->address=a.toStdString();J pairing={{"url","https://"+p->address+":"+std::to_string(p->port)},{"cert_sha256",p->pin},{"token",p->token},{"transport","https-poll-v1"}};save(p->root+"/pairing.json",pairing);need(qr(pairing.dump(),440).save(p->root+"/pairing.png"),"Cannot render pairing QR");}
 QString NativeService::status()const{return p->message;}
+QString NativeService::publicIdentity()const{return p->pub.is_null()?QString():QString::fromStdString(p->pub.value("key_id",std::string()));}
 bool NativeService::paired()const{return p->connected;}
 bool NativeService::notifyChatRequest(){
  // UI hint only. Acceptance uses the ordinary phone/beacon challenge flow.
  if(!p->connected||p->fault||!p->announced||p->ended||p->state.is_null()||p->state.value("closed",true)||!p->pending.is_null()||p->armPending)return false;
  try{p->send({{"type","chat-request"},{"request_id",QUuid::createUuid().toString(QUuid::Id128).toStdString()},{"source","twitch"},{"viewers",3},{"expires_at",QDateTime::currentMSecsSinceEpoch()+60000},{"session_id",p->sid}});return true;}catch(...){return false;}
 }
-
 
 
 
