@@ -119,6 +119,15 @@ internal data class BoardState(val phase:BoardPhase,val connected:Boolean=false,
  }
 }
 
+@Composable internal fun MenuStripe(){
+ Canvas(Modifier.fillMaxWidth().height(8.dp).clipToBounds()){
+  drawRect(Chalk)
+  val h=size.height;val step=h*3
+  var x=-step
+  while(x<size.width){drawPath(androidx.compose.ui.graphics.Path().apply{moveTo(x,0f);lineTo(x+step/2,0f);lineTo(x+step/2+h,h);lineTo(x+h,h);close()},Color(0xff171715));x+=step}
+ }
+}
+
 @Composable internal fun ClapperBar(angle:Float=0f){
  Canvas(Modifier.fillMaxWidth().height(64.dp).clipToBounds()){
   val c=drawContext.canvas.nativeCanvas;val p=Paint(Paint.ANTI_ALIAS_FLAG);val unit=size.height/64

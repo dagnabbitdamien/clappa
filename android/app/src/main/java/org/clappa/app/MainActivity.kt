@@ -296,7 +296,7 @@ open class MainActivity:ComponentActivity() {
         if(settings)androidx.compose.ui.window.Dialog(onDismissRequest={settings=false},properties=androidx.compose.ui.window.DialogProperties(usePlatformDefaultWidth=false)){
           Surface(color=Slate,contentColor=Chalk,modifier=Modifier.fillMaxSize()){
            Column(Modifier.safeDrawingPadding().padding(20.dp)){
-            ClapperBar()
+            MenuStripe()
             Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically){Text("Settings",style=MaterialTheme.typography.headlineSmall);OutlinedButton(onClick={settings=false}){Text("Done")}}
             Column(Modifier.weight(1f).fillMaxWidth().verticalScroll(androidx.compose.foundation.rememberScrollState()),verticalArrangement=Arrangement.spacedBy(10.dp)){
             Text("Twitch account",color=MenuOrange,style=MaterialTheme.typography.titleMedium)

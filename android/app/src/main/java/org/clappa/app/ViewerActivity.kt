@@ -35,7 +35,7 @@ import java.util.concurrent.Executors
 class HomeActivity:ComponentActivity(){
  override fun onCreate(savedInstanceState:Bundle?){super.onCreate(savedInstanceState);enableEdgeToEdge(statusBarStyle=androidx.activity.SystemBarStyle.dark(0xff24231f.toInt()),navigationBarStyle=androidx.activity.SystemBarStyle.dark(0xff24231f.toInt()));setContent{
   ClappaScreenTheme{BoxWithConstraints(Modifier.fillMaxSize().safeDrawingPadding(),contentAlignment=androidx.compose.ui.Alignment.Center){val wide=maxWidth>maxHeight;Column(Modifier.widthIn(max=if(wide)840.dp else 560.dp).fillMaxWidth().verticalScroll(rememberScrollState()).padding(24.dp),verticalArrangement=Arrangement.spacedBy(if(wide)8.dp else 16.dp)){
-   ClapperBar()
+   MenuStripe()
    Wordmark(size=if(wide)32 else 40)
    Text("No cap! Clap!",color=MenuOrange,fontStyle=androidx.compose.ui.text.font.FontStyle.Italic,style=MaterialTheme.typography.titleMedium,modifier=Modifier.padding(bottom=if(wide)0.dp else 12.dp))
    @Composable fun ModeCard(viewer:Boolean,modifier:Modifier){
@@ -69,7 +69,7 @@ open class ViewerActivity:ComponentActivity(){
  private val permission=registerForActivityResult(ActivityResultContracts.RequestPermission()){ok->cameraAllowed=ok;if(!ok)error="Camera permission is needed to scan a stream." else scanning=true}
  override fun onCreate(savedInstanceState:Bundle?){super.onCreate(savedInstanceState);enableEdgeToEdge(statusBarStyle=androidx.activity.SystemBarStyle.dark(0xff24231f.toInt()),navigationBarStyle=androidx.activity.SystemBarStyle.dark(0xff24231f.toInt()));cameraAllowed=ContextCompat.checkSelfPermission(this,Manifest.permission.CAMERA)==PackageManager.PERMISSION_GRANTED
   setContent{ClappaScreenTheme{Column(Modifier.fillMaxSize().background(Slate).safeDrawingPadding().padding(16.dp)){
-   ClapperBar()
+   MenuStripe()
    Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween){Wordmark(size=28);TextButton(onClick={finish()}){Text("Modes")}}
    if(scanning&&cameraAllowed){Camera(Modifier.weight(1f).fillMaxWidth());Text(progress,Modifier.padding(vertical=12.dp));Text("Keep the whole code visible while its frames change.");TextButton(onClick={stopScan()}){Text("Cancel scan")}}
    else{Column(Modifier.weight(1f).verticalScroll(rememberScrollState())){

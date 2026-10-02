@@ -3,7 +3,7 @@ android {
     namespace = "org.clappa.app"
     compileSdk = 36
     signingConfigs { getByName("debug") { rootProject.file("../.tools/review-signing/debug.keystore").takeIf { it.exists() }?.let { storeFile = it } } }
-    defaultConfig { applicationId = "org.clappa.app"; minSdk = 28; targetSdk = 36; versionCode = 23; versionName = "0.3.0-test16" }
+    defaultConfig { applicationId = "org.clappa.app"; minSdk = 28; targetSdk = 36; versionCode = 24; versionName = "0.3.0-test16.1" }
     buildTypes { create("review") { initWith(getByName("debug")); applicationIdSuffix = ".review"; matchingFallbacks += "debug" } }
     buildFeatures { compose = true }
     compileOptions { sourceCompatibility = JavaVersion.VERSION_17; targetCompatibility = JavaVersion.VERSION_17 }
