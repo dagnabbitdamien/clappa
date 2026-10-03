@@ -3,7 +3,7 @@
 #include <memory>
 class NativeService {
 public:
-    explicit NativeService(const QString &root);
+    explicit NativeService(const QString &root,bool reset=false);
     ~NativeService();
     void tick();
     void setAddress(const QString &address);

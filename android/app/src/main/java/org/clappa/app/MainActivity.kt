@@ -82,6 +82,7 @@ open class MainActivity:ComponentActivity() {
     private var connectionNotice by mutableStateOf<String?>(null)
     private var cameraOpen by mutableStateOf(false)
     private var scanning by mutableStateOf(false)
+    private var scanHint by mutableStateOf("Point the camera at the pairing code")
     private var prompt by mutableStateOf("")
     private var flash by mutableStateOf(Color.Transparent)
     private var claimSeconds by mutableIntStateOf(0)
@@ -95,7 +96,15 @@ open class MainActivity:ComponentActivity() {
     private val executor=Executors.newSingleThreadExecutor()
     private val mint=Color(0xffa9cfbc)
     private val messages=kotlinx.coroutines.channels.Channel<JSONObject>(64)
-    private val link=LocalLink({msg->check(messages.trySend(msg).isSuccess){"Phone message queue full"}},{err->lifecycleScope.launch {connecting=false;connected=false;phase=BoardPhase.LOST;status=err;busy=false;if(session==null&&savedPairing.isNotEmpty()&&!err.contains("pairing code has changed")&&reconnectAttempts<3){reconnectAttempts++;delay(2000L*reconnectAttempts);if(!connected&&!connecting&&session==null)beginPairing(savedPairing)}}})
+    private var retryConnection:Job?=null
+    private val link=LocalLink({msg->check(messages.trySend(msg).isSuccess){"Phone message queue full"}},{err->lifecycleScope.launch {
+        connecting=false;connected=false;busy=false;status=err
+        val changed=err.contains("pairing code has changed")
+        if(session==null&&savedPairing.isNotEmpty()&&!changed&&reconnectAttempts<1){
+            reconnectAttempts++;phase=BoardPhase.CONNECTING;status="Looking for OBS…"
+            retryConnection=lifecycleScope.launch{delay(2000);if(!connected&&!connecting&&session==null)beginPairing(savedPairing)}
+        }else phase=BoardPhase.LOST
+    }})
     private var claimTimer:Job?=null
     private var responseTimer:Job?=null
     private var issueJob:Job?=null
@@ -125,12 +134,12 @@ open class MainActivity:ComponentActivity() {
     private fun refreshDualCapabilities(){val cameras=ProcessCameraProvider.getInstance(this);cameras.addListener({dualAvailable=runCatching{cameras.get().availableConcurrentCameraInfos.any{it.any{c->c.lensFacing==CameraSelector.LENS_FACING_FRONT}&&it.any{c->c.lensFacing==CameraSelector.LENS_FACING_BACK&&c.hasFlashUnit()}}}.getOrDefault(false);if(session==null&&!obsRecording&&!getSharedPreferences("capture",MODE_PRIVATE).contains("dual"))dualEnabled=dualAvailable},ContextCompat.getMainExecutor(this))}
     protected fun beginPairing(data:String){
         check(session==null){"Stop the current recording before changing connection"}
-        prompt="";canFinish=false;pendingSeal=null;hideClaimOffer();connected=false;connecting=true;phase=BoardPhase.CONNECTING;status=""
+        retryConnection?.cancel();retryConnection=null;prompt="";canFinish=false;pendingSeal=null;hideClaimOffer();connected=false;connecting=true;phase=BoardPhase.CONNECTING;status="Connecting to OBS…"
         try{link.connect(data);savedPairing=data}catch(e:Exception){connecting=false;phase=BoardPhase.LOST;status="That pairing code is incomplete. Scan the current code or paste all of its data";pairing=false}
     }
     private suspend fun receive(m:JSONObject){when(m.getString("type")){
         "chat-request"->receiveChatInvitation(m)
-        "paired"->{reconnectAttempts=0;connecting=false;connected=true;obsRecording=m.optBoolean("recording",false);phase=if(obsRecording)BoardPhase.CONNECTING else BoardPhase.STANDBY;status="";pairing=false;cameraOpen=false;scanning=false;getSharedPreferences("connection",MODE_PRIVATE).edit().putString("pairing",savedPairing).apply()}
+        "paired"->{if(m.has("connection_url"))savedPairing=JSONObject(savedPairing).put("url",m.getString("connection_url")).toString();retryConnection?.cancel();retryConnection=null;reconnectAttempts=0;connecting=false;connected=true;obsRecording=m.optBoolean("recording",false);phase=if(obsRecording)BoardPhase.CONNECTING else BoardPhase.STANDBY;status="";pairing=false;cameraOpen=false;scanning=false;getSharedPreferences("connection",MODE_PRIVATE).edit().putString("pairing",savedPairing).apply()}
         "session"->{obsRecording=true;if(session?.sessionId==m.getString("session_id"))return;check(session==null||session!!.ended||session!!.hadFailure){"The previous session is still active"};startElapsed=SystemClock.elapsedRealtime();session=Session(this,m.getString("session_id"),m.getString("recording_id"),m.getJSONArray("descriptors"),link::send,dualEnabled);withContext(Dispatchers.IO){session!!.start()};phase=BoardPhase.CONNECTING;status="Waiting for the first recording checkpoint…"}
         "checkpoint"->{withContext(Dispatchers.IO){session?.checkpoint(m.getJSONArray("outputs"))};if(phase==BoardPhase.CONNECTING){phase=BoardPhase.READY;status=""}}
         "seal-request"->{obsRecording=false;phase=BoardPhase.ENDING;status="Signing the closed recording…";withContext(Dispatchers.IO){checkNotNull(session).seal(m)}}
@@ -161,7 +170,7 @@ open class MainActivity:ComponentActivity() {
     private fun primary(){when(phase){
         BoardPhase.UNPAIRED->{openCamera(true)}
         BoardPhase.STANDBY,BoardPhase.SEALED->{startRecording()}
-        BoardPhase.LOST->{if(session!=null){session=null;prompt=""};if(savedPairing.isEmpty()||status.contains("pairing code has changed"))openCamera(true)else beginPairing(savedPairing)}
+        BoardPhase.LOST->{reconnectAttempts=0;if(session!=null){session=null;prompt=""};if(savedPairing.isEmpty()||status.contains("pairing code has changed"))openCamera(true)else beginPairing(savedPairing)}
         BoardPhase.INCOMPLETE->{if(obsRecording){link.send(JSONObject().put("type","stop-incomplete"));phase=BoardPhase.ENDING}else startRecording()}
         BoardPhase.CHALLENGE->{claimMode=false;openCamera()}
         BoardPhase.READY,BoardPhase.SENT->{issue()}
@@ -201,7 +210,7 @@ open class MainActivity:ComponentActivity() {
         val a=AudioTrack.Builder().setAudioAttributes(AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_MEDIA).setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION).build()).setAudioFormat(AudioFormat.Builder().setSampleRate(44100).setEncoding(AudioFormat.ENCODING_PCM_16BIT).setChannelMask(AudioFormat.CHANNEL_OUT_MONO).build()).setTransferMode(AudioTrack.MODE_STATIC).setBufferSizeInBytes(pcm.size*2).build()
         try{a.write(pcm,0,pcm.size);a.play();delay(pcm.size*1000L/44100+60)}finally{a.stop();a.release()}
     }
-    private fun openCamera(scan:Boolean=false){scanning=scan
+    private fun openCamera(scan:Boolean=false){if(scan){retryConnection?.cancel();retryConnection=null;reconnectAttempts=0;link.disconnect();connected=false;connecting=false;scanHint="Point the camera at the pairing code"};scanning=scan
         if(ContextCompat.checkSelfPermission(this,Manifest.permission.CAMERA)!=PackageManager.PERMISSION_GRANTED){permission.launch(Manifest.permission.CAMERA);return}
         val s=session
         if(!scan&&!claimMode&&s?.dualView==true){busy=true;dualCapture.launch(android.content.Intent(this,DualCaptureActivity::class.java).putExtra("deadline",SystemClock.elapsedRealtime()+s.remainingMillis()).putExtra("prompt",prompt).putExtra("flash",s.pending!!.getString("flash")))}else cameraOpen=true
@@ -376,7 +385,17 @@ open class MainActivity:ComponentActivity() {
                 }
                 capture=imageCapture
                 val analysis=ImageAnalysis.Builder().setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST).build()
-                analysis.setAnalyzer(executor){image->try{if(scanning){val buffer=image.planes[0].buffer;val bytes=ByteArray(buffer.remaining());buffer.get(bytes);val source=com.google.zxing.PlanarYUVLuminanceSource(bytes,image.planes[0].rowStride,image.height,0,0,image.width,image.height,false);val result=com.google.zxing.MultiFormatReader().decode(com.google.zxing.BinaryBitmap(com.google.zxing.common.HybridBinarizer(source)));runOnUiThread{if(scanning){scanning=false;cameraOpen=false;beginPairing(result.text)}}}}catch(_:Exception){}finally{image.close()}}
+                val qrReader=com.google.zxing.MultiFormatReader().apply{setHints(mapOf(com.google.zxing.DecodeHintType.POSSIBLE_FORMATS to listOf(com.google.zxing.BarcodeFormat.QR_CODE),com.google.zxing.DecodeHintType.TRY_HARDER to true))}
+                analysis.setAnalyzer(executor){image->try{if(scanning){
+                    val plane=image.planes[0];val buffer=plane.buffer;val pixels=ByteArray(image.width*image.height)
+                    for(y in 0 until image.height)for(x in 0 until image.width)pixels[y*image.width+x]=buffer.get(y*plane.rowStride+x*plane.pixelStride)
+                    val source=com.google.zxing.PlanarYUVLuminanceSource(pixels,image.width,image.height,0,0,image.width,image.height,false)
+                    val result=qrReader.decodeWithState(com.google.zxing.BinaryBitmap(com.google.zxing.common.HybridBinarizer(source)))
+                    val data=runCatching{JSONObject(result.text)}.getOrNull()
+                    runOnUiThread{if(scanning){if(data?.optString("transport")=="https-poll-v1"){
+                        scanning=false;cameraOpen=false;beginPairing(result.text);status="Code read · connecting to OBS…"
+                    }else scanHint="That's a different QR code. Scan the pairing code in the OBS dock."}}
+                }}catch(_:Exception){}finally{qrReader.reset();image.close()}}
                 owner.unbindAll();val bound=owner.bindToLifecycle(this@MainActivity,if(selfie)CameraSelector.DEFAULT_FRONT_CAMERA else CameraSelector.DEFAULT_BACK_CAMERA,preview,imageCapture,analysis)
                 imageCapture.targetRotation=view.display?.rotation?:android.view.Surface.ROTATION_0
                 if(!scanning&&!claimMode&&!selfie)check(bound.cameraInfo.hasFlashUnit()){"Rear camera flash is required"}
@@ -395,7 +414,7 @@ open class MainActivity:ComponentActivity() {
                 if(!scanning)Canvas(Modifier.align(Alignment.Center).size(76.dp).semantics{contentDescription=if(busy)"Capturing" else "Capture photo"}.clickable(enabled=!busy&&cameraReady){if(claimMode)captureClaim()else capturePair()}){
                     drawCircle(Chalk.copy(alpha=if(busy).45f else 1f),radius=size.minDimension/2-2.dp.toPx(),style=androidx.compose.ui.graphics.drawscope.Stroke(3.dp.toPx()));drawCircle(Chalk.copy(alpha=if(busy).45f else 1f),radius=size.minDimension/2-9.dp.toPx())
                 }
-                else Text("Point the camera at the pairing code",Modifier.align(Alignment.Center).padding(start=72.dp,end=20.dp),fontSize=13.sp,color=Chalk)
+                else Text(scanHint,Modifier.align(Alignment.Center).padding(start=72.dp,end=20.dp),fontSize=13.sp,color=Chalk)
             }
         }
     }

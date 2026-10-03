@@ -52,3 +52,5 @@ output/
 
 # Rendered animation-frame sequences are local design review output.
 /assets/**/review/
+
+**/connection.secret

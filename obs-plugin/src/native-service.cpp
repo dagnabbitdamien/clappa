@@ -24,12 +24,17 @@
 #include "board-art.h"
 #include "twitch-identity.h"
 #include <QBuffer>
+#include <QUdpSocket>
 #include <QUuid>
 #include <deque>
 #include <mutex>
 #include <thread>
 #include <set>
 #include <regex>
+#ifdef _WIN32
+#include <windows.h>
+#include <wincrypt.h>
+#endif
 using J=nlohmann::json;
 namespace {
 void need(bool b,const char *s){if(!b)throw std::runtime_error(s);}
@@ -58,10 +63,21 @@ bool valid(const J &s,const J &v){
 }
 void validate(const char *kind,const J &j){need(valid(schema["definitions"][kind],j),"Invalid protocol fields");}
 QImage qr(const std::string &s,int pixels){auto q=qrcodegen::QrCode::encodeText(s.c_str(),qrcodegen::QrCode::Ecc::MEDIUM);const int n=q.getSize(),scale=std::max(1,pixels/(n+8));QImage im((n+8)*scale,(n+8)*scale,QImage::Format_RGB32);im.fill(Qt::white);QPainter p(&im);p.setPen(Qt::NoPen);p.setBrush(Qt::black);for(int y=0;y<n;y++)for(int x=0;x<n;x++)if(q.getModule(x,y))p.drawRect((x+4)*scale,(y+4)*scale,scale,scale);return im;}
+// Connection secrets are separate from proof bundles and protected by the OS user account.
+QByteArray protectConnection(const QByteArray &input,bool decrypt){
+#ifdef _WIN32
+ DATA_BLOB in{DWORD(input.size()),reinterpret_cast<BYTE*>(const_cast<char*>(input.constData()))},out{};
+ const auto ok=decrypt?CryptUnprotectData(&in,nullptr,nullptr,nullptr,nullptr,CRYPTPROTECT_UI_FORBIDDEN,&out):CryptProtectData(&in,L"CLAPPA connection",nullptr,nullptr,nullptr,CRYPTPROTECT_UI_FORBIDDEN,&out);
+ need(ok,"Cannot access saved OBS connection");QByteArray result(reinterpret_cast<char*>(out.pbData),int(out.cbData));SecureZeroMemory(out.pbData,out.cbData);LocalFree(out.pbData);return result;
+#else
+ return input;
+#endif
+}
 std::string fileHash(const QString &f){QFile q(f);need(q.open(QIODevice::ReadOnly),"Recording cannot be read");QCryptographicHash h(QCryptographicHash::Sha256);need(h.addData(&q),"Recording hash failed");return h.result().toHex().toStdString();}
 }
 struct NativeService::Impl {
  TwitchIdentityVerifier twitchVerifier;std::set<std::string> shownIdentities;
+ QByteArray certificatePem,privatePem;std::unique_ptr<QUdpSocket> discovery;
  QString root,message="Starting encrypted pairing…";int port=qEnvironmentVariableIntValue("CLAPPA_TEST_PORT")?qEnvironmentVariableIntValue("CLAPPA_TEST_PORT"):17443;std::string token,pin,address;std::unique_ptr<httplib::SSLServer> server;std::thread thread;
  std::mutex mutex;std::deque<J> incoming;J outbound=J::array();long long next=0;bool connected=false,fault=false,ended=false,finalized=false,announced=false;std::string sid,head,lastType;int count=0;long long lastAt=0,successAt=0,lastPoll=0;J pub,state,pending,sealRequest,issuedEvent;bool startOK=false,endOK=false,timedSession=false;std::string lastChallenge,lastPrompt;bool closedNotified=false;std::set<std::string> ids;J latestOutputs,armedEvent;bool freshSession=false,armPending=false;std::string cameraProfile,captureProfile;bool tolerantSession=false;long long claimWindow=6000;
  std::vector<QString> frames;int frame=0;long long tileEnd=0,renderBefore=0,lastTick=0,frameTick=0;bool stopPending=false;
@@ -71,19 +87,31 @@ struct NativeService::Impl {
  void send(J j){std::lock_guard<std::mutex> l(mutex);need(outbound.size()<512,"Phone is not receiving messages");outbound.push_back({{"id",++next},{"message",j}});}
  void error(const std::string &s){fault=true;message="Incomplete: "+QString::fromStdString(s);try{send({{"type","error"},{"message",s},{"recording",!state.is_null()&&!state.value("closed",true)}});}catch(...){} }
  void resetSession(){fault=false;ended=false;finalized=false;announced=false;closedNotified=false;sid.clear();head.clear();lastType.clear();count=0;lastAt=0;successAt=0;pending=nullptr;sealRequest=nullptr;startOK=false;endOK=false;timedSession=false;tolerantSession=false;claimWindow=6000;freshSession=false;armPending=false;armedEvent=nullptr;captureProfile.clear();lastChallenge.clear();lastPrompt.clear();ids.clear();latestOutputs=nullptr;stopPending=false;}
+ void persistConnection(){
+  const auto file=root+"/connection.secret";
+  saveConnection(file,{{"certificate",certificatePem.toStdString()},{"private_key",privatePem.toStdString()},{"token",token},{"phone",pub}});
+ }
+ void saveConnection(const QString &file,const J &record){QDir().mkpath(QFileInfo(file).absolutePath());QSaveFile out(file);need(out.open(QIODevice::WriteOnly),"Cannot save OBS connection");need(out.setPermissions(QFileDevice::ReadOwner|QFileDevice::WriteOwner),"Cannot protect OBS connection file");auto data=protectConnection(bytes(record.dump()),false);need(out.write(data)==data.size()&&out.commit(),"Cannot save OBS connection");}
  void init(){
   twitchVerifier.refresh();
   need(mbedtls_ctr_drbg_seed(&rng,mbedtls_entropy_func,&entropy,(const unsigned char*)"CLAPPA",6)==0,"Random generator failed");
+  if(QFile::exists(root+"/connection.secret")){
+   QFile file(root+"/connection.secret");need(file.open(QIODevice::ReadOnly),"Cannot read saved OBS connection");auto saved=parse(protectConnection(file.readAll(),true));
+   certificatePem=bytes(saved.at("certificate").get<std::string>());privatePem=bytes(saved.at("private_key").get<std::string>());token=saved.at("token");pub=saved.at("phone");
+  }else{
   unsigned char random[32];need(mbedtls_ctr_drbg_random(&rng,random,32)==0,"Random failed");token=b64(QByteArray((char*)random,32));
   mbedtls_pk_context tlskey;mbedtls_pk_init(&tlskey);mbedtls_x509write_cert cert;mbedtls_x509write_crt_init(&cert);
   need(mbedtls_pk_setup(&tlskey,mbedtls_pk_info_from_type(MBEDTLS_PK_ECKEY))==0,"TLS key setup failed");need(mbedtls_ecp_gen_key(MBEDTLS_ECP_DP_SECP256R1,mbedtls_pk_ec(tlskey),mbedtls_ctr_drbg_random,&rng)==0,"TLS key failed");
   mbedtls_x509write_crt_set_version(&cert,MBEDTLS_X509_CRT_VERSION_3);mbedtls_x509write_crt_set_md_alg(&cert,MBEDTLS_MD_SHA256);mbedtls_x509write_crt_set_subject_key(&cert,&tlskey);mbedtls_x509write_crt_set_issuer_key(&cert,&tlskey);
   need(mbedtls_x509write_crt_set_subject_name(&cert,"CN=CLAPPA OBS") ==0&&mbedtls_x509write_crt_set_issuer_name(&cert,"CN=CLAPPA OBS")==0,"TLS certificate name failed");
-  auto from=QDateTime::currentDateTimeUtc().addDays(-1).toString("yyyyMMddHHmmss").toLatin1(),to=QDateTime::currentDateTimeUtc().addDays(7).toString("yyyyMMddHHmmss").toLatin1();
+  auto from=QDateTime::currentDateTimeUtc().addDays(-1).toString("yyyyMMddHHmmss").toLatin1(),to=QDateTime::currentDateTimeUtc().addYears(10).toString("yyyyMMddHHmmss").toLatin1();
   need(mbedtls_x509write_crt_set_validity(&cert,from.constData(),to.constData())==0,"TLS dates failed");random[0]&=0x7f;need(mbedtls_x509write_crt_set_serial_raw(&cert,random,16)==0,"TLS serial failed");
   unsigned char cp[4096]{},kp[2048]{};need(mbedtls_x509write_crt_pem(&cert,cp,sizeof(cp),mbedtls_ctr_drbg_random,&rng)==0&&mbedtls_pk_write_key_pem(&tlskey,kp,sizeof(kp))==0,"TLS encoding failed");
   mbedtls_x509_crt parsed;mbedtls_x509_crt_init(&parsed);need(mbedtls_x509_crt_parse(&parsed,cp,strlen((char*)cp)+1)==0,"TLS parse failed");pin=hash(QByteArray((char*)parsed.raw.p,parsed.raw.len));mbedtls_x509_crt_free(&parsed);mbedtls_x509write_crt_free(&cert);mbedtls_pk_free(&tlskey);
-  httplib::SSLServer::PemMemory pem{};pem.cert_pem=(char*)cp;pem.cert_pem_len=strlen((char*)cp)+1;pem.key_pem=(char*)kp;pem.key_pem_len=strlen((char*)kp)+1;server=std::make_unique<httplib::SSLServer>(pem);
+  certificatePem=QByteArray((char*)cp);privatePem=QByteArray((char*)kp);persistConnection();
+  }
+  mbedtls_x509_crt savedCert;mbedtls_x509_crt_init(&savedCert);need(mbedtls_x509_crt_parse(&savedCert,reinterpret_cast<const unsigned char*>(certificatePem.constData()),certificatePem.size()+1)==0,"Saved certificate is invalid");pin=hash(QByteArray((char*)savedCert.raw.p,savedCert.raw.len));mbedtls_x509_crt_free(&savedCert);
+  httplib::SSLServer::PemMemory pem{};pem.cert_pem=certificatePem.constData();pem.cert_pem_len=certificatePem.size()+1;pem.key_pem=privatePem.constData();pem.key_pem_len=privatePem.size()+1;server=std::make_unique<httplib::SSLServer>(pem);
   // The bundled Mbed TLS build has no threading abstraction: TLS 1.3 shares
   // PSA state and the server configuration shares its RNG/key. Confine all
   // handshakes and records to one worker. Close each response so an idle poll
@@ -94,7 +122,19 @@ struct NativeService::Impl {
   auto auth=[this](const httplib::Request &r){auto a=r.get_header_value("Authorization"),expected="Bearer "+token;unsigned diff=unsigned(a.size()^expected.size());for(size_t i=0;i<std::min(a.size(),expected.size());i++)diff|=a[i]^expected[i];return diff==0;};
   server->Post("/message",[this,auth](const httplib::Request &r,httplib::Response &out){if(!auth(r)){out.status=401;return;}try{auto m=parse(bytes(r.body));std::lock_guard<std::mutex> l(mutex);need(incoming.size()<16,"Incoming queue full");incoming.push_back(std::move(m));out.set_content("{}","application/json");}catch(...){out.status=400;}});
   server->Get("/poll",[this,auth](const httplib::Request &r,httplib::Response &out){if(!auth(r)){out.status=401;return;}try{auto after=std::stoll(r.get_param_value("after"));std::lock_guard<std::mutex> l(mutex);need(after>=0&&after<=next,"Invalid acknowledgment");while(!outbound.empty()&&outbound[0]["id"].get<long long>()<=after)outbound.erase(outbound.begin());lastPoll=QDateTime::currentMSecsSinceEpoch();out.set_content(outbound.dump(),"application/json");}catch(...){out.status=400;}});
-  need(server->is_valid(),"Encrypted listener setup failed");need(server->bind_to_port("0.0.0.0",port),"Port 17443 is busy. Close the old local companion, then restart OBS.");thread=std::thread([this]{server->listen_after_bind();});message="Scan this QR in CLAPPA on your phone";
+  need(server->is_valid(),"Encrypted listener setup failed");need(server->bind_to_port("0.0.0.0",port),"Port 17443 is busy. Close the old local companion, then restart OBS.");thread=std::thread([this]{server->listen_after_bind();});message=pub.is_null()?"Scan this QR in CLAPPA on your phone":"Ready for your saved phone";
+  discovery=std::make_unique<QUdpSocket>();
+  if(discovery->bind(QHostAddress::AnyIPv4,quint16(port))){QObject::connect(discovery.get(),&QUdpSocket::readyRead,discovery.get(),[this]{
+   for(int n=0;n<64&&discovery->hasPendingDatagrams();n++){
+    char data[1024];QHostAddress source;quint16 sourcePort;auto size=discovery->readDatagram(data,sizeof(data),&source,&sourcePort);
+    try{auto request=parse(QByteArray(data,int(size)));if(request.value("type",std::string())!="CLAPPA-DISCOVER-v1"||request.value("pin",std::string())!=pin)continue;
+     auto nonce=request.at("nonce").get<std::string>();if(nonce.size()!=32)continue;
+     // Discovery is only a routing hint. The phone must still verify the pinned TLS certificate.
+     auto reply=bytes(J{{"type","CLAPPA-FOUND-v1"},{"nonce",nonce},{"port",port}}.dump());discovery->writeDatagram(reply,source,sourcePort);
+    }catch(...){}
+   }
+  });}
+
  }
  QString folder()const{return root+"/sessions/"+QString::fromStdString(sid)+"/proof";}
  void signature(const J &e){auto sig=un64(e.at("signature"));need(sig.size()==64,"Signature length");auto half=QByteArray::fromHex("7fffffff800000007fffffffffffffffde737d56d38bcf4279dce5617e3192a8");need(sig.mid(32)<=half,"Noncanonical signature");
@@ -133,7 +173,7 @@ struct NativeService::Impl {
    bool interrupted=announced&&!finalized&&!state.value("closed",true);
    pub=candidate;
    if(QFile::exists(root+"/trusted-phone.json")){auto trusted=read(root+"/trusted-phone.json").value("key_id",std::string());need(trusted.empty()||trusted==pub["key_id"],"Phone identity does not match the trusted fingerprint in the OBS dock");}
-   mbedtls_pk_free(&key);mbedtls_pk_init(&key);need(mbedtls_pk_parse_public_key(&key,(unsigned char*)spki.data(),spki.size())==0,"Invalid phone key");need(mbedtls_pk_can_do(&key,MBEDTLS_PK_ECDSA)&&mbedtls_pk_get_bitlen(&key)==256&&mbedtls_pk_ec(key)->MBEDTLS_PRIVATE(grp).id==MBEDTLS_ECP_DP_SECP256R1,"Unsupported phone key");connected=true;{std::lock_guard<std::mutex> l(mutex);outbound=J::array();lastPoll=QDateTime::currentMSecsSinceEpoch();}send({{"type","paired"},{"recording",!state.is_null()&&state.value("recording_active",false)}});if(interrupted){error("Phone reconnected during a recording. Stop this incomplete recording, then start another");return;}resetSession();message="Phone connected. Start recording in OBS to begin.";return;
+   mbedtls_pk_free(&key);mbedtls_pk_init(&key);need(mbedtls_pk_parse_public_key(&key,(unsigned char*)spki.data(),spki.size())==0,"Invalid phone key");need(mbedtls_pk_can_do(&key,MBEDTLS_PK_ECDSA)&&mbedtls_pk_get_bitlen(&key)==256&&mbedtls_pk_ec(key)->MBEDTLS_PRIVATE(grp).id==MBEDTLS_ECP_DP_SECP256R1,"Unsupported phone key");persistConnection();connected=true;{std::lock_guard<std::mutex> l(mutex);outbound=J::array();lastPoll=QDateTime::currentMSecsSinceEpoch();}send({{"type","paired"},{"recording",!state.is_null()&&state.value("recording_active",false)}});if(interrupted){error("Phone reconnected during a recording. Stop this incomplete recording, then start another");return;}resetSession();message="Phone connected. Start recording in OBS to begin.";return;
   }need(connected,"Phone is not connected");
   if(type=="start-recording"){need(state.is_null()||!state.value("recording_active",false),"OBS is already recording");save(root+"/command.json",{{"type","start"}});return;}
   if(type=="stop-incomplete"){need(!state.is_null()&&!state.value("closed",true),"No active recording");fault=true;save(root+"/command.json",{{"type","stop"},{"session_id",state["session_id"]}});return;}
@@ -188,10 +228,10 @@ struct NativeService::Impl {
   if(state.value("closed",false)&&ended&&sealRequest.is_null()){for(auto &o:state["outputs"])need(o["complete"]==true&&o["packets"].get<long long>()>0,"Incomplete output coverage");auto f=QString::fromStdString(state["media_path"]);sealRequest={{"type","seal-request"},{"session_id",sid},{"recording_id",state["recording_id"]},{"event_count",count},{"head",head},{"outputs",state["outputs"]},{"media",{{"name",QFileInfo(f).fileName().toStdString()},{"bytes",QFileInfo(f).size()},{"sha256",fileHash(f)}}}};send(sealRequest);message="Recording closed. Phone is signing automatically.";}
  }
 };
-NativeService::NativeService(const QString &r):p(std::make_unique<Impl>(r)){try{p->init();}catch(const std::exception &e){p->error(e.what());}}
+NativeService::NativeService(const QString &r,bool reset):p(std::make_unique<Impl>(r)){try{if(reset)need(!QFile::exists(r+"/connection.secret")||QFile::remove(r+"/connection.secret"),"Cannot reset saved connection");p->init();}catch(const std::exception &e){p->error(e.what());}}
 NativeService::~NativeService()=default;
 void NativeService::tick(){try{p->tick();}catch(const std::exception &e){p->error(e.what());}}
-void NativeService::setAddress(const QString &a){if(p->fault||p->connected)return;p->address=a.toStdString();J pairing={{"url","https://"+p->address+":"+std::to_string(p->port)},{"cert_sha256",p->pin},{"token",p->token},{"transport","https-poll-v1"}};save(p->root+"/pairing.json",pairing);need(qr(pairing.dump(),440).save(p->root+"/pairing.png"),"Cannot render pairing QR");}
+void NativeService::setAddress(const QString &a){if(!p->server||p->address==a.toStdString())return;p->address=a.toStdString();J pairing={{"url","https://"+p->address+":"+std::to_string(p->port)},{"cert_sha256",p->pin},{"token",p->token},{"transport","https-poll-v1"}};save(p->root+"/pairing.json",pairing);need(qr(pairing.dump(),300).save(p->root+"/pairing.png"),"Cannot render pairing QR");}
 QString NativeService::status()const{return p->message;}
 QString NativeService::publicIdentity()const{return p->pub.is_null()?QString():QString::fromStdString(p->pub.value("key_id",std::string()));}
 bool NativeService::paired()const{return p->connected;}

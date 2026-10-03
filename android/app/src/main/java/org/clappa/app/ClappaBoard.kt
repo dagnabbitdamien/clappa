@@ -55,7 +55,7 @@ internal data class BoardState(val phase:BoardPhase,val connected:Boolean=false,
  BoxWithConstraints(Modifier.fillMaxSize().background(Slate).clipToBounds()){
   val landscape=maxWidth>maxHeight
   val boardWidth=maxWidth-20.dp
-  val guide=state.phase in listOf(BoardPhase.CHALLENGE,BoardPhase.SENT,BoardPhase.LOST,BoardPhase.INCOMPLETE)
+  val guide=state.phase in listOf(BoardPhase.CHALLENGE,BoardPhase.SENT,BoardPhase.INCOMPLETE)
   val panelShape=RoundedCornerShape(6.dp)
   Column(Modifier.padding(horizontal=10.dp,vertical=6.dp).width(boardWidth)
    .height(maxHeight-12.dp)
@@ -91,7 +91,7 @@ internal data class BoardState(val phase:BoardPhase,val connected:Boolean=false,
     if(state.phase==BoardPhase.CHALLENGE){Text("Capture within ${state.responseSeconds}s",color=Chalk,fontSize=13.sp,modifier=Modifier.padding(bottom=8.dp));CountdownBar(state.responseDeadline,10000,state.responseSeconds)}
     val offer=state.phase==BoardPhase.SENT&&state.claimSeconds>0
     if(offer){Text("Photo offer · ${state.claimSeconds}s remaining",color=Chalk,fontSize=13.sp,modifier=Modifier.padding(bottom=8.dp));CountdownBar(state.claimDeadline,30000,state.claimSeconds)}
-    val label=if(offer)"Add a photo" else if(state.canFinish&&state.phase in listOf(BoardPhase.READY,BoardPhase.SENT))"Stop & seal" else when(state.phase){BoardPhase.UNPAIRED->"Pair with OBS";BoardPhase.CONNECTING->"Connecting…";BoardPhase.STANDBY->"Start recording";BoardPhase.SEALED->"Start another recording";BoardPhase.READY,BoardPhase.SENT->"Tap to clap!";BoardPhase.CLAPPING->"Waiting for fresh timing beacon…";BoardPhase.CHALLENGE->"Capture";BoardPhase.SENDING->"Sending proof…";BoardPhase.ENDING->"Finishing recording…";BoardPhase.LOST->if(state.needsPairing)"Scan pairing code" else "Reconnect";BoardPhase.INCOMPLETE->if(state.recording)"Stop incomplete recording" else "Start another recording"}
+    val label=if(offer)"Add a photo" else if(state.canFinish&&state.phase in listOf(BoardPhase.READY,BoardPhase.SENT))"Stop & seal" else when(state.phase){BoardPhase.UNPAIRED->"Pair with OBS";BoardPhase.CONNECTING->"Connecting…";BoardPhase.STANDBY->"Start recording";BoardPhase.SEALED->"Start another recording";BoardPhase.READY,BoardPhase.SENT->"Tap to clap!";BoardPhase.CLAPPING->"Waiting for fresh timing beacon…";BoardPhase.CHALLENGE->"Capture";BoardPhase.SENDING->"Sending proof…";BoardPhase.ENDING->"Finishing recording…";BoardPhase.LOST->if(state.needsPairing)"Scan pairing code" else "Connect to OBS";BoardPhase.INCOMPLETE->if(state.recording)"Stop incomplete recording" else "Start another recording"}
     AnimatedContent(label,label="primary action",transitionSpec={fadeIn(tween(140))+slideInVertically{it/8} togetherWith fadeOut(tween(80))}){text->
      Button(onClick=if(offer)onClaim else if(state.canFinish&&state.phase in listOf(BoardPhase.READY,BoardPhase.SENT))onFinish else onPrimary,enabled=state.phase !in listOf(BoardPhase.CONNECTING,BoardPhase.CLAPPING,BoardPhase.SENDING,BoardPhase.ENDING)&&(state.phase!=BoardPhase.CHALLENGE||state.responseSeconds>0),shape=RoundedCornerShape(8.dp),colors=ButtonDefaults.buttonColors(containerColor=Chalk,contentColor=Slate),contentPadding=PaddingValues(horizontal=16.dp,vertical=14.dp),modifier=Modifier.fillMaxWidth().heightIn(min=56.dp)){
       Text(text,fontSize=18.sp,fontWeight=FontWeight.SemiBold)

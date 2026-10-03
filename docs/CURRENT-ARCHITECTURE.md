@@ -25,7 +25,7 @@ This is the maintenance map for the Android/Windows implementation. Historical T
 - `CLAPPA-QUICKNET-v1`: authenticated future Quicknet pulse, deterministic public derivation and media commitment. Completed QR includes the context; no separate pre-capture stream popup.
 - `CLAPPA-SESSION-v2`: one optional additional photo within thirty seconds; missed attempts remain visible but do not terminate recording; automatic seal when recording closes with the connected phone. Photo B/group interval is three seconds.
 - `CLAPPA-DUAL-v1`: front/rear normal and illuminated groups, four immutable JPEGs. Concurrent delivery is not asserted to mean simultaneous exposure.
-- QR transport v2: fixed-version, repeated chunks with QR error correction. Current evidence carries hashes and signatures, not thumbnail pixels; it is not fountain coding.
+- QR transport v3: fixed-grid Cauchy erasure coding, any k of 2k frames. Evidence carries hashes and signatures, not thumbnail pixels; legacy v2 verification remains supported.
 
 Reference details: [session and dual-camera policy](review12/SESSION-POLICY.md), [exact QR contents](review12/QR-PAYLOAD.md), [media binding](review9/MEDIA-PROFILE.md).
 
@@ -39,4 +39,4 @@ Release packaging should copy the current protocol/verifier sources, verify the 
 
 ## Known boundaries
 
-Windows OBS and Android are the built targets. The protocol can describe iPhone multi-camera evidence, but an iPhone app is not implemented. Pairing survives consecutive recordings in the same OBS instance; restarting OBS changes its ephemeral pairing. Exact hashes check the original recording, not platform-transcoded pixels. The local unsigned summaries and presence of a seal file make no authenticity claim on their own.
+Windows OBS and Android are the built targets. The protocol can describe iPhone multi-camera evidence, but an iPhone app is not implemented. Pairing survives consecutive recordings in the same OBS instance; Test18 persists pairing across OBS restarts and refreshes LAN addressing. Exact hashes check the original recording, not platform-transcoded pixels. The local unsigned summaries and presence of a seal file make no authenticity claim on their own.

@@ -1,0 +1,7 @@
+import fs from 'node:fs';import https from 'node:https';import dgram from 'node:dgram';import {createHash,randomBytes} from 'node:crypto';
+const p=JSON.parse(fs.readFileSync('output/native-test/pairing.json'));if(!p.url.endsWith(':17444'))throw Error('Test instance only');
+console.log('Advertised test address:',new URL(p.url).hostname);
+await new Promise((resolve,reject)=>{const nonce=randomBytes(16).toString('hex');const s=dgram.createSocket('udp4');const timer=setTimeout(()=>{s.close();reject(Error('Discovery timeout'))},3000);s.on('message',bytes=>{const j=JSON.parse(bytes);if(j.nonce!==nonce||j.port!==17444)throw Error('Bad discovery');clearTimeout(timer);s.close();console.log('Discovery matched saved pin and nonce');resolve()});s.send(Buffer.from(JSON.stringify({type:'CLAPPA-DISCOVER-v1',pin:p.cert_sha256,nonce})),17444,'127.0.0.1')});
+await new Promise((resolve,reject)=>{const r=https.get('https://127.0.0.1:17444/poll?after=0',{rejectUnauthorized:false,headers:{Authorization:'Bearer '+p.token}},res=>{if(res.statusCode!==200)reject(Error('Auth '+res.statusCode));res.resume();res.on('end',resolve)});r.on('socket',s=>s.on('secureConnect',()=>{if(createHash('sha256').update(s.getPeerCertificate().raw).digest('hex')!==p.cert_sha256){r.destroy(Error('pin mismatch'))}}));r.on('error',reject)});
+console.log('Saved credential TLS pin and token accepted');
+fs.mkdirSync('docs/review18',{recursive:true});fs.writeFileSync('output/connection18-before.json',JSON.stringify(p));
