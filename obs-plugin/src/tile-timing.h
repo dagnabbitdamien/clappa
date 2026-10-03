@@ -1,7 +1,7 @@
 #pragma once
 #include <algorithm>
 namespace TileTiming {
-constexpr long long settleMs=500, frameMs=240, freezeMs=100, exitMs=240;
+constexpr long long settleMs=500, frameMs=180, freezeMs=100, exitMs=240;
 inline int frame(long long age,long long remaining,int count,int previous){
  if(age<settleMs)return 0;
  if(remaining<=freezeMs)return previous;

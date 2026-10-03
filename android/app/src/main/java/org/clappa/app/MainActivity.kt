@@ -87,6 +87,7 @@ open class MainActivity:ComponentActivity() {
     private var flash by mutableStateOf(Color.Transparent)
     private var claimSeconds by mutableIntStateOf(0)
     private var canFinish by mutableStateOf(false)
+    private var recentCanFinish by mutableStateOf(false)
     private var pendingSeal by mutableStateOf<JSONObject?>(null)
     private var session by mutableStateOf<Session?>(null)
     private var capture:ImageCapture?=null
@@ -280,6 +281,7 @@ open class MainActivity:ComponentActivity() {
         }
     }
     @Composable private fun Screen(){
+        LaunchedEffect(session){while(true){recentCanFinish=session?.canFinishNow()==true;delay(100)}}
         val invitation=chatRequest
         LaunchedEffect(invitation?.id,phase,connected,session?.sessionId){
             if(invitation!=null){
@@ -290,9 +292,9 @@ open class MainActivity:ComponentActivity() {
         androidx.activity.compose.BackHandler(enabled=cameraOpen){if(!busy){cameraOpen=false;claimMode=false;scanning=false}}
         Box(Modifier.fillMaxSize().background(Slate)){
             Box(Modifier.fillMaxSize().safeDrawingPadding()){
-                ClappaBoard(BoardState(phase,connected,prompt,status,claimSeconds,session?.startDone==true,canFinish,obsRecording,status.contains("pairing code has changed"),responseSeconds,responseDeadline,claimDeadline),clapVisual,
+                ClappaBoard(BoardState(phase,connected,prompt,status,claimSeconds,session?.startDone==true,canFinish,obsRecording,status.contains("pairing code has changed"),responseSeconds,responseDeadline,claimDeadline,recentCanFinish),clapVisual,
                     onPrimary=::primary,onSettings={settings=true},onEnd={issue(true)},
-                    onFinish={phase=BoardPhase.ENDING;lifecycleScope.launch{runCatching{withContext(Dispatchers.IO){session?.finish()}}.onFailure{status=it.message?:"Cannot finish";phase=BoardPhase.INCOMPLETE}}},
+                    onFinish={hideClaimOffer();phase=BoardPhase.ENDING;lifecycleScope.launch{runCatching{withContext(Dispatchers.IO){session?.finish()}}.onFailure{status=it.message?:"Cannot finish";phase=BoardPhase.INCOMPLETE}}},
                     onClaim=::beginClaim)
                 if(cameraOpen)CameraScreen()
             }

@@ -122,15 +122,16 @@ static void frontend(enum obs_frontend_event e,void*){
     if(e==OBS_FRONTEND_EVENT_STREAMING_STOPPED&&streamChain){streamChain->stop();if(recordChain&&!recordChain->output&&!mediaPath.isEmpty())closed=true;writeState();}
     if(e==OBS_FRONTEND_EVENT_RECORDING_STOPPED){if(recordChain)recordChain->stop();if(streamChain)streamChain->stop();char *p=obs_frontend_get_last_recording();if(p){mediaPath=QString::fromUtf8(p);bfree(p);}closed=true;writeState();}
 }
-struct Tile {gs_texture_t *texture=nullptr;QList<QImage> frames;QImage flash;qint64 until=0,start=0;int index=0;bool settled=false;uint32_t width=BoardArt::Width,height=BoardArt::Height;};
+static bool tileQrOnly=false;
+struct Tile {QImage base;bool qrOnly=false;gs_texture_t *texture=nullptr;QList<QImage> frames;QImage flash;qint64 until=0,start=0;int index=0;bool settled=false;uint32_t width=BoardArt::Width,height=BoardArt::Height;};
 static const char *tileName(void*){return "CLAPPA proof tile";}
 static void *tileCreate(obs_data_t*,obs_source_t*){return new Tile;}
 static void tileDestroy(void *data){auto *t=static_cast<Tile*>(data);obs_enter_graphics();gs_texture_destroy(t->texture);obs_leave_graphics();delete t;}
 static void tileTick(void *data,float){
- QStringList paths;QString flash;qint64 until;{std::lock_guard<std::mutex> lock(tileMutex);paths=tileFrames;flash=tileFlash;until=tileUntil;}
+ QStringList paths;QString flash,basePath;bool qrOnly;qint64 until;{std::lock_guard<std::mutex> lock(tileMutex);paths=tileFrames;flash=tileFlash;until=tileUntil;basePath=tilePath;qrOnly=tileQrOnly;}
  auto *t=static_cast<Tile*>(data);auto now=QDateTime::currentMSecsSinceEpoch();if(paths.empty()||now>until+TileTiming::exitMs)return;
  bool fresh=until!=t->until;
- if(fresh){QList<QImage> frames;for(const auto &path:paths){QImage im(path);if(im.isNull())return;frames.append(im.scaled(BoardArt::Width,BoardArt::Height,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));}t->frames=frames;t->flash=flash.isEmpty()?QImage():QImage(flash);now=QDateTime::currentMSecsSinceEpoch();t->start=now;t->until=until;t->settled=false;t->index=0;}
+ if(fresh){QList<QImage> frames;for(const auto &path:paths){QImage im(path);if(im.isNull())return;frames.append(im.scaled(qrOnly?292:BoardArt::Width,qrOnly?292:BoardArt::Height,Qt::IgnoreAspectRatio,qrOnly?Qt::FastTransformation:Qt::SmoothTransformation));}t->qrOnly=qrOnly;t->base=qrOnly?QImage(basePath).scaled(BoardArt::Width,BoardArt::Height,Qt::IgnoreAspectRatio,Qt::SmoothTransformation):QImage();if(qrOnly&&t->base.isNull())return;t->frames=frames;t->flash=flash.isEmpty()?QImage():QImage(flash);now=QDateTime::currentMSecsSinceEpoch();t->start=now;t->until=until;t->settled=false;t->index=0;}
  const auto ageMs=now-t->start;int index=TileTiming::frame(ageMs,until-now,t->frames.size(),t->index);bool changed=index!=t->index;t->index=index;
  double age=ageMs/1000.,exit=(now-until)/1000.;bool moving=age<.5||exit>0;bool fading=!t->flash.isNull()&&ageMs<1250;
  if(!moving&&!fading&&!changed&&t->settled&&!fresh)return;t->settled=!moving&&!fading;
@@ -145,7 +146,7 @@ static void tileTick(void *data,float){
   const double lag=.85*acceleration/(omega*omega)*(1-(1+omega*t)*std::exp(-omega*t));
   angle=std::asin(lag/(BoardArt::BoardWidth-14))*180/3.14159265;
  }
- QImage im(BoardArt::Width*2,BoardArt::Height*2,QImage::Format_ARGB32_Premultiplied);im.fill(Qt::transparent);QPainter p(&im);p.setRenderHint(QPainter::Antialiasing);p.setRenderHint(QPainter::SmoothPixmapTransform,false);p.scale(2,2);p.translate(0,y);p.drawImage(QRectF(0,0,BoardArt::Width,BoardArt::Height),t->frames[t->index]);p.translate(12,40);
+ QImage im(BoardArt::Width*2,BoardArt::Height*2,QImage::Format_ARGB32_Premultiplied);im.fill(Qt::transparent);QPainter p(&im);p.setRenderHint(QPainter::Antialiasing);p.setRenderHint(QPainter::SmoothPixmapTransform,false);p.scale(2,2);p.translate(0,y);if(t->qrOnly){p.drawImage(QRectF(0,0,BoardArt::Width,BoardArt::Height),t->base);p.drawImage(QRectF(548,120,292,292),t->frames[t->index]);}else p.drawImage(QRectF(0,0,BoardArt::Width,BoardArt::Height),t->frames[t->index]);p.translate(12,40);
  if(!t->flash.isNull()&&ageMs<1250){p.save();p.setOpacity(TileTiming::flashOpacity(ageMs));BoardArt::drawPhoto(p,t->flash);p.restore();}
  BoardArt::bar(p,angle);BoardArt::bracket(p);p.end();im=im.convertToFormat(QImage::Format_RGBA8888);
  const uint8_t *ptr=im.constBits();obs_enter_graphics();if(!t->texture)t->texture=gs_texture_create(im.width(),im.height(),GS_RGBA,1,&ptr,GS_DYNAMIC);else gs_texture_set_image(t->texture,ptr,im.bytesPerLine(),false);obs_leave_graphics();
@@ -175,7 +176,7 @@ static void poll(){
      if(now-summaryWritten>=2000){SessionSummary::write(root,sessionId,recordingId,summaryStarted,summaryEnded,summaryDuration,obs_frontend_recording_active(),mediaPath);summaryWritten=now;}
     }
     const auto pairing=read(root+"/pairing.json");if(!pairing.isEmpty()){auto pix=QPixmap(root+"/pairing.png");if(!pix.isNull())pairImage->setPixmap(pix);}
-    const auto tile=read(root+"/tile.json");{std::lock_guard<std::mutex> lock(tileMutex);tilePath=tile["path"].toString();tileUntil=qint64(tile["until"].toDouble());tileFrames.clear();for(auto f:tile["frames"].toArray())tileFrames.append(f.toString());tileFlash=tile["flash_path"].toString();}
+    const auto tile=read(root+"/tile.json");{std::lock_guard<std::mutex> lock(tileMutex);tilePath=tile["path"].toString();tileQrOnly=tile["qr_only"].toBool();tileUntil=qint64(tile["until"].toDouble());tileFrames.clear();for(auto f:tile["frames"].toArray())tileFrames.append(f.toString());tileFlash=tile["flash_path"].toString();}
     auto command=read(root+"/command.json");if(command["type"]=="start"){QFile::remove(root+"/command.json");if(!obs_frontend_recording_active())obs_frontend_recording_start();}if(command["type"]=="stop"&&command["session_id"]==sessionId){QFile::remove(root+"/command.json");obs_frontend_recording_stop();}
     label->setText(service?service->status():QString("Connection unavailable"));
     if(identityCode){identityCode->setText(service?service->publicIdentity():QString());if(copyPublic)copyPublic->setEnabled(!identityCode->text().isEmpty());}

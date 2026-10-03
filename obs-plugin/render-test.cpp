@@ -1,0 +1,6 @@
+#include "src/board-art.h"
+#include <QGuiApplication>
+#include <QElapsedTimer>
+#include <QDir>
+#include <iostream>
+int main(int argc,char **argv){QGuiApplication app(argc,argv);if(argc!=3)return 1;QImage photo(argv[1]);if(photo.isNull())return 2;QDir().mkpath(argv[2]);QString dir=argv[2];photo=BoardArt::mountedPhotos(photo);QList<QImage> codes;for(int i=0;i<26;i++){QImage qr(876,876,QImage::Format_RGB32);qr.fill(Qt::white);QPainter p(&qr);for(int y=4;y<69;y++)for(int x=4;x<69;x++)if((x*17+y*31+i*7)%5<2)p.fillRect(x*12,y*12,12,12,Qt::black);codes.append(qr);}QElapsedTimer t;t.start();QImage last;for(int i=0;i<26;i++){last=BoardArt::proof(photo,codes[i],1790800000000LL,"Take a selfie!",true);if(!last.save(dir+QString("/old-%1.png").arg(i)))return 3;}auto before=t.elapsed();t.restart();auto base=BoardArt::proof(photo,codes[0],1790800000000LL,"Take a selfie!",true);base.save(dir+"/base.png");for(int i=0;i<26;i++)codes[i].save(dir+QString("/code-%1.png").arg(i));auto after=t.elapsed();QPainter p(&base);p.drawImage(QRectF(1644,360,876,876),codes.last());p.end();if(base!=last){std::cerr<<"Composite mismatch";return 4;}std::cout<<"{\"old_ms\":"<<before<<",\"new_ms\":"<<after<<",\"frames\":26,\"pixel_match\":true}\n";}

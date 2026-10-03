@@ -70,3 +70,6 @@ endif()
 add_executable(clappa-qr-erasure-test EXCLUDE_FROM_ALL qr-erasure-test.cpp)
 target_include_directories(clappa-qr-erasure-test PRIVATE vendor "${NATIVE_DEPS}/include")
 target_link_libraries(clappa-qr-erasure-test PRIVATE Qt6::Core "${NATIVE_DEPS}/lib/zlibstatic.lib")
+
+add_executable(clappa-render-test EXCLUDE_FROM_ALL render-test.cpp)
+target_link_libraries(clappa-render-test PRIVATE Qt6::Core Qt6::Gui)

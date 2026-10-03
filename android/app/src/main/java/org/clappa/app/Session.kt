@@ -21,7 +21,7 @@ class Session(private val context: Context, val sessionId:String, val recordingI
     private var seq=0
     private val additionalPhoto=AdditionalPhotoOffer()
     @Synchronized fun canClaim(at:Long=System.currentTimeMillis())=!ended&&pending==null&&additionalPhoto.available(at)
-    @Synchronized fun acknowledgeCapture(seq:Int)=additionalPhoto.acknowledgeResponse(seq)
+    @Synchronized fun acknowledgeCapture(seq:Int):Boolean {val accepted=additionalPhoto.acknowledgeResponse(seq);if(accepted)recentFinish.acknowledge(seq);return accepted}
     @Synchronized fun acknowledgeClaim(seq:Int)=additionalPhoto.acknowledgeClaim(seq)
     var head:String?=null;private set
     private var lastAt=0L
@@ -33,6 +33,8 @@ class Session(private val context: Context, val sessionId:String, val recordingI
     var hadFailure=false;private set
     var startDone=false;private set
     var endDone=false;private set
+    private val recentFinish=RecentFinishWindow()
+    @Synchronized fun canFinishNow()=!ended&&pending==null&&startDone&&(endDone||recentFinish.available(android.os.SystemClock.elapsedRealtime()))
     private var snapshots=JSONArray()
     private var snapshotTime=0L
     private var issuedEvent:JSONObject?=null
@@ -74,7 +76,7 @@ class Session(private val context: Context, val sessionId:String, val recordingI
     @Synchronized fun checkpoint(outputs:JSONArray){if(ended)return;require(outputs.length()==descriptors.length());for(i in 0 until outputs.length()){require(outputs.getJSONObject(i).getBoolean("complete"))};snapshots=JSONArray(outputs.toString());snapshotTime=android.os.SystemClock.elapsedRealtime();emit("output-checkpoint",JSONObject().put("outputs",snapshots))}
     @Synchronized fun arm(phase:String,elapsed:Long):Long {
         check(snapshots.length()>0&&android.os.SystemClock.elapsedRealtime()-snapshotTime<3000){"Waiting for fresh OBS media checkpoint"}
-        check(pending==null&&!endDone);additionalPhoto.close();check(phase=="start"&&!startDone||phase!="start"&&startDone)
+        check(pending==null&&!endDone);recentFinish.clear();additionalPhoto.close();check(phase=="start"&&!startDone||phase!="start"&&startDone)
         check(armedEvent==null||issuedEvent!=null){"A challenge is already locked"};val round=Quicknet.futureRound(System.currentTimeMillis());armAcknowledged=false;issuedEvent=null
         armedEvent=emit("challenge-armed",JSONObject().put("camera_profile",cameraProfile).put("challenge_id",Proof.id()).put("phase",phase).put("mapping",ChallengeChoices.MAPPING).put("chain",Quicknet.CHAIN).put("round",round)
             .put("obs",JSONObject().put("recording_id",recordingId).put("outputs",JSONArray(snapshots.toString())).put("elapsed_ms",elapsed)).apply{if(dualView)put("capture_profile","CLAPPA-DUAL-v1")})
@@ -103,7 +105,7 @@ class Session(private val context: Context, val sessionId:String, val recordingI
     @Synchronized fun accept(a:File,b:File,aAt:Long,bAt:Long,aMono:Long,bMono:Long,dual:JSONObject?=null){val p=checkNotNull(pending);val limit=p.getInt("pair_window_ms");check(bAt-aAt in 0..limit){"The camera took too long between photos (${bAt-aAt} ms; limit $limit ms)"};val id=p.getString("challenge_id");val window=checkNotNull(responseWindow);val responseMs=window.first(aMono);val pairMs=window.pair(aMono,bMono,p.getString("camera")=="front",limit.toLong())
         check(aAt-lastIssuedAt in 0..10000 && kotlin.math.abs(aAt-lastIssuedAt-responseMs)<=250 && kotlin.math.abs(bAt-aAt-pairMs)<=250){"Phone clocks changed during capture"}
         check(dualView==(dual!=null)){"Two-camera proof is missing"}
-        val e=emit("challenge-captured",JSONObject().put("challenge_id",id).put("photo_a",imagePair(a,"$seq-a")).put("photo_b",imagePair(b,"$seq-b")).put("a_at",aAt).put("b_at",bAt).put("response_ms",responseMs).put("pair_ms",pairMs).apply{if(dual!=null)put("dual",dual)});lastSuccessAt=e.getJSONObject("payload").getLong("at");lastChallenge=id;additionalPhoto.open(e.getJSONObject("payload").getInt("seq"),lastSuccessAt)
+        val e=emit("challenge-captured",JSONObject().put("challenge_id",id).put("photo_a",imagePair(a,"$seq-a")).put("photo_b",imagePair(b,"$seq-b")).put("a_at",aAt).put("b_at",bAt).put("response_ms",responseMs).put("pair_ms",pairMs).apply{if(dual!=null)put("dual",dual)});lastSuccessAt=e.getJSONObject("payload").getLong("at");lastChallenge=id;recentFinish.captured(e.getJSONObject("payload").getInt("seq"),android.os.SystemClock.elapsedRealtime());additionalPhoto.open(e.getJSONObject("payload").getInt("seq"),lastSuccessAt)
         if(p.getString("phase")=="start")startDone=true;if(p.getString("phase")=="end")endDone=true;pending=null
     }
     @Synchronized fun acceptDual(result:JSONObject){
@@ -115,7 +117,7 @@ class Session(private val context: Context, val sessionId:String, val recordingI
         val extra=JSONObject().put("profile","CLAPPA-DUAL-v1").put("rear_a",imagePair(File(dir,"rear-a.jpg"),"$seq-rear-a")).put("rear_b",imagePair(File(dir,"rear-b.jpg"),"$seq-rear-b")).put("normal",normal).put("illuminated",lit).put("exposure_synchronization","not-established")
         try{accept(File(dir,"front-a.jpg"),File(dir,"front-b.jpg"),result.getLong("a_at"),result.getLong("b_at"),result.getLong("a_mono"),result.getLong("b_mono"),extra)}finally{dir.deleteRecursively()}
     }
-    @Synchronized fun fail(reason:String){val p=pending?:if(issuedEvent==null)armedEvent?.getJSONObject("payload")?.getJSONObject("data") else null;p?:return;emit("challenge-failed",JSONObject().put("challenge_id",p.getString("challenge_id")).put("reason",reason));pending=null;hadFailure=true;if(p.getString("phase")=="start")startDone=true;if(p.getString("phase")=="end")endDone=true;armedEvent=null;issuedEvent=null;lastSuccessAt=0;additionalPhoto.close()}
+    @Synchronized fun fail(reason:String){val p=pending?:if(issuedEvent==null)armedEvent?.getJSONObject("payload")?.getJSONObject("data") else null;p?:return;emit("challenge-failed",JSONObject().put("challenge_id",p.getString("challenge_id")).put("reason",reason));pending=null;hadFailure=true;if(p.getString("phase")=="start")startDone=true;if(p.getString("phase")=="end")endDone=true;armedEvent=null;issuedEvent=null;lastSuccessAt=0;recentFinish.clear();additionalPhoto.close()}
     @Synchronized fun claim(file:File,at:Long){
         check(canClaim(at)){"The additional-photo offer has ended"}
         val before=seq
@@ -126,7 +128,7 @@ class Session(private val context: Context, val sessionId:String, val recordingI
             if(seq>before){additionalPhoto.commit(before);lastSuccessAt=0}
         }
     }
-    @Synchronized fun finish(alreadyClosed:Boolean=false){check((alreadyClosed||startDone&&endDone)&&pending==null);emit("session-end",JSONObject());ended=true;if(!alreadyClosed)send(JSONObject().put("type","stop-request").put("session_id",sessionId))}
+    @Synchronized fun finish(alreadyClosed:Boolean=false){check((alreadyClosed||canFinishNow())&&pending==null);emit("session-end",JSONObject());ended=true;if(!alreadyClosed)send(JSONObject().put("type","stop-request").put("session_id",sessionId))}
     @Synchronized fun seal(request:JSONObject){check(ended);check(request.getString("recording_id")==recordingId&&request.getString("session_id")==sessionId&&request.getString("head")==head&&request.getInt("event_count")==seq)
         val m=request.getJSONObject("media");require(m.getLong("bytes")>0&&m.getString("sha256").matches(Regex("[0-9a-f]{64}")));require(!m.getString("name").contains(Regex("[/\\\\:]")))
         val terminal=request.getJSONArray("outputs");require(terminal.length()==descriptors.length());for(i in 0 until terminal.length()){require(terminal.getJSONObject(i).getBoolean("complete")&&terminal.getJSONObject(i).getLong("packets")>0)}

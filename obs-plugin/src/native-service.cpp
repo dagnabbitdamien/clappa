@@ -24,6 +24,8 @@
 #include "board-art.h"
 #include "twitch-identity.h"
 #include <QBuffer>
+#include <QElapsedTimer>
+#include "tile-timing.h"
 #include <QUdpSocket>
 #include <QUuid>
 #include <deque>
@@ -143,7 +145,7 @@ struct NativeService::Impl {
  }
  void outputs(const J &o){need(o.size()==state["outputs"].size(),"Output coverage missing");std::set<std::string> seen;for(auto &x:o){need(x["complete"]==true,"Incomplete packet coverage");auto id=x["output_id"].get<std::string>();need(seen.insert(id).second,"Duplicate output");bool found=false;for(auto &actual:state["outputs"])if(actual["output_id"]==x["output_id"]){found=true;need(actual["role"]==x["role"]&&x["packets"]<=actual["packets"]&&x["bytes"]<=actual["bytes"],"Unknown media checkpoint");}need(found,"Unknown output");for(auto &old:latestOutputs)if(old["output_id"]==x["output_id"])need(x["packets"]>=old["packets"]&&x["bytes"]>=old["bytes"]&&(x["packets"]!=old["packets"]||x==old),"Checkpoint regression or conflicting head");}latestOutputs=o;}
  void showArm(const J &e,long long target){auto digest=hash(bytes(e.dump()));auto text="CLAPPA-ARM1:"+digest+":"+std::to_string(e["payload"]["data"]["round"].get<long long>());auto image=BoardArt::arming(qr(text,292),QString::fromStdString(digest.substr(0,12)),target);auto name=root+"/armed-"+QString::number(count)+".png";need(image.save(name),"Cannot display locked challenge");tileEnd=target+20000;save(root+"/tile.json",{{"path",name.toStdString()},{"frames",J::array({name.toStdString()})},{"flash_path",""},{"until",tileEnd}});}
- void tile(const J &e,const J &images,const J &context,const J &identity){auto d=e["payload"]["data"];bool claim=e["payload"]["type"]=="claim";J pairs=claim?J::array({d["photo"]}):J::array({d["photo_a"],d["photo_b"]});J photos=J::array();if(!freshSession)for(auto &p:pairs)photos.push_back(images.at(p["proof"]["path"].get<std::string>()));
+ void tile(const J &e,const J &images,const J &context,const J &identity){QElapsedTimer renderTimer;renderTimer.start();auto d=e["payload"]["data"];bool claim=e["payload"]["type"]=="claim";J pairs=claim?J::array({d["photo"]}):J::array({d["photo_a"],d["photo_b"]});J photos=J::array();if(!freshSession)for(auto &p:pairs)photos.push_back(images.at(p["proof"]["path"].get<std::string>()));
   J envelope={{"event",e},{"key",pub},{"photos",photos},{"context",context}};QString twitchName;std::string identityDigest;
   if(!identity.is_null()){
    auto binding=identity.at("binding"),v=binding.at("payload");need(identity.is_object()&&identity.size()==2&&binding.size()==2&&v.size()==6&&v.at("profile")=="CLAPPA-TWITCH-BINDING-v1"&&v.at("algorithm")=="ES256-P1363"&&v.at("key_id")==pub.at("key_id")&&v.at("session_id")==sid&&v.at("event_sha256")==hash(bytes(e.dump())),"Wrong Twitch identity binding");signature(binding);
@@ -155,16 +157,18 @@ struct NativeService::Impl {
   QImageReader reader(folder()+"/"+QString::fromStdString(pairs[0]["original"]["path"]));reader.setAutoTransform(true);if(reader.size().isValid())reader.setScaledSize(reader.size().scaled(1348,984,Qt::KeepAspectRatio));auto photo=reader.read();need(!photo.isNull(),"Photo cannot be displayed");bool dual=!claim&&d.contains("dual");auto rearPhoto=[&](const char *which){QImageReader r(folder()+"/"+QString::fromStdString(d["dual"][which]["original"]["path"]));r.setAutoTransform(true);if(r.size().isValid())r.setScaledSize(r.size().scaled(1348,984,Qt::KeepAspectRatio));auto image=r.read();need(!image.isNull(),"Rear photo cannot be displayed");return image;};photo=dual?BoardArt::dualPhoto(photo,rearPhoto("rear_a")):BoardArt::mountedPhotos(photo);frames.clear();
   const auto digest=QByteArray::fromHex(QByteArray::fromStdString(hash(compressed)));
   auto texts=resilientQrFrames(digest,compressed);const int n=int(texts.size());int version=12;
+  QString boardPath;
   for(int i=0;i<n;i++){
    auto q=qrcodegen::QrCode::encodeSegments(qrcodegen::QrSegment::makeSegments(texts[i].c_str()),qrcodegen::QrCode::Ecc::MEDIUM,version,version,-1,false);
    need(version==12,"QR profile exceeds its fixed grid");const int cells=q.getSize()+8,scale=12;QImage code(cells*scale,cells*scale,QImage::Format_RGB32);code.fill(Qt::white);QPainter painter(&code);
    for(int y=0;y<q.getSize();y++)for(int x=0;x<q.getSize();x++)if(q.getModule(x,y))painter.fillRect((x+4)*scale,(y+4)*scale,scale,scale,Qt::black);painter.end();
-   auto im=BoardArt::proof(photo,code,freshSession?issuedEvent["payload"]["data"]["freshness"]["pulse"]["at"].get<long long>():d[claim?"captured_at":"a_at"].get<long long>(),claim?QStringLiteral("Your additional photo!"):promptText(lastPrompt,dual),freshSession,twitchName);auto name=root+QString("/native-tile-%1-%2.png").arg(count).arg(i);need(im.save(name),"Cannot save proof tile");frames.push_back(name);
+   if(i==0){auto im=BoardArt::proof(photo,code,freshSession?issuedEvent["payload"]["data"]["freshness"]["pulse"]["at"].get<long long>():d[claim?"captured_at":"a_at"].get<long long>(),claim?QStringLiteral("Your additional photo!"):promptText(lastPrompt,dual),freshSession,twitchName);boardPath=root+QString("/native-board-%1.png").arg(count);need(im.save(boardPath),"Cannot save proof board");}
+   auto name=root+QString("/native-code-%1-%2.png").arg(count).arg(i);need(code.save(name),"Cannot save proof code");frames.push_back(name);
   }
   QString flashPath;
   if(!claim){QImageReader flashReader(folder()+"/"+QString::fromStdString(pairs[1]["original"]["path"]));flashReader.setAutoTransform(true);if(flashReader.size().isValid())flashReader.setScaledSize(flashReader.size().scaled(1348,984,Qt::KeepAspectRatio));auto b=flashReader.read();need(!b.isNull(),"Flash photo cannot be displayed");b=dual?BoardArt::dualPhoto(b,rearPhoto("rear_b")):BoardArt::mountedPhotos(b);flashPath=root+QString("/native-flash-%1.png").arg(count);need(b.save(flashPath),"Cannot save flash preview");}
-  tileEnd=QDateTime::currentMSecsSinceEpoch()+600+std::max(4500,n*240+1000);renderBefore=state.value("tile_renders",0LL);
-  J paths=J::array();for(auto &path:frames)paths.push_back(path.toStdString());save(root+"/tile.json",{{"path",frames.front().toStdString()},{"frames",paths},{"flash_path",flashPath.toStdString()},{"until",tileEnd}});
+  tileEnd=QDateTime::currentMSecsSinceEpoch()+TileTiming::settleMs+std::max(3000LL,n*TileTiming::frameMs)+250;renderBefore=state.value("tile_renders",0LL);
+  J paths=J::array();for(auto &path:frames)paths.push_back(path.toStdString());save(root+"/tile.json",{{"path",boardPath.toStdString()},{"qr_only",true},{"render_ms",renderTimer.elapsed()},{"frame_ms",TileTiming::frameMs},{"frames",paths},{"flash_path",flashPath.toStdString()},{"until",tileEnd}});
   if(!identityDigest.empty()){if(shownIdentities.size()>256)shownIdentities.clear();shownIdentities.insert(sid+identityDigest);}
  }
  void messageIn(const J &m){std::string type=m.at("type");if(type=="hello"){

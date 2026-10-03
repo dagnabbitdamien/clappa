@@ -33,7 +33,7 @@ import java.util.*
 internal val Slate=Color(0xff24231f)
 internal val Chalk=Color(0xffeeeade)
 internal enum class BoardPhase { UNPAIRED, CONNECTING, STANDBY, READY, CLAPPING, CHALLENGE, SENDING, SENT, ENDING, SEALED, LOST, INCOMPLETE }
-internal data class BoardState(val phase:BoardPhase,val connected:Boolean=false,val prompt:String="",val detail:String="",val claimSeconds:Int=0,val canEnd:Boolean=false,val canFinish:Boolean=false,val recording:Boolean=false,val needsPairing:Boolean=false,val responseSeconds:Int=0,val responseDeadline:Long=0,val claimDeadline:Long=0)
+internal data class BoardState(val phase:BoardPhase,val connected:Boolean=false,val prompt:String="",val detail:String="",val claimSeconds:Int=0,val canEnd:Boolean=false,val canFinish:Boolean=false,val recording:Boolean=false,val needsPairing:Boolean=false,val responseSeconds:Int=0,val responseDeadline:Long=0,val claimDeadline:Long=0,val recentCanFinish:Boolean=false)
 
 @Composable private fun CountdownBar(deadline:Long,totalMillis:Long,fallbackSeconds:Int){
  var remaining by remember(deadline){mutableLongStateOf(if(deadline>0)(deadline-android.os.SystemClock.elapsedRealtime()).coerceAtLeast(0) else fallbackSeconds*1000L)}
@@ -100,8 +100,8 @@ internal data class BoardState(val phase:BoardPhase,val connected:Boolean=false,
     if(state.phase==BoardPhase.UNPAIRED)Text("Scan the pairing code in the CLAPPA dock.",Modifier.padding(top=12.dp),fontSize=13.sp,lineHeight=19.sp,color=Chalk.copy(alpha=.72f))
     if(state.phase==BoardPhase.STANDBY)Text("Start OBS recording from your phone.",Modifier.padding(top=12.dp),fontSize=13.sp,color=Chalk.copy(alpha=.72f))
     if(state.phase==BoardPhase.SEALED)Text("Recording sealed. Your proof is saved.",Modifier.padding(top=12.dp),fontSize=13.sp,color=Chalk.copy(alpha=.72f))
-    if(!state.canFinish&&state.canEnd&&state.phase in listOf(BoardPhase.READY,BoardPhase.SENT))TextButton(onClick=onEnd,modifier=Modifier.heightIn(min=48.dp)){Text("End session")}
-    if(offer&&state.canFinish)TextButton(onClick=onFinish,modifier=Modifier.heightIn(min=48.dp)){Text("Stop & seal")}
+    if(!state.canFinish&&!state.recentCanFinish&&state.canEnd&&state.phase in listOf(BoardPhase.READY,BoardPhase.SENT))TextButton(onClick=onEnd,modifier=Modifier.heightIn(min=48.dp)){Text("End session")}
+    if((offer&&state.canFinish||state.recentCanFinish&&!state.canFinish)&&state.phase in listOf(BoardPhase.READY,BoardPhase.SENT))TextButton(onClick=onFinish,modifier=Modifier.heightIn(min=48.dp)){Text("Stop & seal")}
     if(state.detail.isNotEmpty()&&state.phase !in listOf(BoardPhase.CHALLENGE,BoardPhase.SENT))Text(state.detail,Modifier.padding(top=12.dp),fontSize=13.sp,lineHeight=19.sp,color=Chalk.copy(alpha=.8f))
    }}
    if(landscape){

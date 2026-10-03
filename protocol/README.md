@@ -1,3 +1,5 @@
+**Test19:** QR hold is 180ms with full 2k redundancy; OBS renders one static photo board plus QR-only layers. Recent acknowledged challenges allow Stop & seal for 30 seconds under existing SESSION-v2 semantics, without inventing an end challenge. See docs/test19.md (../docs from protocol).
+
 **Test17.1 (2026-10-02):** New QR uses CLAPPA3 systematic Cauchy erasure coding (any k of 2k frames); preserve legacy verification. No change to signed envelopes, hash-only photos or Twitch first-token/later-reference policy. Frame hold remains 240ms. Windows Twitch issuer keys use authenticated WinHTTP independently of Qt TLS; never trust phone-supplied issuer keys. See docs/review17.1/TRANSPORT.md (../docs from protocol).
 
 # CLAPPA protocol notes
