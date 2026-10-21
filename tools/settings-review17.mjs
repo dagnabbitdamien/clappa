@@ -1,0 +1,11 @@
+import {execFileSync as exec} from 'node:child_process';import fs from 'node:fs';
+const adb='.tools/android-sdk/platform-tools/adb.exe';const run=(...a)=>exec(adb,['-s','emulator-5556',...a],{encoding:'utf8',timeout:30000});
+function nodes(){run('shell','uiautomator','dump','/sdcard/settings.xml');return [...run('shell','cat','/sdcard/settings.xml').matchAll(/<node\b[^>]*>/g)].map(m=>Object.fromEntries([...m[0].matchAll(/([\w-]+)="([^"]*)"/g)].map(a=>[a[1],a[2]])));}
+function tap(label){for(let i=0;i<8;i++){const n=nodes().find(n=>n.text===label||n['content-desc']===label);if(n){const b=n.bounds.match(/\d+/g).map(Number);run('shell','input','tap',String((b[0]+b[2])/2),String((b[1]+b[3])/2));return;}}throw Error('Missing '+label)}
+function shot(name){nodes();fs.writeFileSync('docs/review17/'+name+'.png',exec(adb,['-s','emulator-5556','exec-out','screencap','-p'],{maxBuffer:20000000}));}
+run('shell','wm','user-rotation','lock','0');run('shell','am','force-stop','org.clappa.app.review');run('shell','am','start','-W','-n','org.clappa.app.review/org.clappa.app.HomeActivity');tap('Streamer');tap('Settings');shot('settings-portrait');run('shell','input','swipe','530','1800','530','700','400');shot('settings-identity');run('shell','wm','user-rotation','lock','1');shot('settings-landscape');run('shell','settings','put','system','font_scale','1.3');run('shell','cmd','overlay','enable-exclusive','--category','com.android.internal.systemui.navbar.threebutton');shot('settings-large-text');run('shell','settings','put','system','font_scale','1.0');run('shell','cmd','overlay','enable-exclusive','--category','com.android.internal.systemui.navbar.gestural');run('shell','input','keyevent','4');
+
+
+for(const rotation of [0,1]){
+ run('shell','wm','user-rotation','lock',String(rotation));run('shell','am','force-stop','org.clappa.app.review');run('shell','am','start','-W','-n','org.clappa.app.review/org.clappa.app.HomeActivity');tap('Streamer');tap('Settings');tap('Manage Twitch account');shot('twitch-'+(rotation?'landscape':'portrait'));
+}

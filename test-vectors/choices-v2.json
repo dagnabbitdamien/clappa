@@ -1,0 +1,5849 @@
+[
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000000",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_wink",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1000101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000001",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_around",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1010100010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      0,
+      0,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000002",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_chin",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1010100010001010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      0,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000003",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_chin",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1000101010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -5,
+      -5,
+      -5,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000004",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_right",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1010101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      2,
+      0,
+      2,
+      4,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000005",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_palm",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1010101010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      0,
+      2,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000006",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_right",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1000101010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      0,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000007",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_nose_left",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1010101010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      0,
+      0,
+      2,
+      4,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000008",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_wink",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1010100010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      -3,
+      -5,
+      -3,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000009",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_tilt",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1000100010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      0,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000000a",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_right",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1010100010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      0,
+      -3,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000000b",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_palm",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1000101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      4,
+      2,
+      4,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000000c",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_nose_right",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1000101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      -3,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000000d",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1010100010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      0,
+      0,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000000e",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_tilt",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1000100010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      4,
+      4,
+      7,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000000f",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_around",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1000101010001010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      4,
+      4,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000010",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_chin",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1010100010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      2,
+      4,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000011",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_tilt",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1010100010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      -3,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000012",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_right",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1010100010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      0,
+      0,
+      0,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000013",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_wink",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1010101010001000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      0,
+      -3,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000014",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_around",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1000101010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      0,
+      2,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000015",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1000101010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -5,
+      -3,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000016",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_nose_left",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1000100010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      4,
+      2,
+      4,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000017",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_chin",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1000101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      0,
+      2,
+      4,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000018",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_wink",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1000101010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      -5,
+      -5,
+      -5,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000019",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_smile",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1010100010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      4,
+      2,
+      2,
+      4,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000001a",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_left",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1010100010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      -3,
+      -5,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000001b",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_wink",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1010101010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      0,
+      0,
+      2,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000001c",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_right",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1000101010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      -3,
+      0,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000001d",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_tilt",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1010100010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      4,
+      7,
+      7,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000001e",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_nose_left",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1010101010001000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      4,
+      4,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000001f",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_chin",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1010101010001000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      4,
+      4,
+      7,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000020",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_nose_left",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1010101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      2,
+      2,
+      0,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000021",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1010100010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      0,
+      0,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000022",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_around",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1000100010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      -3,
+      -3,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000023",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1010101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      0,
+      0,
+      -3,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000024",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_nose_left",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1010101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -5,
+      -5,
+      -3,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000025",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_right",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1010101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      4,
+      4,
+      4,
+      7,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000026",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_around",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1010101010001000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      0,
+      0,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000027",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_right",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1010100010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      -3,
+      -5,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000028",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_palm",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1010101010001010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      -3,
+      -5,
+      -5,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000029",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_palm",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1010100010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      2,
+      0,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000002a",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_left",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1010101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -5,
+      -3,
+      -3,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000002b",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_palm",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1000101010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      2,
+      4,
+      7,
+      7,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000002c",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_right",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1010101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      2,
+      2,
+      4,
+      4,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000002d",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_smile",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1010100010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      0,
+      -3,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000002e",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1010101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      0,
+      2,
+      4,
+      7,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000002f",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_tilt",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1000101010001010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      0,
+      0,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000030",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_palm",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1010100010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      -3,
+      -5,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000031",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_nose_left",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1010101010001010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      2,
+      2,
+      4,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000032",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_right",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1010101010001000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      -3,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000033",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_wink",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1000101010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      -3,
+      -5,
+      -5,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000034",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_nose_left",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1010101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      -3,
+      0,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000035",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_around",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1010101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      0,
+      0,
+      -3,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000036",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_smile",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1000101010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      2,
+      0,
+      -3,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000037",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_around",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1010101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      -5,
+      -5,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000038",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_smile",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1010101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      2,
+      2,
+      4,
+      7,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000039",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_tilt",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1010101010001000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      -3,
+      -5,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000003a",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_left",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1000101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      0,
+      0,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000003b",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_chin",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1010101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      0,
+      0,
+      -3,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000003c",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_smile",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1000100010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      -3,
+      0,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000003d",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_nose_right",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1010100010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      2,
+      0,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000003e",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_nose_left",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1010100010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      0,
+      -3,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000003f",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_tilt",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1010101010001010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      0,
+      2,
+      0,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000040",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_nose_left",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1000101010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      2,
+      4,
+      2,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000041",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_palm",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1010100010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      0,
+      2,
+      4,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000042",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_nose_left",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1000101010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      0,
+      2,
+      0,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000043",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_nose_left",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1010100010001010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      0,
+      -3,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000044",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_tilt",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1010101010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -5,
+      -5,
+      -3,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000045",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_nose_right",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1010100010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      -3,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000046",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_around",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1010100010001010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      2,
+      0,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000047",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_wink",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1000101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      4,
+      2,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000048",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_palm",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1010101010001000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      0,
+      -3,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000049",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_around",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1000101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      4,
+      2,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000004a",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_around",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1010101010001010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      0,
+      0,
+      0,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000004b",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_palm",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1010101010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -5,
+      -5,
+      -3,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000004c",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_wink",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1000101010001010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      -5,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000004d",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_left",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1000101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000004e",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_chin",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1010101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      0,
+      -3,
+      -3,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000004f",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_left",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1010100010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      2,
+      4,
+      7,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000050",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_left",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1000101010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      0,
+      0,
+      2,
+      4,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000051",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_nose_right",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1010101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      2,
+      2,
+      2,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000052",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1010101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -5,
+      -3,
+      -5,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000053",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_tilt",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1010101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      2,
+      4,
+      7,
+      7,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000054",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_smile",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1000101010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      4,
+      4,
+      4,
+      4,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000055",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_nose_right",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1000101010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      0,
+      2,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000056",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_smile",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1000101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      0,
+      -3,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000057",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_nose_right",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1010100010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      -5,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000058",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_nose_left",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1000101010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      4,
+      4,
+      4,
+      7,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000059",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_left",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1000101010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      2,
+      0,
+      -3,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000005a",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_right",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1000101010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      0,
+      -3,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000005b",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_smile",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1000101010001010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      -3,
+      0,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000005c",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_tilt",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1010100010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000005d",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_smile",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1010100010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      2,
+      4,
+      7,
+      7,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000005e",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_left",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1000100010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      -3,
+      -5,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000005f",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1000101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      -5,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000060",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1010101010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      4,
+      7,
+      4,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000061",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_chin",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1010100010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      4,
+      2,
+      2,
+      4,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000062",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_left",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1000101010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      0,
+      2,
+      4,
+      4,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000063",
+    "profile": "front-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_around",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1010100010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      -3,
+      -5,
+      -5,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000000",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "up",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000001",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "front",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      0,
+      0,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000002",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "up",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010001010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      0,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000003",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "back",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -5,
+      -5,
+      -5,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000004",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "down",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      2,
+      0,
+      2,
+      4,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000005",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "up",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      0,
+      2,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000006",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "up",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      0,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000007",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "front",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      0,
+      0,
+      2,
+      4,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000008",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "front",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      -3,
+      -5,
+      -3,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000009",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "left",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000100010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      0,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000000a",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "left",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      0,
+      -3,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000000b",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "left",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      4,
+      2,
+      4,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000000c",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "down",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      -3,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000000d",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "down",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      0,
+      0,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000000e",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "down",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000100010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      4,
+      4,
+      7,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000000f",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "down",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010001010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      4,
+      4,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000010",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "down",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      2,
+      4,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000011",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "up",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      -3,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000012",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "up",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      0,
+      0,
+      0,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000013",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "back",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010001000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      0,
+      -3,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000014",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "right",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      0,
+      2,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000015",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "right",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -5,
+      -3,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000016",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "front",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000100010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      4,
+      2,
+      4,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000017",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "up",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      0,
+      2,
+      4,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000018",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "front",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      -5,
+      -5,
+      -5,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000019",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "right",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      4,
+      2,
+      2,
+      4,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000001a",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "back",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      -3,
+      -5,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000001b",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "right",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      0,
+      0,
+      2,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000001c",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "back",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      -3,
+      0,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000001d",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "down",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      4,
+      7,
+      7,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000001e",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "back",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010001000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      4,
+      4,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000001f",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "left",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010001000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      4,
+      4,
+      7,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000020",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "down",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      2,
+      2,
+      0,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000021",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "front",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      0,
+      0,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000022",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "down",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000100010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      -3,
+      -3,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000023",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "back",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      0,
+      0,
+      -3,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000024",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "right",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -5,
+      -5,
+      -3,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000025",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "back",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      4,
+      4,
+      4,
+      7,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000026",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "down",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010001000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      0,
+      0,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000027",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "right",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      -3,
+      -5,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000028",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "right",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010001010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      -3,
+      -5,
+      -5,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000029",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "left",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      2,
+      0,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000002a",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "down",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -5,
+      -3,
+      -3,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000002b",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "down",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      2,
+      4,
+      7,
+      7,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000002c",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "front",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      2,
+      2,
+      4,
+      4,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000002d",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "back",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      0,
+      -3,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000002e",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "down",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      0,
+      2,
+      4,
+      7,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000002f",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "back",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010001010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      0,
+      0,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000030",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "front",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      -3,
+      -5,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000031",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "back",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010001010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      2,
+      2,
+      4,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000032",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "left",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010001000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      -3,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000033",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "left",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      -3,
+      -5,
+      -5,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000034",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "back",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      -3,
+      0,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000035",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "front",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      0,
+      0,
+      -3,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000036",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "front",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      2,
+      0,
+      -3,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000037",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "down",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      -5,
+      -5,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000038",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "right",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      2,
+      2,
+      4,
+      7,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000039",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "down",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010001000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      -3,
+      -5,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000003a",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "down",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      0,
+      0,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000003b",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "right",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      0,
+      0,
+      -3,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000003c",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "front",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000100010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      -3,
+      0,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000003d",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "down",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      2,
+      0,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000003e",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "back",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      0,
+      -3,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000003f",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "down",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010001010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      0,
+      2,
+      0,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000040",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "back",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      2,
+      4,
+      2,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000041",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "down",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      0,
+      2,
+      4,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000042",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "right",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      0,
+      2,
+      0,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000043",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "left",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010001010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      0,
+      -3,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000044",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "front",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -5,
+      -5,
+      -3,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000045",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "left",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      -3,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000046",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "up",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010001010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      2,
+      0,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000047",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "back",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      4,
+      2,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000048",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "up",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010001000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      0,
+      -3,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000049",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "left",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      4,
+      2,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000004a",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "down",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010001010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      0,
+      0,
+      0,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000004b",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "left",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -5,
+      -5,
+      -3,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000004c",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "right",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010001010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      -5,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000004d",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "front",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000004e",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "back",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      0,
+      -3,
+      -3,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000004f",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "front",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      2,
+      4,
+      7,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000050",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "right",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      0,
+      0,
+      2,
+      4,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000051",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "up",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      2,
+      2,
+      2,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000052",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "right",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -5,
+      -3,
+      -5,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000053",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "left",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      2,
+      4,
+      7,
+      7,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000054",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "left",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      4,
+      4,
+      4,
+      4,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000055",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "right",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      0,
+      2,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000056",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "front",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      0,
+      -3,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000057",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "front",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      -5,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000058",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "up",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      4,
+      4,
+      4,
+      7,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000059",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "back",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      2,
+      0,
+      -3,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000005a",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "back",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      0,
+      -3,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000005b",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "right",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010001010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      -3,
+      0,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000005c",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "up",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000005d",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "right",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      2,
+      4,
+      7,
+      7,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000005e",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "left",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000100010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      -3,
+      -5,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000005f",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "front",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      -5,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000060",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "up",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      4,
+      7,
+      4,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000061",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "left",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      4,
+      2,
+      2,
+      4,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000062",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "up",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      0,
+      2,
+      4,
+      4,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000063",
+    "profile": "rear-only",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "down",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      -3,
+      -5,
+      -5,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000000",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_chin",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1000101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000001",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "left",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      0,
+      0,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000002",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "front",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010001010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      0,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000003",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1000101010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -5,
+      -5,
+      -5,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000004",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_around",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1010101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      2,
+      0,
+      2,
+      4,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000005",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "up",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      0,
+      2,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000006",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_tilt",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1000101010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      0,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000007",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "up",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      0,
+      0,
+      2,
+      4,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000008",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_nose_left",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1010100010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      -3,
+      -5,
+      -3,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000009",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "back",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000100010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      0,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000000a",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1010100010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      0,
+      -3,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000000b",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_palm",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1000101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      4,
+      2,
+      4,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000000c",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "right",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      -3,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000000d",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "left",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      0,
+      0,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000000e",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "down",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000100010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      4,
+      4,
+      7,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000000f",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_smile",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1000101010001010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      4,
+      4,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000010",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_around",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1010100010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      2,
+      4,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000011",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_right",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1010100010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      -3,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000012",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "left",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      0,
+      0,
+      0,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000013",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_left",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1010101010001000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      0,
+      -3,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000014",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "up",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      0,
+      2,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000015",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_chin",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1000101010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -5,
+      -3,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000016",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_tilt",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1000100010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      4,
+      2,
+      4,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000017",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "back",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      0,
+      2,
+      4,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000018",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_wink",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1000101010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      -5,
+      -5,
+      -5,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000019",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "right",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      4,
+      2,
+      2,
+      4,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000001a",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_palm",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1010100010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      -3,
+      -5,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000001b",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_around",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1010101010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      0,
+      0,
+      2,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000001c",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "front",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      -3,
+      0,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000001d",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1010100010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      4,
+      7,
+      7,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000001e",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "back",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010001000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      4,
+      4,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000001f",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_tilt",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1010101010001000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      4,
+      4,
+      7,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000020",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "right",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      2,
+      2,
+      0,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000021",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_nose_right",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1010100010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      0,
+      0,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000022",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_left",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1000100010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      -3,
+      -3,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000023",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_around",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1010101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      0,
+      0,
+      -3,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000024",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_tilt",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1010101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -5,
+      -5,
+      -3,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000025",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_nose_left",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1010101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      4,
+      4,
+      4,
+      7,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000026",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_around",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1010101010001000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      0,
+      0,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000027",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "left",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      -3,
+      -5,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000028",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "front",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010001010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      -3,
+      -5,
+      -5,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000029",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_chin",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1010100010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      2,
+      0,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000002a",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_around",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1010101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -5,
+      -3,
+      -3,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000002b",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "back",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      2,
+      4,
+      7,
+      7,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000002c",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1010101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      2,
+      2,
+      4,
+      4,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000002d",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1010100010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      0,
+      -3,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000002e",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_nose_right",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1010101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      0,
+      2,
+      4,
+      7,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000002f",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_wink",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1000101010001010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      0,
+      0,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000030",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "right",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      -3,
+      -5,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000031",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "back",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010001010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      2,
+      2,
+      4,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000032",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_wink",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1010101010001000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      -3,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000033",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_chin",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1000101010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      -3,
+      -5,
+      -5,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000034",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "left",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      -3,
+      0,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000035",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_smile",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1010101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      0,
+      0,
+      -3,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000036",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1000101010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      2,
+      0,
+      -3,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000037",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_tilt",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1010101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      -5,
+      -5,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000038",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_nose_left",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1010101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      2,
+      2,
+      4,
+      7,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000039",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_nose_right",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1010101010001000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      -3,
+      -5,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000003a",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_palm",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1000101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      0,
+      0,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000003b",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_smile",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1010101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      0,
+      0,
+      -3,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000003c",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "left",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000100010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      -3,
+      0,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000003d",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_nose_left",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1010100010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      2,
+      0,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000003e",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "front",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      0,
+      -3,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000003f",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_nose_left",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1010101010001010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      0,
+      2,
+      0,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000040",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1000101010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      2,
+      4,
+      2,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000041",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "front",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      0,
+      2,
+      4,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000042",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_nose_right",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1000101010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      0,
+      2,
+      0,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000043",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_wink",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1010100010001010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      0,
+      -3,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000044",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_smile",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1010101010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -5,
+      -5,
+      -3,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000045",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_chin",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1010100010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      -3,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000046",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "back",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010001010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      2,
+      0,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000047",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_palm",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1000101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      4,
+      2,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000048",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "front",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010001000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      0,
+      -3,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000049",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "left",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      4,
+      2,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000004a",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "back",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010001010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      0,
+      0,
+      0,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000004b",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "left",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -5,
+      -5,
+      -3,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000004c",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_nose_right",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1000101010001010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      -5,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000004d",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_nose_left",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1000101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000004e",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "left",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      0,
+      -3,
+      -3,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000004f",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_nose_left",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1010100010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      2,
+      4,
+      7,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000050",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "left",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      0,
+      0,
+      2,
+      4,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000051",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "down",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      2,
+      2,
+      2,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000052",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_right",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1010101010101000",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -5,
+      -3,
+      -5,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000053",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "right",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      2,
+      4,
+      7,
+      7,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000054",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_chin",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1000101010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      4,
+      4,
+      4,
+      4,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000055",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "back",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      0,
+      2,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000056",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "down",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      0,
+      -3,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000057",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_tilt",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1010100010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      -5,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000058",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_smile",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1000101010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      4,
+      4,
+      4,
+      7,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000059",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_nose_left",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1000101010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      2,
+      0,
+      -3,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000005a",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_wink",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1000101010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      0,
+      -3,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000005b",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_tilt",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1000101010001010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      -3,
+      0,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000005c",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "down",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1010100010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000005d",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_right",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1010100010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      2,
+      4,
+      7,
+      7,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000005e",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_left",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1000100010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      0,
+      -3,
+      -5,
+      -5,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "000000000000000000000000000000000000000000000000000000000000005f",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "front",
+    "camera": "rear",
+    "flash": "led",
+    "cadence": "1000101010101000",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      -3,
+      -3,
+      -5,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000060",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_chin",
+    "camera": "front",
+    "flash": "green",
+    "cadence": "1010101010001010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      2,
+      4,
+      7,
+      4,
+      2,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000061",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_smile",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1010100010101010",
+    "slot_ms": 111,
+    "pitches": [
+      0,
+      2,
+      4,
+      2,
+      2,
+      4,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000062",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_tilt",
+    "camera": "front",
+    "flash": "blue",
+    "cadence": "1000101010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      -3,
+      0,
+      2,
+      4,
+      4,
+      0
+    ],
+    "response_window_ms": 10000
+  },
+  {
+    "seed": "0000000000000000000000000000000000000000000000000000000000000063",
+    "profile": "front-rear",
+    "mapping": "CLAPPA-CHOICES-v2",
+    "prompt_id": "selfie_chin",
+    "camera": "front",
+    "flash": "red",
+    "cadence": "1010100010101010",
+    "slot_ms": 125,
+    "pitches": [
+      0,
+      0,
+      -3,
+      -5,
+      -5,
+      -3,
+      0
+    ],
+    "response_window_ms": 10000
+  }
+]
