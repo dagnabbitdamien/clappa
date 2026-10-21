@@ -1,0 +1,25 @@
+{
+  "name": "clappa",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test verifier/test/*.test.mjs",
+    "vectors": "node test-vectors/generate.mjs",
+    "verify": "node verifier/cli.mjs"
+  },
+  "dependencies": {
+    "ajv": "8.17.1",
+    "qrcode": "1.5.4",
+    "selfsigned": "2.4.1",
+    "sharp": "0.34.3",
+    "ws": "8.18.3",
+    "@noble/curves": "1.9.7"
+  },
+  "devDependencies": {
+    "jsqr": "1.4.0"
+  }
+}

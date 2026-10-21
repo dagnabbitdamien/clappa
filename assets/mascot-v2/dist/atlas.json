@@ -1,0 +1,155 @@
+[
+  {
+    "id": "tail",
+    "node": "tail",
+    "variant": "open",
+    "bounds": [
+      19.5,
+      124.5,
+      174.75,
+      174.75
+    ],
+    "atlas": [
+      4,
+      4,
+      699,
+      699
+    ]
+  },
+  {
+    "id": "body",
+    "node": "body",
+    "variant": "open",
+    "bounds": [
+      117.25,
+      115.25,
+      165.5,
+      186.5
+    ],
+    "atlas": [
+      4,
+      711,
+      662,
+      746
+    ]
+  },
+  {
+    "id": "farArm",
+    "node": "farArm",
+    "variant": "open",
+    "bounds": [
+      104.75,
+      83.25,
+      78.5,
+      132.5
+    ],
+    "atlas": [
+      4,
+      1465,
+      314,
+      530
+    ]
+  },
+  {
+    "id": "earFar",
+    "node": "earFar",
+    "variant": "open",
+    "bounds": [
+      198.25,
+      4.5,
+      52.5,
+      65.25
+    ],
+    "atlas": [
+      4,
+      2003,
+      210,
+      261
+    ]
+  },
+  {
+    "id": "earNear",
+    "node": "earNear",
+    "variant": "open",
+    "bounds": [
+      119.25,
+      12,
+      63.5,
+      74.75
+    ],
+    "atlas": [
+      4,
+      2272,
+      254,
+      299
+    ]
+  },
+  {
+    "id": "head",
+    "node": "head",
+    "variant": "open",
+    "bounds": [
+      146.25,
+      44.5,
+      115.25,
+      88.25
+    ],
+    "atlas": [
+      4,
+      2579,
+      461,
+      353
+    ]
+  },
+  {
+    "id": "head-blink",
+    "node": "head",
+    "variant": "blink",
+    "bounds": [
+      146.25,
+      44.5,
+      115.25,
+      88.25
+    ],
+    "atlas": [
+      4,
+      2940,
+      461,
+      353
+    ]
+  },
+  {
+    "id": "upperArm",
+    "node": "upperArm",
+    "variant": "open",
+    "bounds": [
+      187.25,
+      131.25,
+      55.5,
+      93.5
+    ],
+    "atlas": [
+      4,
+      3301,
+      222,
+      374
+    ]
+  },
+  {
+    "id": "forearm",
+    "node": "forearm",
+    "variant": "open",
+    "bounds": [
+      171.25,
+      205.5,
+      45.5,
+      57.25
+    ],
+    "atlas": [
+      4,
+      3683,
+      182,
+      229
+    ]
+  }
+]
