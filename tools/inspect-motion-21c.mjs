@@ -1,0 +1,5 @@
+import {readFile,writeFile} from 'node:fs/promises';import vm from 'node:vm';import sharp from 'sharp';
+const dir='docs/mockups/21-motion/',ctx={window:{},document:{getElementById:()=>({checked:false})}};vm.createContext(ctx);for(const f of ['puppet-data.js','media-data.js','motion.js'])vm.runInContext(await readFile(dir+f,'utf8'),ctx);
+const player=await readFile(dir+'player.js','utf8');vm.runInContext(player.slice(0,player.indexOf("$('scenes').onclick"))+';window.draw=markup;window.pose=puppet;',ctx);
+for(const [name,t] of [['rub',1],['success',.6],['error',.3],['obs',1],['clap',1.14]]){const svg='<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720">'+ctx.window.draw(name,t)+'</svg>';await sharp(Buffer.from(svg)).resize(960,540).png().toFile(dir+'review-'+name+'.png');}
+const q=ctx.window.pose(ctx.window.MOTION.evaluate('rub',1));await sharp(Buffer.from('<svg xmlns="http://www.w3.org/2000/svg" width="627" height="627" viewBox="0 0 313.5 313.5">'+q+'</svg>')).png().toFile(dir+'rub-pose.png');
