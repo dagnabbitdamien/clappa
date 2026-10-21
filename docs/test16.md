@@ -1,0 +1,11 @@
+# Test16 — consistent menus and individual photo prints
+
+Android 0.3.0-test16 (23) restores the shared mirrored clapper jaws above the main menu and viewer, with the same charcoal surfaces and orange accents throughout. Streamer settings are a full-screen scrolling page with clear section headings and outlined action buttons. Viewer mode stays on the main menu. Camera configuration becomes an explicit locked status during recording. Public identity sharing and private backup actions are separated and explained briefly.
+
+The OBS dock focuses on connection and saved sessions. Its Settings window separates Connection, Identity, Saved proofs and Twitch chat. Public identity is selectable and has a Copy button; it no longer fills the connection status. Twitch chat explains the three-viewer clapper invitation. The pairing restriction retains its security behavior under the clearer Apply pairing rule action.
+
+Each OBS photo now has an independent fitted paper border and tape. Dual photos share the available height proportionally to their actual aspect ratios, without a surrounding landscape photo frame. No source photo is stretched or cropped. Flash and normal layers still use the same renderer. The OBS source remains 872×480 to preserve scene placement; it does not rotate automatically. Very narrow images still leave slate space, rather than being stretched or cropped to fill it.
+
+Proof contents, signed originals, derivation and QR geometry are unchanged. Update both APK and OBS DLL for this revision. Live Twitch authorization remains unverified. Local layout renders use an empty QR placeholder and are not scanability evidence. The optional CLAPPA_UI_REVIEW build flag is disabled in the distributed plugin.
+
+Validation: emulator camera → native OBS → final seal returned EXACT ORIGINAL VERIFIED (80 events, 6,228 matched recording packets, two fresh-beacon responses, one additional photo). The additional-photo offer did not reopen. This run used one camera; the four orientation layouts are native renderer fixtures, not a new physical dual-camera test. Native menu/viewer checks decoded eight QR frames and rejected three altered proofs. Android settings and menu captures and native Qt dock/tab captures are retained in the local review folder.
