@@ -1,0 +1,336 @@
+{
+  "arm": {
+    "payload": {
+      "algorithm": "ES256-P1363",
+      "at": 1789539306000,
+      "data": {
+        "challenge_id": "33333333333333333333333333333333",
+        "phase": "start",
+        "mapping": "CLAPPA-CHOICES-v1",
+        "chain": "52db9ba70e0cc0f6eaf7803dd07447a1f5477735fd3f661792ba94600c84e971",
+        "round": 32245316,
+        "camera_profile": "front-only",
+        "capture_profile": "CLAPPA-DUAL-v1",
+        "obs": {
+          "elapsed_ms": 1000,
+          "outputs": [
+            {
+              "bytes": 0,
+              "complete": true,
+              "head": "6b240d17cb1d4875f775048b890c0bc5514231f268bdc05a61af9c4d8b6bb5c7",
+              "output_id": "66666666666666666666666666666666",
+              "packets": 0,
+              "role": "recording"
+            }
+          ],
+          "recording_id": "22222222222222222222222222222222"
+        }
+      },
+      "key_id": "5cd252fb0ce8932436faf8ccd1040981b89ee4ad6b9fe9e2a2b7e71aacb27cd3",
+      "prev": "62366196f548cfec2d78ec934687d91a18c12c816c107fadefb0d30662c788cf",
+      "protocol": "0.3",
+      "seq": 1,
+      "session_id": "11111111111111111111111111111111",
+      "type": "challenge-armed"
+    },
+    "signature": "fTnvwWMxs73yCrm3zwgKOpr_8cuNwHGQqFmoDC39EG0p19eMLa23W4ac1DRAgLZdkbYWI66BBGDvhwXD_e3QSw"
+  },
+  "issue": {
+    "payload": {
+      "algorithm": "ES256-P1363",
+      "at": 1789539312100,
+      "data": {
+        "cadence": "1010101010101000",
+        "camera": "front",
+        "challenge_id": "33333333333333333333333333333333",
+        "flash": "blue",
+        "obs": {
+          "elapsed_ms": 1000,
+          "outputs": [
+            {
+              "bytes": 0,
+              "complete": true,
+              "head": "6b240d17cb1d4875f775048b890c0bc5514231f268bdc05a61af9c4d8b6bb5c7",
+              "output_id": "66666666666666666666666666666666",
+              "packets": 0,
+              "role": "recording"
+            }
+          ],
+          "recording_id": "22222222222222222222222222222222"
+        },
+        "phase": "start",
+        "prompt_id": "selfie_turn",
+        "slot_ms": 111,
+        "pitches": [
+          0,
+          2,
+          4,
+          4,
+          2,
+          4,
+          0
+        ],
+        "response_window_ms": 10000,
+        "capture_profile": "CLAPPA-DUAL-v1",
+        "rear_flash": "torch",
+        "pair_window_ms": 3000,
+        "qr_profile": "hashes-v1",
+        "freshness": {
+          "profile": "CLAPPA-QUICKNET-v1",
+          "arm_sha256": "193262e4d79f9b133217ce738ea8ddfb25269f922a0fa6a5c94da3f7192f2064",
+          "pulse": {
+            "chain": "52db9ba70e0cc0f6eaf7803dd07447a1f5477735fd3f661792ba94600c84e971",
+            "round": 32245316,
+            "at": 1789539312000,
+            "signature": "99544dc406460b45e83ed7583e9e3d9512906add4100b9bb8b0de066ac1939a8da098d98ee7e14b71e2f6c4e8e8ead7f"
+          }
+        }
+      },
+      "key_id": "5cd252fb0ce8932436faf8ccd1040981b89ee4ad6b9fe9e2a2b7e71aacb27cd3",
+      "prev": "193262e4d79f9b133217ce738ea8ddfb25269f922a0fa6a5c94da3f7192f2064",
+      "protocol": "0.3",
+      "seq": 2,
+      "session_id": "11111111111111111111111111111111",
+      "type": "challenge-issued"
+    },
+    "signature": "mDJ7tVcbpxg0Rmyk03_PRSRmTVsCAMYIa9uZvXFEsOlVSehQB8KDz_UZPigJobwKQox5x0FhbUCtGn-HrzBbBw"
+  },
+  "event": {
+    "payload": {
+      "algorithm": "ES256-P1363",
+      "at": 1789539313400,
+      "data": {
+        "a_at": 1789539313100,
+        "b_at": 1789539313300,
+        "challenge_id": "33333333333333333333333333333333",
+        "photo_a": {
+          "original": {
+            "bytes": 268,
+            "path": "images/start-a-original.jpg",
+            "sha256": "87d20052ef5524feefc929efd16dcd470381c7eb09f0bb594a94a4d27a7bbaf8"
+          },
+          "proof": {
+            "bytes": 268,
+            "path": "images/start-a-proof.jpg",
+            "sha256": "87d20052ef5524feefc929efd16dcd470381c7eb09f0bb594a94a4d27a7bbaf8"
+          }
+        },
+        "photo_b": {
+          "original": {
+            "bytes": 268,
+            "path": "images/start-b-original.jpg",
+            "sha256": "87d20052ef5524feefc929efd16dcd470381c7eb09f0bb594a94a4d27a7bbaf8"
+          },
+          "proof": {
+            "bytes": 268,
+            "path": "images/start-b-proof.jpg",
+            "sha256": "87d20052ef5524feefc929efd16dcd470381c7eb09f0bb594a94a4d27a7bbaf8"
+          }
+        },
+        "response_ms": 1000,
+        "pair_ms": 200,
+        "dual": {
+          "profile": "CLAPPA-DUAL-v1",
+          "rear_a": {
+            "original": {
+              "bytes": 268,
+              "path": "images/start-a-original.jpg",
+              "sha256": "87d20052ef5524feefc929efd16dcd470381c7eb09f0bb594a94a4d27a7bbaf8"
+            },
+            "proof": {
+              "bytes": 268,
+              "path": "images/start-a-proof.jpg",
+              "sha256": "87d20052ef5524feefc929efd16dcd470381c7eb09f0bb594a94a4d27a7bbaf8"
+            }
+          },
+          "rear_b": {
+            "original": {
+              "bytes": 268,
+              "path": "images/start-b-original.jpg",
+              "sha256": "87d20052ef5524feefc929efd16dcd470381c7eb09f0bb594a94a4d27a7bbaf8"
+            },
+            "proof": {
+              "bytes": 268,
+              "path": "images/start-b-proof.jpg",
+              "sha256": "87d20052ef5524feefc929efd16dcd470381c7eb09f0bb594a94a4d27a7bbaf8"
+            }
+          },
+          "normal": {
+            "front_delivered_ms": 5000,
+            "rear_delivered_ms": 5010,
+            "front_sensor_us": 5000000,
+            "rear_sensor_us": 5005000,
+            "front_width": 720,
+            "front_height": 1280,
+            "rear_width": 720,
+            "rear_height": 1280
+          },
+          "illuminated": {
+            "front_delivered_ms": 5200,
+            "rear_delivered_ms": 5210,
+            "front_sensor_us": 5200000,
+            "rear_sensor_us": 5205000,
+            "front_width": 720,
+            "front_height": 1280,
+            "rear_width": 720,
+            "rear_height": 1280
+          },
+          "exposure_synchronization": "not-established"
+        }
+      },
+      "key_id": "5cd252fb0ce8932436faf8ccd1040981b89ee4ad6b9fe9e2a2b7e71aacb27cd3",
+      "prev": "4c3c516d30a24697473d56edcad947ce87ab5fcbc5a699d9cb5f653a90be3eb7",
+      "protocol": "0.3",
+      "seq": 3,
+      "session_id": "11111111111111111111111111111111",
+      "type": "challenge-captured"
+    },
+    "signature": "aGHxSpAUHmbjkan2IyltqSxCiQn_56U05F3hyZGCvWwVzR9UWhdzT0K4txk-2EpmmmRjN2uaMGALHbhhAs83MQ"
+  },
+  "context": {
+    "armed": {
+      "payload": {
+        "algorithm": "ES256-P1363",
+        "at": 1789539306000,
+        "data": {
+          "challenge_id": "33333333333333333333333333333333",
+          "phase": "start",
+          "mapping": "CLAPPA-CHOICES-v1",
+          "chain": "52db9ba70e0cc0f6eaf7803dd07447a1f5477735fd3f661792ba94600c84e971",
+          "round": 32245316,
+          "camera_profile": "front-only",
+          "capture_profile": "CLAPPA-DUAL-v1",
+          "obs": {
+            "elapsed_ms": 1000,
+            "outputs": [
+              {
+                "bytes": 0,
+                "complete": true,
+                "head": "6b240d17cb1d4875f775048b890c0bc5514231f268bdc05a61af9c4d8b6bb5c7",
+                "output_id": "66666666666666666666666666666666",
+                "packets": 0,
+                "role": "recording"
+              }
+            ],
+            "recording_id": "22222222222222222222222222222222"
+          }
+        },
+        "key_id": "5cd252fb0ce8932436faf8ccd1040981b89ee4ad6b9fe9e2a2b7e71aacb27cd3",
+        "prev": "62366196f548cfec2d78ec934687d91a18c12c816c107fadefb0d30662c788cf",
+        "protocol": "0.3",
+        "seq": 1,
+        "session_id": "11111111111111111111111111111111",
+        "type": "challenge-armed"
+      },
+      "signature": "fTnvwWMxs73yCrm3zwgKOpr_8cuNwHGQqFmoDC39EG0p19eMLa23W4ac1DRAgLZdkbYWI66BBGDvhwXD_e3QSw"
+    },
+    "challenge": {
+      "payload": {
+        "algorithm": "ES256-P1363",
+        "at": 1789539312100,
+        "data": {
+          "cadence": "1010101010101000",
+          "camera": "front",
+          "challenge_id": "33333333333333333333333333333333",
+          "flash": "blue",
+          "obs": {
+            "elapsed_ms": 1000,
+            "outputs": [
+              {
+                "bytes": 0,
+                "complete": true,
+                "head": "6b240d17cb1d4875f775048b890c0bc5514231f268bdc05a61af9c4d8b6bb5c7",
+                "output_id": "66666666666666666666666666666666",
+                "packets": 0,
+                "role": "recording"
+              }
+            ],
+            "recording_id": "22222222222222222222222222222222"
+          },
+          "phase": "start",
+          "prompt_id": "selfie_turn",
+          "slot_ms": 111,
+          "pitches": [
+            0,
+            2,
+            4,
+            4,
+            2,
+            4,
+            0
+          ],
+          "response_window_ms": 10000,
+          "capture_profile": "CLAPPA-DUAL-v1",
+          "rear_flash": "torch",
+          "pair_window_ms": 3000,
+          "qr_profile": "hashes-v1",
+          "freshness": {
+            "profile": "CLAPPA-QUICKNET-v1",
+            "arm_sha256": "193262e4d79f9b133217ce738ea8ddfb25269f922a0fa6a5c94da3f7192f2064",
+            "pulse": {
+              "chain": "52db9ba70e0cc0f6eaf7803dd07447a1f5477735fd3f661792ba94600c84e971",
+              "round": 32245316,
+              "at": 1789539312000,
+              "signature": "99544dc406460b45e83ed7583e9e3d9512906add4100b9bb8b0de066ac1939a8da098d98ee7e14b71e2f6c4e8e8ead7f"
+            }
+          }
+        },
+        "key_id": "5cd252fb0ce8932436faf8ccd1040981b89ee4ad6b9fe9e2a2b7e71aacb27cd3",
+        "prev": "193262e4d79f9b133217ce738ea8ddfb25269f922a0fa6a5c94da3f7192f2064",
+        "protocol": "0.3",
+        "seq": 2,
+        "session_id": "11111111111111111111111111111111",
+        "type": "challenge-issued"
+      },
+      "signature": "mDJ7tVcbpxg0Rmyk03_PRSRmTVsCAMYIa9uZvXFEsOlVSehQB8KDz_UZPigJobwKQox5x0FhbUCtGn-HrzBbBw"
+    },
+    "proof": {
+      "payload": {
+        "profile": "CLAPPA-MEDIA-PROOF-v1",
+        "algorithm": "ES256-P1363",
+        "key_id": "5cd252fb0ce8932436faf8ccd1040981b89ee4ad6b9fe9e2a2b7e71aacb27cd3",
+        "session_id": "11111111111111111111111111111111",
+        "recording_id": "22222222222222222222222222222222",
+        "event_sha256": "42f5dec84fe116c43810021f897ba922b454cf1a7b467702dd3d8e387d2d50d7",
+        "challenge_sha256": "4c3c516d30a24697473d56edcad947ce87ab5fcbc5a699d9cb5f653a90be3eb7",
+        "at": 1789539313400,
+        "outputs": [
+          {
+            "bytes": 20,
+            "complete": true,
+            "head": "6b240d17cb1d4875f775048b890c0bc5514231f268bdc05a61af9c4d8b6bb5c7",
+            "output_id": "66666666666666666666666666666666",
+            "packets": 1,
+            "role": "recording"
+          }
+        ],
+        "descriptors": [
+          {
+            "codec": "test-fixture",
+            "output_id": "66666666666666666666666666666666",
+            "role": "recording",
+            "session_id": "11111111111111111111111111111111"
+          }
+        ]
+      },
+      "signature": "0NJGnFJpfFSbG62K5nx7l5POkggS2NZcbTFiVR4umss7x_unXY3g-ESBp2PSboO1khAWNC662dc5OjhFHjUo4A"
+    }
+  },
+  "key": {
+    "algorithm": "ES256-P1363",
+    "key_id": "5cd252fb0ce8932436faf8ccd1040981b89ee4ad6b9fe9e2a2b7e71aacb27cd3",
+    "protocol": "0.3",
+    "spki": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEaxfR8uEsQkf4vOblY6RA8ncDfYEt6zOg9KE5RdiYwpZP40Li_hp_m47n60p8D54WK84zV2sxXs7LtkBoN79R9Q"
+  },
+  "frames": [
+    "CLAPPA2:I$0E1O-Y9O.9.T6YFFZZT5%VPFP:XSD%F278YYEVTQZ.G:WR000900$X4%LHA0U*DBZQRL13036US103VEIUX60BLUWAFFZ7EOKTX8DH8/Q44DMDAWQMA6CI7 ONJH0SE84T$LKIR4$QEA9ULQF*147P0B0JV/FKIGJ05*THJ7F7E9S:3QS9F6LUHJQY84Z8EDQFQGK:C:%FH11FAK1UEPG7:89K9HVAIO21KHOYK9I4CFOF.I1PLPUT5OEHFU32LH1:LXEBAT73*2%I75%21DWIEN*SQ-GN/5N%4BXVI%K0P6LVG7.98E86PWHJIB8:1M*GHPF*XGD OK352U20U0: G2VG//8XAT/45R$M",
+    "CLAPPA2:I$0E1O-Y9O.9.T6YFFZZT5%VPFP:XSD%F278YYEVTQZ.G:WR100900J:HFRGYP3HN552B1J22D9IK73VI8EGK340575M15*ECCPF%U 4MOPSCDA756UP8FT99ALQL2/8J7%9TZ43BK.NV+FAOTHBQ0 :74B07BB:E2H6C9GRW:JC6O3CKWT2U8SZII5WT2GN3P2SS4.C8CK9-JG4P1:FD2KGJH3653CDJDCGIU67J8.D7YB8%TTIOS146XHOQIF0*LT+1FDQMLNBM6S+LKV2TRANSO:ZLH*ED8Q5JBS4M4D4T+1AKU3E0M$KXG7MGBTLKM+EX$8478$7CU83W.VWU0M7W6X3EEBO736 0%.5",
+    "CLAPPA2:I$0E1O-Y9O.9.T6YFFZZT5%VPFP:XSD%F278YYEVTQZ.G:WR200900S4T-BUBLO+IUBTG73R8891PIV99Y 7J/HTX2USU:NC.ZN1JB9SG2-E9SNK*GDDLT/O*RE 9FWWAEFSY.E%MFR51XHAZ$G3LIZCCZA2Q31WDKL+10F7VD7%+A$DD0J2-SLRRJDAK0FSY+EMRQIN0VUAQ0J6 J7SD:ET6.03JGTC63%UY%RK:T6+GBQB7ZHDKL2ZRR9UCZPNECGSE2E5RIF1W2WUU6XJU9KA.OPTR*ORLHUGIV06GN1V6R8Z 151IY:7GMQF%R+ D97GU-JU+RNJJL-NKSSZ6E+FK1225ESH05VR1IZP",
+    "CLAPPA2:I$0E1O-Y9O.9.T6YFFZZT5%VPFP:XSD%F278YYEVTQZ.G:WR300900NYKC2KZB5/14N7M$QHJRRQ:LCKLL60DLV+L1E1H8Z6.7NE7WI*2DNIHC4UYCAJ72P4P2CH*2CXHZ3C9L3HOJDJIA H:01QIO.TF7VG*OPOG87H2FI1O/N12Q PGH4TU55ZV6LNJX+C1*ESP04O2343QPNSLGTISJVLD8SLOR$IE$*72R4.QAE0SHX6:3G-IFJ/G/VNXRK0WKOBBGE73FQC4TYMUV46+*N.ZOA1HRLGAM7T92Z%8IJ4QUEIME$W58T8ULTOWAJD5O0OC9H9FGO*1OHAS0OASRN30G7KJM1H1IROTVAJ",
+    "CLAPPA2:I$0E1O-Y9O.9.T6YFFZZT5%VPFP:XSD%F278YYEVTQZ.G:WR4009000FUJG94 S4*CW:K+XK4*O H6IAPF.H6OEA81DDNVQBGGFZ:3C2KQCTJP2L7KPFRTNLZHIU+2H8B0:O/79.FI+AR--AYZB73NV2CY*GOOJ4%CF.KBBW*P9L65.W0RS497R661ZF3W F::D/546GV/N09-591P9D1+DU$M2*+M+NVLD1$ U183GTITLQ3U6OZNTTFAZQ/M4 $2T02EAVK0T+JE59V-8E7-3H5KQ2B9137+UR/CJBPZXDX-AN:764B-QTZZD- 20RFG7M:HRXGPTKUG*QJGQT-A8W8:UMLCA Q5. R$BL",
+    "CLAPPA2:I$0E1O-Y9O.9.T6YFFZZT5%VPFP:XSD%F278YYEVTQZ.G:WR5009004MKGJ3I:SP6AFT3-4SW/TAY2BP99T1H4RL3LAIATFBUD0 R8:7DWOUN6T3 U1 50*NBLH$08S7TZ*L6GP*YA$%OH0LB9MV%QOS671UX0RXWUP-7O2OEZ2S7T %IRAFJFNRR8R11WD1$91*X2J/G4ID:SQ66A5R0D2QA/49JIBGC1EK2TINUP.3GH-QE4GG1RGCS$RRSZR3OT97G9$D1 H4DQ69N0SU::RO:U8CU%/1N-N4A9WDSTECWTD/47K0DZG9R.TSVFE-J%PUF*JR9JLQUW9HV5T7A5 RI*WV10JZXR5NU*/H",
+    "CLAPPA2:I$0E1O-Y9O.9.T6YFFZZT5%VPFP:XSD%F278YYEVTQZ.G:WR6009008BN05VB2PAM72WMDRFL7RRP3JYPCDUS3WW V3YHSUJYILF:KY5H3PB7SKXVNK.HWD6G$RIVNC1WSCQK 2ODD8FQ72KL+MSE5ZMAKV2EE3KLTC4QX7K7.CAYR%%IFC97/8GEG/BH:TCG5I-$B:4G9Z62ND$UF-38MLCF71JXBMEBAS8I0KLX6WQ5Q9S5%FT:C$WCSFJ5BO7:B.2MU588*QT:RF26VZ0XXRF1S30Q71SVXL6VRLXF5WVWD0Z/AKARY6OSZ3-S7ZGV7KTO4DQXOC.GE/14/MW$RCT9W*OT5725D%$I3*5",
+    "CLAPPA2:I$0E1O-Y9O.9.T6YFFZZT5%VPFP:XSD%F278YYEVTQZ.G:WR7009001S7PSU NFDFG5V7DOA*8W%860+DN7S1AW8+7HS6QULW.MAE8QBMRXH4H3B.1-GCXQGO%R1:89P4EGB$U1C60ZTO :QAND*FM8OO2Z322QD+U4635+QJCPJZN6YHB$DG%PGSK 6TXV2JWTVDTG-5/77:$LK:FODQ:X3I4M6AU4MFDNB 9M2$6:AO:0R2JGBZF00RH07A2V$/7D6OF4V GS4 6YUNP5HSPECVQJ+76V9P8IRYAG*3MM2C6MXVR1OQV/RTEU/.CK0WJIA517*SFGZG0 M31Q*AFXCQ2$U%:V-:BCXQJ8U",
+    "CLAPPA2:I$0E1O-Y9O.9.T6YFFZZT5%VPFP:XSD%F278YYEVTQZ.G:WR8009001S2IS1/IK2OKWC5*KTKYL9/V 0EK%D8JSXSO%SM8YE7QTUUDPABF 3R3DU093EVY8RR3SU*D$$V8LK2:150SW.B.GIYR1:KSDGQMRE.-RXCAI3L /3D+0Z3GE8KIVSWM3LIVGKJ%ZB38F13AOVF 5L$/S 6JV+8T/HB+FM6P:ST:95.QLH.B++4+49DLOROIXN2.KUN0"
+  ]
+}
