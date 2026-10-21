@@ -1,0 +1,201 @@
+{
+  "version": 2,
+  "canvas": [
+    313.5,
+    313.5
+  ],
+  "nodes": [
+    {
+      "id": "tail",
+      "parent": "body",
+      "pivot": [
+        151,
+        279
+      ]
+    },
+    {
+      "id": "body",
+      "parent": null,
+      "pivot": [
+        178,
+        248
+      ]
+    },
+    {
+      "id": "farArm",
+      "parent": "body",
+      "pivot": [
+        155,
+        143
+      ]
+    },
+    {
+      "id": "earFar",
+      "parent": "head",
+      "pivot": [
+        235,
+        57
+      ]
+    },
+    {
+      "id": "earNear",
+      "parent": "head",
+      "pivot": [
+        163,
+        77
+      ]
+    },
+    {
+      "id": "head",
+      "parent": "body",
+      "pivot": [
+        197,
+        129
+      ]
+    },
+    {
+      "id": "upperArm",
+      "parent": "body",
+      "pivot": [
+        224,
+        164
+      ]
+    },
+    {
+      "id": "forearm",
+      "parent": "upperArm",
+      "pivot": [
+        204,
+        215
+      ]
+    }
+  ],
+  "parts": [
+    {
+      "id": "tail",
+      "node": "tail",
+      "variant": "open",
+      "bounds": [
+        19.5,
+        124.5,
+        174.75,
+        174.75
+      ]
+    },
+    {
+      "id": "body",
+      "node": "body",
+      "variant": "open",
+      "bounds": [
+        0,
+        0,
+        313.5,
+        313.5
+      ]
+    },
+    {
+      "id": "farArm",
+      "node": "farArm",
+      "variant": "open",
+      "bounds": [
+        104.75,
+        83.25,
+        78.5,
+        132.5
+      ]
+    },
+    {
+      "id": "earFar",
+      "node": "earFar",
+      "variant": "open",
+      "bounds": [
+        0,
+        0,
+        313.5,
+        313.5
+      ]
+    },
+    {
+      "id": "earNear",
+      "node": "earNear",
+      "variant": "open",
+      "bounds": [
+        0,
+        0,
+        313.5,
+        313.5
+      ]
+    },
+    {
+      "id": "head",
+      "node": "head",
+      "variant": "open",
+      "bounds": [
+        0,
+        0,
+        313.5,
+        313.5
+      ]
+    },
+    {
+      "id": "head-blink",
+      "node": "head",
+      "variant": "blink",
+      "bounds": [
+        146.25,
+        44.5,
+        115.25,
+        88.25
+      ]
+    },
+    {
+      "id": "upperArm",
+      "node": "upperArm",
+      "variant": "open",
+      "bounds": [
+        0,
+        0,
+        313.5,
+        313.5
+      ]
+    },
+    {
+      "id": "forearm",
+      "node": "forearm",
+      "variant": "open",
+      "bounds": [
+        0,
+        0,
+        313.5,
+        313.5
+      ]
+    },
+    {
+      "id": "forearm-thumb",
+      "node": "forearm",
+      "variant": "thumb",
+      "bounds": [
+        0,
+        0,
+        313.5,
+        313.5
+      ]
+    }
+  ],
+  "nose": [
+    238,
+    116
+  ],
+  "shoulder": [
+    224,
+    164
+  ],
+  "elbow": [
+    204,
+    215
+  ],
+  "hand": [
+    184,
+    249
+  ]
+}

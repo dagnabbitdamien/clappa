@@ -1,0 +1,6 @@
+import fs from 'node:fs/promises';
+const escape=s=>s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+const inline=s=>escape(s).replace(/`([^`]+)`/g,'<code>$1</code>').replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
+const text=await fs.readFile('docs/test8.md','utf8');let body='';
+for(const block of text.trim().split(/\r?\n\r?\n/)){if(block.startsWith('# '))body+='<h1>'+inline(block.slice(2))+'</h1>';else if(block.startsWith('## '))body+='<h2>'+inline(block.slice(3))+'</h2>';else if(/^(?:- |\d+\. )/.test(block)){const ordered=/^\d/.test(block),tag=ordered?'ol':'ul';body+='<'+tag+'>'+block.split(/\r?\n/).map(l=>'<li>'+inline(l.replace(/^(?:- |\d+\. )/,''))+'</li>').join('')+'</'+tag+'>'}else body+='<p>'+inline(block)+'</p>'}
+await fs.writeFile('docs/review8/testing.html','<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CLAPPA Test8 notes</title><style>body{background:#24231f;color:#eeeade;font:16px/1.65 system-ui;max-width:900px;margin:40px auto;padding:20px}h2{margin-top:36px}a{color:inherit}li{margin:12px 0}code{font-size:.88em;overflow-wrap:anywhere}</style><a href="index.html">← Back to native review</a>'+body);

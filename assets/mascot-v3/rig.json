@@ -1,0 +1,178 @@
+{
+  "version": 3,
+  "canvas": [
+    313.5,
+    313.5
+  ],
+  "nodes": [
+    {
+      "id": "tail",
+      "parent": "body",
+      "pivot": [
+        151,
+        279
+      ]
+    },
+    {
+      "id": "body",
+      "parent": null,
+      "pivot": [
+        178,
+        248
+      ]
+    },
+    {
+      "id": "longArm",
+      "parent": "body",
+      "pivot": [
+        222,
+        157
+      ]
+    },
+    {
+      "id": "earFar",
+      "parent": "head",
+      "pivot": [
+        235,
+        69
+      ]
+    },
+    {
+      "id": "earNear",
+      "parent": "head",
+      "pivot": [
+        164,
+        80
+      ]
+    },
+    {
+      "id": "head",
+      "parent": "body",
+      "pivot": [
+        197,
+        129
+      ]
+    },
+    {
+      "id": "farArm",
+      "parent": "body",
+      "pivot": [
+        155,
+        140
+      ]
+    }
+  ],
+  "parts": [
+    {
+      "id": "body",
+      "node": "body",
+      "variant": "open",
+      "bounds": [
+        116,
+        90,
+        162,
+        212
+      ]
+    },
+    {
+      "id": "head",
+      "node": "head",
+      "variant": "open",
+      "bounds": [
+        151,
+        46,
+        110,
+        96
+      ]
+    },
+    {
+      "id": "earNear",
+      "node": "earNear",
+      "variant": "open",
+      "bounds": [
+        118,
+        11,
+        61,
+        82
+      ]
+    },
+    {
+      "id": "earFar",
+      "node": "earFar",
+      "variant": "open",
+      "bounds": [
+        213,
+        9,
+        51,
+        81
+      ]
+    },
+    {
+      "id": "farArm",
+      "node": "farArm",
+      "variant": "open",
+      "bounds": [
+        136,
+        124,
+        77,
+        85
+      ]
+    },
+    {
+      "id": "farArm-rub",
+      "node": "farArm",
+      "variant": "rub",
+      "bounds": [
+        136,
+        124,
+        112,
+        96
+      ]
+    },
+    {
+      "id": "farArm-thumb",
+      "node": "farArm",
+      "variant": "thumb",
+      "bounds": [
+        136,
+        124,
+        92,
+        90
+      ]
+    },
+    {
+      "id": "longArm",
+      "node": "longArm",
+      "variant": "open",
+      "bounds": [
+        194,
+        145,
+        55,
+        119
+      ]
+    },
+    {
+      "id": "tail",
+      "node": "tail",
+      "variant": "open",
+      "bounds": [
+        15,
+        127,
+        146,
+        177
+      ]
+    },
+    {
+      "id": "tailHook",
+      "node": "tailHook",
+      "variant": "open",
+      "bounds": [
+        0,
+        0,
+        83,
+        115
+      ]
+    }
+  ],
+  "gestureMethod": "Whole authored bent-arm poses, registered at shoulder; restrained pose blend and squash, no inverse-kinematic wrist flipping."
+}

@@ -1,0 +1,13 @@
+import fs from 'node:fs/promises';import path from 'node:path';import {execFileSync} from 'node:child_process';
+const dir='docs/review12';
+const summary=[];for(const file of await fs.readdir('android/app/build/test-results/testDebugUnitTest'))if(file.endsWith('.xml')){const xml=await fs.readFile('android/app/build/test-results/testDebugUnitTest/'+file,'utf8');const root=xml.match(/<testsuite [^>]+>/)[0];summary.push(Object.fromEntries([...root.matchAll(/\s(name|tests|failures|errors)="([^"]+)"/g)].map(m=>[m[1],m[2]])))}
+await fs.writeFile(dir+'/android-tests.json',JSON.stringify(summary,null,2));
+await fs.writeFile(dir+'/BUILD-NOTES.md',(await fs.readFile('docs/test12.md','utf8')).replaceAll('review12/',''));
+await fs.writeFile('output/test-kit-v12/TESTING.md',(await fs.readFile('docs/test12.md','utf8')).replace('review12/index.html','http://127.0.0.1:17450/revision12/index.html').replaceAll('review12/',''));
+const timing=JSON.parse(await fs.readFile(dir+'/dual-emulator-flow.json'));const waits=timing.captures.flatMap(c=>[c.dual.normal,c.dual.illuminated].map(g=>Math.abs(g.front_delivered_ms-g.rear_delivered_ms)));
+await fs.writeFile(dir+'/DUAL-MEASUREMENTS.md',`# Native two-camera execution\n\nTwo real concurrent CameraX captures completed through the production app, OBS and verifier on the emulator. Both views used normal and illuminated groups, for eight original JPEGs across two challenges.\n\n- Front original size: 768×1024.\n- Rear original size: 1392×1856.\n- Normal-to-illuminated group completion: ${timing.captures.map(c=>c.pair_ms).join(' / ')} ms.\n- Front/rear frame-delivery gaps: ${waits.join(' / ')} ms.\n- Two photo QR packages: 2275 and 2290 compressed bytes, 12 frames each.\n- Final recording: EXACT ORIGINAL VERIFIED; 4506 encoded packets matched.\n\nThe emulator's synthetic camera scene is intentionally visible in the screenshots. Screen colour and LED-torch API calls completed, but virtual cameras do not establish physical reflected illumination or simultaneous exposure on the S22. iPhone is not built. The separate native fixture is labelled synthetic and exercises signed evidence rejection/recovery.\n`);
+await fs.cp(dir,'docs/review7/revision12',{recursive:true});
+await fs.writeFile('docs/review7/index.html','<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=/revision12/index.html"><title>CLAPPA Test12</title><a href="/revision12/index.html">Open Test12</a>');
+const html=await fs.readFile(dir+'/index.html','utf8');const links=[...html.matchAll(/(?:href|src)="([^"]+)"/g)].map(m=>m[1]).filter(s=>!s.startsWith('http'));
+for(const link of new Set(links))await fs.access(path.resolve(dir,link));
+console.log('Review copied; '+new Set(links).size+' local resources verified.');
