@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "bodySilhouette": "M280 590 Q261 522 360 500 Q485 477 615 466 L702 466 L692 503 Q631 550 553 590 L350 650 Q292 641 280 590Z",
+  "hip": [
+    280,
+    590
+  ],
+  "neck": [
+    697,
+    479
+  ],
+  "tail": {
+    "part": "tail",
+    "parent": "concealedBody",
+    "translation": [
+      8.2,
+      87.8
+    ],
+    "scale": 1.8,
+    "bindRotation": -20,
+    "pivot": [
+      151,
+      279
+    ]
+  },
+  "head": {
+    "translation": [
+      500,
+      350
+    ],
+    "scale": 1
+  },
+  "visibleParts": [
+    "tail",
+    "earNear",
+    "earFar"
+  ],
+  "visibleMasks": [
+    [
+      10,
+      365,
+      130,
+      25
+    ],
+    [
+      605,
+      367,
+      157,
+      23
+    ]
+  ],
+  "protectedQR": [
+    413,
+    49,
+    310,
+    310
+  ],
+  "note": "Torso is a diagnostic silhouette only; it is fully concealed. Tail and ears are the actual exported paper sprites."
+}

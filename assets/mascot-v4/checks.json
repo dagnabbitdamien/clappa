@@ -1,0 +1,9 @@
+{
+  "singleWholeSpritePerFrame": true,
+  "approvedBoardMotionPreserved": true,
+  "qrAndLogoPositionsPreserved": true,
+  "photoNudgeLeft": 16,
+  "tailOutsideBoard": true,
+  "clockFormat": "YYYY:MM:DD HH:MM:SS:mmm",
+  "scope": "Browser prototype; artwork requires visual review"
+}
