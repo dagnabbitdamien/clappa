@@ -1,0 +1,18 @@
+import fs from 'node:fs/promises';
+import {deterministicSign as sign} from '../test-vectors/generate.mjs';
+import {hashObject,canonical} from '../verifier/proof.mjs';
+import {encodeTransport,decodeTransport} from '../protocol/transport.mjs';
+import QRCode from 'qrcode';
+const read=async p=>JSON.parse(await fs.readFile(p));
+const {arm,issue:oldIssue}=await read('test-vectors/quicknet/challenge.json');
+const issue=sign({...oldIssue.payload,data:{...oldIssue.payload.data,pair_window_ms:3000}});
+const previous=await read('test-vectors/valid/events/000002.json'),key=await read('test-vectors/valid/public-key.json');
+const at=issue.payload.at;
+const event=sign({...previous.payload,seq:3,prev:hashObject(issue),at:at+2000,data:{...previous.payload.data,a_at:at+1000,b_at:at+1200,response_ms:1000,pair_ms:200}});
+const descriptors=(await read('test-vectors/valid/events/000000.json')).payload.data.outputs;
+const context={armed:arm,challenge:issue,proof:sign({profile:'CLAPPA-MEDIA-PROOF-v1',algorithm:'ES256-P1363',key_id:key.key_id,session_id:event.payload.session_id,recording_id:issue.payload.data.obs.recording_id,event_sha256:hashObject(event),challenge_sha256:hashObject(issue),at:event.payload.at,outputs:issue.payload.data.obs.outputs.map(o=>({...o,packets:o.packets+1,bytes:o.bytes+20})),descriptors})};
+const frames=encodeTransport(event,key,[],{context}),root=decodeTransport(frames);
+const dir='android/app/src/review/assets/viewer';await fs.mkdir(dir,{recursive:true});
+await fs.writeFile(dir+'/proof.json',canonical(root));await fs.writeFile(dir+'/frames.json',JSON.stringify(frames));
+for(let i=0;i<frames.length;i++)await QRCode.toFile(`${dir}/frame-${i}.png`,frames[i],{version:12,errorCorrectionLevel:'M',margin:4,scale:4});
+console.log(JSON.stringify({frames:frames.length,proofBytes:Buffer.byteLength(canonical(root)),reviewOnly:true}));

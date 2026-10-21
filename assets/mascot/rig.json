@@ -1,0 +1,325 @@
+{
+  "version": 1,
+  "canvas": [
+    320,
+    320
+  ],
+  "density": 3,
+  "coordinates": "Global bind coordinates; x right/y down; clockwise degrees; ancestor rotations composed before child rotations; trim applied only at draw.",
+  "nodes": [
+    {
+      "id": "tail",
+      "parent": "body",
+      "pivot": [
+        148,
+        271
+      ],
+      "range": [
+        -4,
+        4
+      ]
+    },
+    {
+      "id": "body",
+      "parent": null,
+      "pivot": [
+        177,
+        240
+      ],
+      "range": [
+        -2,
+        2
+      ]
+    },
+    {
+      "id": "farArm",
+      "parent": "body",
+      "pivot": [
+        146,
+        130
+      ],
+      "range": [
+        -8,
+        8
+      ]
+    },
+    {
+      "id": "earFar",
+      "parent": "head",
+      "pivot": [
+        214,
+        56
+      ],
+      "range": [
+        -8,
+        8
+      ]
+    },
+    {
+      "id": "earNear",
+      "parent": "head",
+      "pivot": [
+        154,
+        72
+      ],
+      "range": [
+        -12,
+        12
+      ]
+    },
+    {
+      "id": "head",
+      "parent": "body",
+      "pivot": [
+        184,
+        121
+      ],
+      "range": [
+        -6,
+        8
+      ]
+    },
+    {
+      "id": "upperArm",
+      "parent": "body",
+      "pivot": [
+        208,
+        146
+      ],
+      "range": [
+        -135,
+        15
+      ]
+    },
+    {
+      "id": "forearm",
+      "parent": "upperArm",
+      "pivot": [
+        191,
+        204
+      ],
+      "range": [
+        -15,
+        175
+      ]
+    }
+  ],
+  "anchors": {
+    "nose": [
+      224,
+      113
+    ],
+    "shoulder": [
+      208,
+      146
+    ],
+    "elbow": [
+      191,
+      204
+    ],
+    "hand": [
+      169,
+      243
+    ]
+  },
+  "parts": [
+    {
+      "id": "tail",
+      "node": "tail",
+      "variant": "open",
+      "parent": "body",
+      "pivot": [
+        148,
+        271
+      ],
+      "bounds": [
+        19.333333333333332,
+        121,
+        132.66666666666666,
+        160.33333333333334
+      ],
+      "atlas": [
+        4,
+        4,
+        398,
+        481
+      ]
+    },
+    {
+      "id": "body",
+      "node": "body",
+      "variant": "open",
+      "parent": null,
+      "pivot": [
+        177,
+        240
+      ],
+      "bounds": [
+        109.66666666666667,
+        104,
+        151.33333333333334,
+        185
+      ],
+      "atlas": [
+        4,
+        493,
+        454,
+        555
+      ]
+    },
+    {
+      "id": "farArm",
+      "node": "farArm",
+      "variant": "open",
+      "parent": "body",
+      "pivot": [
+        146,
+        130
+      ],
+      "bounds": [
+        98,
+        112,
+        72,
+        97
+      ],
+      "atlas": [
+        4,
+        1056,
+        216,
+        291
+      ]
+    },
+    {
+      "id": "earFar",
+      "node": "earFar",
+      "variant": "open",
+      "parent": "head",
+      "pivot": [
+        214,
+        56
+      ],
+      "bounds": [
+        193,
+        7,
+        40.333333333333336,
+        62
+      ],
+      "atlas": [
+        4,
+        1355,
+        121,
+        186
+      ]
+    },
+    {
+      "id": "earNear",
+      "node": "earNear",
+      "variant": "open",
+      "parent": "head",
+      "pivot": [
+        154,
+        72
+      ],
+      "bounds": [
+        115,
+        18,
+        60,
+        71
+      ],
+      "atlas": [
+        4,
+        1549,
+        180,
+        213
+      ]
+    },
+    {
+      "id": "head",
+      "node": "head",
+      "variant": "open",
+      "parent": "body",
+      "pivot": [
+        184,
+        121
+      ],
+      "bounds": [
+        140,
+        47,
+        102,
+        82
+      ],
+      "atlas": [
+        4,
+        1770,
+        306,
+        246
+      ]
+    },
+    {
+      "id": "head-blink",
+      "node": "head",
+      "variant": "blink",
+      "parent": "body",
+      "pivot": [
+        184,
+        121
+      ],
+      "bounds": [
+        140,
+        47,
+        102,
+        82
+      ],
+      "atlas": [
+        4,
+        2024,
+        306,
+        246
+      ]
+    },
+    {
+      "id": "upperArm",
+      "node": "upperArm",
+      "variant": "open",
+      "parent": "body",
+      "pivot": [
+        208,
+        146
+      ],
+      "bounds": [
+        179.33333333333334,
+        129,
+        47,
+        91.33333333333333
+      ],
+      "atlas": [
+        4,
+        2278,
+        141,
+        274
+      ]
+    },
+    {
+      "id": "forearm",
+      "node": "forearm",
+      "variant": "open",
+      "parent": "upperArm",
+      "pivot": [
+        191,
+        204
+      ],
+      "bounds": [
+        156,
+        192.66666666666666,
+        48,
+        60.333333333333336
+      ],
+      "atlas": [
+        4,
+        2560,
+        144,
+        181
+      ]
+    }
+  ]
+}

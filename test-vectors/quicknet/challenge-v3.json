@@ -1,0 +1,97 @@
+{
+  "arm": {
+    "payload": {
+      "algorithm": "ES256-P1363",
+      "at": 1789539306000,
+      "data": {
+        "challenge_id": "00000000000000000000000000000001",
+        "phase": "start",
+        "mapping": "CLAPPA-CHOICES-v3",
+        "chain": "52db9ba70e0cc0f6eaf7803dd07447a1f5477735fd3f661792ba94600c84e971",
+        "round": 32245316,
+        "camera_profile": "front-only",
+        "capture_profile": "CLAPPA-DUAL-v1",
+        "obs": {
+          "elapsed_ms": 1000,
+          "outputs": [
+            {
+              "bytes": 0,
+              "complete": true,
+              "head": "6b240d17cb1d4875f775048b890c0bc5514231f268bdc05a61af9c4d8b6bb5c7",
+              "output_id": "66666666666666666666666666666666",
+              "packets": 0,
+              "role": "recording"
+            }
+          ],
+          "recording_id": "22222222222222222222222222222222"
+        }
+      },
+      "key_id": "5cd252fb0ce8932436faf8ccd1040981b89ee4ad6b9fe9e2a2b7e71aacb27cd3",
+      "prev": "62366196f548cfec2d78ec934687d91a18c12c816c107fadefb0d30662c788cf",
+      "protocol": "0.3",
+      "seq": 1,
+      "session_id": "11111111111111111111111111111111",
+      "type": "challenge-armed"
+    },
+    "signature": "7bsGl1bw85mEv0diGxbBkAvDuDjhRA0zWdNbLRtPQONDFC-Ehka-fnpU-HcvxMd9MR0CW9OLFE4F2Dj_SXjsgw"
+  },
+  "issue": {
+    "payload": {
+      "algorithm": "ES256-P1363",
+      "at": 1789539312100,
+      "data": {
+        "cadence": "1000100010101010",
+        "camera": "front",
+        "challenge_id": "00000000000000000000000000000001",
+        "flash": "green",
+        "obs": {
+          "elapsed_ms": 1000,
+          "outputs": [
+            {
+              "bytes": 0,
+              "complete": true,
+              "head": "6b240d17cb1d4875f775048b890c0bc5514231f268bdc05a61af9c4d8b6bb5c7",
+              "output_id": "66666666666666666666666666666666",
+              "packets": 0,
+              "role": "recording"
+            }
+          ],
+          "recording_id": "22222222222222222222222222222222"
+        },
+        "phase": "start",
+        "prompt_id": "selfie_peace_left",
+        "slot_ms": 125,
+        "pitches": [
+          0,
+          0,
+          -3,
+          -3,
+          0,
+          0
+        ],
+        "response_window_ms": 10000,
+        "capture_profile": "CLAPPA-DUAL-v1",
+        "rear_flash": "torch",
+        "pair_window_ms": 3000,
+        "qr_profile": "hashes-v1",
+        "freshness": {
+          "profile": "CLAPPA-QUICKNET-v1",
+          "arm_sha256": "2825eafb7d7ee686518da99c0540414336833ef10914fbadb04cc25d96fe3b62",
+          "pulse": {
+            "chain": "52db9ba70e0cc0f6eaf7803dd07447a1f5477735fd3f661792ba94600c84e971",
+            "round": 32245316,
+            "at": 1789539312000,
+            "signature": "99544dc406460b45e83ed7583e9e3d9512906add4100b9bb8b0de066ac1939a8da098d98ee7e14b71e2f6c4e8e8ead7f"
+          }
+        }
+      },
+      "key_id": "5cd252fb0ce8932436faf8ccd1040981b89ee4ad6b9fe9e2a2b7e71aacb27cd3",
+      "prev": "2825eafb7d7ee686518da99c0540414336833ef10914fbadb04cc25d96fe3b62",
+      "protocol": "0.3",
+      "seq": 2,
+      "session_id": "11111111111111111111111111111111",
+      "type": "challenge-issued"
+    },
+    "signature": "v_E89p1_CgrZgn67HYugKNj9Apodpt0nEbGSPbKTaLI1afQh0l_c0aMRPRgDzWX4JPZvO8UMHOuQGvUBFBVKpA"
+  }
+}
