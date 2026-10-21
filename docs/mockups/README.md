@@ -1,0 +1,15 @@
+# Initial CLAPPA mockups
+
+The owner authorized a budget-conscious mockup pass on 2026-09-12. One comparison sheet was generated with the built-in image generation tool. Implementation remains unstarted.
+
+See `clappa-concepts-v1.png`: Classic Cinema and Playful Possum, each showing opening, tap-to-clap, verification, and OBS tile concepts.
+
+Suggested direction for owner review: Classic Cinema's readable board layout with Playful Possum's expressiveness and visible bushy tail. No direction is approved yet.
+
+These are composition studies, not finished UI or assets. Discard the unsolicited slogans generated inside the artwork, especially wording suggesting physical truth. Simplify the furry mascot into vector artwork later. Phone frames are illustrative, not accurate Galaxy S22 Ultra hardware. QR patterns and time values are placeholders. Claim prompt, failure states, landscape variants, and animation storyboards remain for a later design pass.
+
+To conserve usage, this pass stops after one generation. The user requires at least 80% account usage remaining; use an 82% stopping buffer and check before further substantial work. A 20-minute usage check was scheduled in the app.
+
+## Generation prompt
+
+Use case: ui-mockup. Create ONE landscape comparison sheet of early CLAPPA app visual concepts, high readability, flat vector-like artwork, not final assets. Two rows, four columns. Row A "CLASSIC CINEMA": charcoal old-school clapperboard, cream lettering, restrained mint accents. Row B "PLAYFUL POSSUM": softly rounded charcoal clapperboard, warm cream face labels, peach accents, bigger cute Australian brush-tail possum with grey fur, large ears and a thick bushy tail (not a rat, not a raccoon). Column headings: "OPENING", "TAP TO CLAP", "VERIFY", "OBS TILE". First three columns in each row show tall Android screen mockups, final column a wide OBS overlay. Screen is the object: a clapperboard occupies almost entire phone screen with prominent hinged diagonal BLACK AND WHITE striped top. Early iPhone novelty-app physical-object charm, simple shapes suitable for light tween animations. Opening: CLAPPA on board and possum peeking up. Tap: open hinged board, big "TAP TO CLAP" on face, little timecode label "LOCAL TIME • DEMO" and "12:34:56", subtle "OBS CONNECTED". Verify: board retained behind possum giving "Take a picture to your left", short "CAPTURE" action and small "PHOTO A → COLOUR FLASH → PHOTO B" caption. OBS: a wide clapperboard popup, a Polaroid-style normal room photo popping up on left, unobstructed illustrative QR placeholder on right with white quiet border, possum in foreground below photo without covering QR, "CLAPPA CHECK 01" and "SIGNED EVENT". Only one visible photo per tile. Footer "CONCEPT MOCKUPS • QR AND TIME VALUES ARE ILLUSTRATIVE". Clean warm light background, generous grid spacing, big clear mockups, concise legible labels. Make the two directions distinctly different while both cute, coherent and immediately recognisable as cinema clapperboards. No photorealistic 3D phones, no NIST seal, no verified-recording claim, no extra screens.

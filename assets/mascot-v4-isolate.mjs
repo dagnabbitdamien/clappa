@@ -1,0 +1,19 @@
+import sharp from 'sharp';import {readFile,writeFile} from 'node:fs/promises';import vm from 'node:vm';
+const dir='assets/mascot-v4/',{data,info}=await sharp(dir+'whole-sprite-sheet.png').ensureAlpha().raw().toBuffer({resolveWithObject:true}),W=info.width,H=info.height,N=W*H;
+const mask=new Uint8Array(N);for(let k=0;k<N;k++){const i=k*4,r=data[i],g=data[i+1],b=data[i+2];mask[k]=!(Math.max(r,g,b)-Math.min(r,g,b)<22&&Math.min(r,g,b)>155);}
+// Preserve small enclosed highlights (not the connected checker background).
+const neutralSeen=new Uint8Array(N);for(let k=0;k<N;k++){if(mask[k]||neutralSeen[k])continue;const region=[k];neutralSeen[k]=1;for(let j=0;j<region.length;j++){const n=region[j];for(const z of [n-1,n+1,n-W,n+W])if(z>=0&&z<N&&!mask[z]&&!neutralSeen[z]){neutralSeen[z]=1;region.push(z);}}if(region.length<180)for(const z of region)mask[z]=1;}
+// One-pixel inset breaks background fringe bridges; components are found on the entire sheet.
+const core=new Uint8Array(N);for(let y=1;y<H-1;y++)for(let x=1;x<W-1;x++){let ok=1;for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++)ok&=mask[(y+dy)*W+x+dx];core[y*W+x]=ok;}
+const labels=new Int32Array(N),objects=[];let id=0;
+for(let k=0;k<N;k++){if(!core[k]||labels[k])continue;id++;const q=[k];labels[k]=id;let l=W,t=H,r=0,b=0;for(let j=0;j<q.length;j++){const n=q[j],x=n%W,y=Math.floor(n/W);l=Math.min(l,x);r=Math.max(r,x);t=Math.min(t,y);b=Math.max(b,y);for(const z of [n-1,n+1,n-W,n+W])if(z>=0&&z<N&&core[z]&&!labels[z]){labels[z]=id;q.push(z);}}if(q.length>15000)objects.push({id,l,t,r,b,area:q.length});}
+if(objects.length!==6)throw Error('Expected six isolated complete characters; found '+objects.length);
+objects.sort((a,b)=>Math.floor((a.t+a.b)/2/(H/2))-Math.floor((b.t+b.b)/2/(H/2))||a.l-b.l);
+const ctx={window:{}};vm.runInNewContext(await readFile(dir+'sprites.js','utf8'),ctx);const D=ctx.window.PUPPET;
+const reports=[];
+for(let n=0;n<6;n++){const o=objects[n],ww=o.r-o.l+7,hh=o.b-o.t+7,out=Buffer.alloc(ww*hh*4);for(let y=0;y<hh;y++)for(let x=0;x<ww;x++){const sx=o.l+x-3,sy=o.t+y-3,k=sy*W+sx,i=(y*ww+x)*4;if(sx<0||sy<0||sx>=W||sy>=H)continue;
+let closest=-1,dist=99;for(let dy=-2;dy<=2;dy++)for(let dx=-2;dx<=2;dx++){const z=(sy+dy)*W+sx+dx,d=dx*dx+dy*dy;if(z>=0&&z<N&&labels[z]===o.id&&d<dist){dist=d;closest=z;}}
+if(closest<0||dist>2)continue;const source=(labels[k]===o.id?k:closest)*4;out[i]=data[source];out[i+1]=data[source+1];out[i+2]=data[source+2];out[i+3]=dist===0?255:dist===1?155:55;}
+const fit=await sharp(out,{raw:{width:ww,height:hh,channels:4}}).resize(484,484,{fit:'inside'}).png().toBuffer(),fm=await sharp(fit).metadata();const png=await sharp({create:{width:512,height:512,channels:4,background:'#0000'}}).composite([{input:fit,left:Math.floor((512-fm.width)/2),top:498-fm.height}]).png().toBuffer();const p=D.sprites[n],nose=[[418,200],[900,205],[1477,273],[435,658],[900,710],[1471,700]][n];p.mouth=[(Math.floor((512-fm.width)/2)+(nose[0]-o.l+3)*fm.width/ww)*313.5/512,(498-fm.height+(nose[1]-o.t+3)*fm.height/hh)*313.5/512];p.uri='data:image/png;base64,'+png.toString('base64');await writeFile(dir+'sprites/'+p.id+'.png',png);reports.push({sprite:p.id,sourceBounds:[o.l,o.t,o.r,o.b],component:o.id,area:o.area});}
+const js='window.PUPPET='+JSON.stringify(D)+';';await writeFile(dir+'sprites.js',js);await writeFile('docs/mockups/21-motion/puppet-data.js',js);await writeFile('docs/mockups/21-motion/assembled.png',Buffer.from(D.sprites[0].uri.split(',')[1],'base64'));await writeFile(dir+'isolation.json',JSON.stringify(reports,null,2));
+await sharp({create:{width:1536,height:1024,channels:4,background:'#25241f'}}).composite(D.sprites.map((p,i)=>({input:Buffer.from(p.uri.split(',')[1],'base64'),left:i%3*512,top:Math.floor(i/3)*512}))).png().toFile('docs/mockups/21-motion/isolated-sprites.png');console.log(reports);

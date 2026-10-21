@@ -1,0 +1,68 @@
+[
+  {
+    "sprite": "rest",
+    "sourceBounds": [
+      33,
+      11,
+      476,
+      499
+    ],
+    "component": 1,
+    "area": 128526
+  },
+  {
+    "sprite": "blink",
+    "sourceBounds": [
+      515,
+      13,
+      959,
+      500
+    ],
+    "component": 2,
+    "area": 128368
+  },
+  {
+    "sprite": "rub",
+    "sourceBounds": [
+      1019,
+      60,
+      1501,
+      503
+    ],
+    "component": 3,
+    "area": 121680
+  },
+  {
+    "sprite": "success",
+    "sourceBounds": [
+      33,
+      507,
+      487,
+      991
+    ],
+    "component": 5,
+    "area": 120828
+  },
+  {
+    "sprite": "error",
+    "sourceBounds": [
+      547,
+      516,
+      994,
+      973
+    ],
+    "component": 6,
+    "area": 111698
+  },
+  {
+    "sprite": "guide",
+    "sourceBounds": [
+      1016,
+      527,
+      1525,
+      989
+    ],
+    "component": 7,
+    "area": 109727
+  }
+]
