@@ -1,0 +1,54 @@
+node_modules/
+.tools/
+.gradle/
+**/build/
+android/local.properties
+*.keystore
+*.jks
+*.log
+output/
+.idea/
+
+# Local caches, SDKs, tools and editor state
+.pnpm-store/
+.kotlin/
+.codex/
+.agents/
+.aws/
+.env
+.env.*
+!.env.example
+
+# Private identities, credentials and local session evidence
+*.p12
+*.pfx
+*.key
+*.pem
+!test-vectors/nist/certificate.pem
+**/pairing.json
+**/obs-state.json
+
+# Installers and compiled artifacts belong in Releases, not Git history
+*.apk
+*.aab
+*.exe
+*.dll
+*.lib
+*.obj
+*.pdb
+*.zip
+*.mp4
+*.mkv
+*.webm
+
+# Keep documentation, not captured photos, review recordings or local snapshots.
+/docs/**
+!/docs/**/
+!/docs/**/*.md
+
+# blst's build directory contains required assembly SOURCE, not local outputs.
+!/vendor/blst/build/
+!/vendor/blst/build/**
+
+# Rendered animation-frame sequences are local design review output.
+/assets/**/review/
